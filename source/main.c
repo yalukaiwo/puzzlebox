@@ -82,6 +82,8 @@ int main(void)
     {
     	GPS.updateData();
 
+    	printf("hello");
+
 
     }
 }
