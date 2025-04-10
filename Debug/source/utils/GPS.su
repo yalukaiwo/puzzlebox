@@ -1,0 +1,4 @@
+../source/utils/GPS.c:11:8:calculateLongitudeDistance	48	static
+../source/utils/GPS.c:19:8:calculateLatitudeDistance	40	static
+../source/utils/GPS.c:27:6:determineLongitudeDirection	24	static
+../source/utils/GPS.c:35:6:determineLatitudeDirection	24	static
