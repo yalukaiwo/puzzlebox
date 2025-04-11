@@ -1,0 +1,2 @@
+../source/games/gps_location.game.c:16:6:initGPSLocationGame	4	static
+../source/games/gps_location.game.c:29:6:gpsLocationGame	64	static

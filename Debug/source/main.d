@@ -46,7 +46,8 @@ source/main.o source/main.d: ../source/main.c \
  /Users/yalukaiwo/Documents/MCUXpressoIDE_24.12.148/workspace/project/device/periph/PERI_WUU.h \
  /Users/yalukaiwo/Documents/MCUXpressoIDE_24.12.148/workspace/project/device/periph/PERI_WWDT.h \
  ../source/lpuart0_interrupt.h ../source/lpuart2_interrupt.h \
- ../source/utils/GPS.h
+ ../source/utils/GPS.h ../source/games/game_control.h \
+ ../source/games/gps_location.game.h ../source/games/../utils/GPS.h
 /Users/yalukaiwo/Documents/MCUXpressoIDE_24.12.148/workspace/project/device/MCXA153.h:
 /Users/yalukaiwo/Documents/MCUXpressoIDE_24.12.148/workspace/project/device/periph/PERI_ADC.h:
 /Users/yalukaiwo/Documents/MCUXpressoIDE_24.12.148/workspace/project/device/MCXA153_COMMON.h:
@@ -96,3 +97,6 @@ source/main.o source/main.d: ../source/main.c \
 ../source/lpuart0_interrupt.h:
 ../source/lpuart2_interrupt.h:
 ../source/utils/GPS.h:
+../source/games/game_control.h:
+../source/games/gps_location.game.h:
+../source/games/../utils/GPS.h:

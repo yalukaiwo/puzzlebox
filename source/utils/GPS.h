@@ -32,7 +32,8 @@ typedef struct Directions {
 
 typedef struct Connection {
 	double HDOP;
-	unsigned short satelliteNumber;
+	int satelliteNumber;
+	int fixType;
 } connection_t;
 
 typedef struct GPS {
@@ -46,6 +47,7 @@ typedef struct GPS {
 
 // Available functions outside module
 
-GPS_t initGPS();
+GPS_t * initGPS();
+GPS_t * getGPS();
 
 #endif /* UTILS_GPS_H_ */
