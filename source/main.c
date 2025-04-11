@@ -37,12 +37,16 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "math.h"
+#include <math.h>
+
 #include "lpuart0_interrupt.h"
 #include "lpuart2_interrupt.h"
+
 #include "utils/GPS.h"
+
 #include "games/game_control.h"
 #include "games/gps_location.game.h"
+#include "games/gps_proximity.game.h"
 
 // -----------------------------------------------------------------------------
 // Local type definitions
@@ -76,6 +80,7 @@ int main(void)
     GPS_t *GPS = initGPS();
 
     initGPSLocationGame();
+    initGPSProximityGame();
 
     directions_t *directions;
 
@@ -93,6 +98,9 @@ int main(void)
     		break;
     	case LOCATION:
     		gpsLocationGame();
+    		break;
+    	case PROXIMITY:
+    		gpsProximityGame();
     		break;
     	default:
     		break;
