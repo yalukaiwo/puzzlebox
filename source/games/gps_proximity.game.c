@@ -11,18 +11,18 @@
 #include "game_control.h"
 #include "math.h"
 
-GPS_proximity_game_props_t gameProps;
+GPS_proximity_game_props_t proximityGameProps;
 
 void initGPSProximityGame() {
 	// get the gps location from SD
 	// SD.get("gps_location_game_place")
 
     // set the destination
-	gameProps.location.latitude = 51.985078;
-	gameProps.location.latDirection = 'N';
+	proximityGameProps.location.latitude = 51.989105;
+	proximityGameProps.location.latDirection = 'N';
 
-	gameProps.location.longitude = 5.954033;
-	gameProps.location.longDirection = 'E';
+	proximityGameProps.location.longitude = 5.948583;
+	proximityGameProps.location.longDirection = 'E';
 
 }
 
@@ -31,7 +31,7 @@ void gpsProximityGame() {
 	game_controller_t *gameControl = getGameControl();
 	// LCD_t *LCD = getLCD();
 
-	GPS->setDestination(gameProps.location.latitude, gameProps.location.latDirection, gameProps.location.longitude, gameProps.location.longDirection); // Should be gotten from game props
+	GPS->setDestination(proximityGameProps.location.latitude, proximityGameProps.location.latDirection, proximityGameProps.location.longitude, proximityGameProps.location.longDirection); // Should be gotten from game props
 
 	directions_t *directions = GPS->getCurrentDirections();
 

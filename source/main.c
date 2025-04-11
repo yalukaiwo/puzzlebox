@@ -99,10 +99,19 @@ int main(void)
     	case LOCATION:
     		gpsLocationGame();
     		break;
+    	case MEMORY:
+    		gameControl->gameSuccessFlag = true;
+    		break;
+    	case QUIZ:
+    		gameControl->gameSuccessFlag = true;
     	case PROXIMITY:
     		gpsProximityGame();
     		break;
+    	case PIN:
+    		gameControl->gameSuccessFlag = true;
+    		break;
     	default:
+    		gameControl->gameFailFlag = true;
     		break;
     	}
     }

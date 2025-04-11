@@ -7,6 +7,7 @@
 
 #include "game_control.h"
 #include "gps_location.game.h"
+#include "stdio.h"
 
 game_controller_t gameControl;
 
@@ -38,6 +39,8 @@ void checkGameStatus() {
 	    if (gameControl.currentGame == PIN)
 	    {
 	    	// Success, open the box and display a success message
+
+	    	printf("GAME WON!");
 
 	    	gameControl.currentGame = TUTORIAL; // Reset the game
 	    }
