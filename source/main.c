@@ -37,8 +37,16 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <math.h>
+
 #include "lpuart0_interrupt.h"
+#include "lpuart2_interrupt.h"
+
 #include "utils/GPS.h"
+
+#include "games/game_control.h"
+#include "games/gps_location.game.h"
+#include "games/gps_proximity.game.h"
 
 // -----------------------------------------------------------------------------
 // Local type definitions
@@ -55,13 +63,9 @@
 
 
 
-void parseGNGGA(char *buffer, location_t *location, connection_t *connection);
-void GPSCalculateDirections(directions_t *directions, location_t *origin, location_t *destination);
-
 // -----------------------------------------------------------------------------
 // Local variables
 // -----------------------------------------------------------------------------
-
 
 
 // -----------------------------------------------------------------------------
@@ -72,17 +76,44 @@ int main(void)
     lpuart0_init(115200);
     lpuart2_init(9600);
 
-    GPS_t GPS = initGPS();
+    game_controller_t *gameControl = initGameControl();
+    GPS_t *GPS = initGPS();
 
-    GPS.setDestination(51.9848863,'N',5.8990061,'E');
+    initGPSLocationGame();
+    initGPSProximityGame();
 
-    printf("GPS Test\n");
+    directions_t *directions;
+
+    gameControl->gameSuccessFlag = true;
 
     while(1)
     {
-    	GPS.updateData();
+    	GPS->updateData();
+    	directions = GPS->getCurrentDirections();
 
+    	checkGameStatus();
 
+    	switch (gameControl->currentGame) {
+    	case TUTORIAL:
+    		break;
+    	case LOCATION:
+    		gpsLocationGame();
+    		break;
+    	case MEMORY:
+    		gameControl->gameSuccessFlag = true;
+    		break;
+    	case QUIZ:
+    		gameControl->gameSuccessFlag = true;
+    	case PROXIMITY:
+    		gpsProximityGame();
+    		break;
+    	case PIN:
+    		gameControl->gameSuccessFlag = true;
+    		break;
+    	default:
+    		gameControl->gameFailFlag = true;
+    		break;
+    	}
     }
 }
 
