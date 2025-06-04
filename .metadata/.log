@@ -1,0 +1,22 @@
+!SESSION 2025-06-04 16:32:46.149 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=17.0.9
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_GB
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -data C:\Users\safin\Desktop\Final Safin
+
+!ENTRY com.nxp.mcuxpresso.core.datamodels 1 0 2025-06-04 16:32:58.391
+!MESSAGE Recreating part support. No part support available.
+
+!ENTRY org.eclipse.egit.ui 2 0 2025-06-04 16:33:02.323
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\safin'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY com.nxp.mcuxpresso.core.datamodels 1 0 2025-06-04 16:33:03.990
+!MESSAGE The device 'MCXA153' (version='1.0.0') from SDK 'SDK_2.x_FRDM-MCXA153' (version='24.12.00', build='871 2025-01-14') will be installed.
+
+!ENTRY org.eclipse.cdt.core 1 0 2025-06-04 16:33:35.317
+!MESSAGE Indexed 'project' (21 sources, 90 headers) in 2,86 sec: 4.818 declarations; 7.120 references; 8 unresolved inclusions; 117 syntax errors; 1.378 unresolved names (10%)

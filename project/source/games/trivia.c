@@ -1,0 +1,175 @@
+#include "trivia.h"
+#include "utils/keypad.h"
+#include "utils/delay.h"
+
+static TriviaQuestion question_pool[TOTAL_QUESTIONS] = {
+    {
+        "What is 2+2*2?",
+        {"A: 6", "B: 8", "C: 4", "D: 10"},
+        'A'
+    },
+    {
+        "Which country spans most time zones?",
+        {"A: France", "B: Russia", "C: USA", "D: China"},
+        'A'
+    },
+    {
+        "GPS satellite altitude (km)?",
+        {"A: 20,200", "B: 10,500", "C: 35,786", "D: 500"},
+        'A'
+    },
+    {
+        "Capital of Australia?",
+        {"A: Sydney", "B: Melbourne", "C: Canberra", "D: Perth"},
+        'C'
+    },
+    {
+        "MCUXpresso IDE uses which core?",
+        {"A: ARM Cortex-M", "B: RISC-V", "C: x86", "D: MIPS"},
+        'A'
+    },
+    {
+        "I2C requires how many wires?",
+        {"A: 2", "B: 4", "C: 6", "D: 8"},
+        'A'
+    },
+    {
+        "Best map projection for nav?",
+        {"A: Mercator", "B: Robinson", "C: Winkel", "D: Polar"},
+        'A'
+    },
+    {
+        "Prime meridian location?",
+        {"A: Greenwich", "B: Paris", "C: Washington", "D: Tokyo"},
+        'A'
+    },
+    {
+        "What is geocaching?",
+        {"A: GPS treasure hunt", "B: Geology", "C: Mapping", "D: Mining"},
+        'A'
+    },
+    {
+        "FRDM-MCXA153 MCU brand?",
+        {"A: NXP", "B: STM", "C: TI", "D: Microchip"},
+        'A'
+    },
+    {
+        "LED cathode connects to?",
+        {"A: GND", "B: VCC", "C: Data", "D: Clock"},
+        'A'
+    },
+    {
+        "GPS constellation name?",
+        {"A: Navstar", "B: Glonass", "C: Galileo", "D: BeiDou"},
+        'A'
+    },
+    {
+        "Magnetic declination is?",
+        {"A: Compass variance", "B: Altitude", "C: Speed", "D: Time"},
+        'A'
+    },
+    {
+        "1 nautical mile (meters)?",
+        {"A: 1852", "B: 1609", "C: 1000", "D: 2000"},
+        'A'
+    },
+    {
+        "OLED display type?",
+        {"A: Organic LED", "B: LCD", "C: eInk", "D: CRT"},
+        'A'
+    },
+    {
+        "Best geocache container?",
+        {"A: Waterproof", "B: Glass", "C: Paper", "D: Cloth"},
+        'A'
+    },
+    {
+        "GPIO stands for?",
+        {"A: General Purpose I/O", "B: Global Port", 
+         "C: Gate Protocol", "D: Group Power"},
+        'A'
+    },
+    {
+        "UTC stands for?",
+        {"A: Coordinated Univ Time", "B: United Time Code",
+         "C: Universal Temp Clock", "D: Urban Time Calc"},
+        'A'
+    },
+    {
+        "Most common map scale?",
+        {"A: 1:24,000", "B: 1:100,000", "C: 1:500", "D: 1:1M"},
+        'A'
+    },
+    {
+        "What is a waypoint?",
+        {"A: GPS location", "B: Compass", 
+         "C: Altitude", "D: Speed"},
+        'A'
+    },
+    {
+        "Battery voltage range?",
+        {"A: 3-5V", "B: 12-24V", "C: 110-220V", "D: 1-2V"},
+        'A'
+    },
+    {
+        "Best geocache terrain?",
+        {"A: 1-star", "B: 5-star", "C: 10-star", "D: Water"},
+        'A'
+    },
+    {
+        "I2C clock line name?",
+        {"A: SCL", "B: SDA", "C: VCC", "D: MOSI"},
+        'A'
+    },
+    {
+        "First GPS satellite launch?",
+        {"A: 1978", "B: 1990", "C: 2000", "D: 1960"},
+        'A'
+    },
+    {
+        "Geocache log purpose?",
+        {"A: Prove found", "B: Decoration",
+         "C: Navigation", "D: Power"},
+        'A'
+    }
+};
+
+static void shuffle_questions(void) {
+    for(int i=TOTAL_QUESTIONS-1; i>0; i--) {
+        int j = rand() % (i+1);
+        TriviaQuestion temp = question_pool[i];
+        question_pool[i] = question_pool[j];
+        question_pool[j] = temp;
+    }
+}
+
+bool Trivia_RunGame(void) {
+    uint8_t lives = MAX_LIVES;
+    uint8_t correct = 0;
+
+    shuffle_questions();
+
+    for(uint8_t q=0; q<QUIZ_SIZE; q++) {
+        OLED_ShowQuestionScreen(
+            question_pool[q].question,
+            question_pool[q].options,
+            lives
+        );
+
+        char answer;
+        do {
+            answer = Keypad_Scan();
+        } while(!(answer >= 'A' && answer <= 'D'));
+
+        if(answer == question_pool[q].correct) {
+            correct++;
+            GAME_STATUS_SUCCESS();
+        } else {
+            lives--;
+            GAME_STATUS_FAILURE();
+            if(lives == 0) break;
+        }
+        Delay_ms(1000);
+    }
+    return (correct >= (QUIZ_SIZE/2)); // Require 3/6 correct
+}
