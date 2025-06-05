@@ -8,6 +8,11 @@
 #ifndef UTILS_GPS_H_
 #define UTILS_GPS_H_
 
+#include "math.h"
+#include "../lpuart2_interrupt.h"
+#include "stdio.h"
+#include "stdlib.h"
+
 // Defines
 
 #define M_PI 3.141592

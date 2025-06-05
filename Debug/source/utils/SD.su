@@ -1,0 +1,5 @@
+../source/utils/SD.c:16:6:SD_Rmfile	16	static
+../source/utils/SD.c:20:6:SD_Init	8	static
+../source/utils/SD.c:29:6:SD_Writeln	24	static
+../source/utils/SD.c:39:6:SD_Overwrite	24	static
+../source/utils/SD.c:47:5:SD_Read	24	static

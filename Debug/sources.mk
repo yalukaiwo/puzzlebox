@@ -16,6 +16,7 @@ OBJS :=
 SUBDIRS := \
 device \
 source \
+source/games \
 source/utils \
 startup \
 

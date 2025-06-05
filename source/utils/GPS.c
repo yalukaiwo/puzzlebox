@@ -6,8 +6,6 @@
  */
 
 #include "GPS.h"
-#include "math.h"
-#include "../lpuart2_interrupt.h"
 
 // LOCAL VARIABLES
 

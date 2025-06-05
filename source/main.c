@@ -37,7 +37,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+
 #include "lpuart0_interrupt.h"
+#include "lpuart2_interrupt.h"
+
 #include "utils/GPS.h"
 
 // -----------------------------------------------------------------------------
@@ -71,6 +74,7 @@ int main(void)
 {
     lpuart0_init(115200);
     lpuart2_init(9600);
+    lpi2c0_controller_init();
 
     GPS_t GPS = initGPS();
 

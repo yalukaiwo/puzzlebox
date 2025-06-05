@@ -1,6 +1,6 @@
-/Users/yalukaiwo/Documents/MCUXpressoIDE_24.12.148/workspace/project/CMSIS/core_cm33.h:2358:22:__NVIC_EnableIRQ	16	static
-/Users/yalukaiwo/Documents/MCUXpressoIDE_24.12.148/workspace/project/CMSIS/core_cm33.h:2449:22:__NVIC_ClearPendingIRQ	16	static
-/Users/yalukaiwo/Documents/MCUXpressoIDE_24.12.148/workspace/project/CMSIS/core_cm33.h:2555:22:__NVIC_SetPriority	16	static
+C:\Users\safin\Downloads\nigga\project\CMSIS/core_cm33.h:2358:22:__NVIC_EnableIRQ	16	static
+C:\Users\safin\Downloads\nigga\project\CMSIS/core_cm33.h:2449:22:__NVIC_ClearPendingIRQ	16	static
+C:\Users\safin\Downloads\nigga\project\CMSIS/core_cm33.h:2555:22:__NVIC_SetPriority	16	static
 ../source/lpuart0_interrupt.c:58:6:lpuart0_init	16	static
 ../source/lpuart0_interrupt.c:143:6:lpuart0_putchar	16	static
 ../source/lpuart0_interrupt.c:153:5:lpuart0_getchar	16	static

@@ -1,4 +1,13 @@
-../source/utils/GPS.c:11:8:calculateLongitudeDistance	48	static
-../source/utils/GPS.c:19:8:calculateLatitudeDistance	40	static
-../source/utils/GPS.c:27:6:determineLongitudeDirection	24	static
-../source/utils/GPS.c:35:6:determineLatitudeDirection	24	static
+../source/utils/GPS.c:40:7:initGPS	24	static
+../source/utils/GPS.c:53:6:updateData	16	static
+../source/utils/GPS.c:76:6:setDestination	24	static
+../source/utils/GPS.c:86:13:getCurrentLocation	4	static
+../source/utils/GPS.c:90:15:getCurrentDirections	4	static
+../source/utils/GPS.c:94:15:getConnectionQuality	4	static
+../source/utils/GPS.c:98:5:isLocationRelevant	4	static
+../source/utils/GPS.c:104:6:parseGNGGA	80	static
+../source/utils/GPS.c:160:6:GPSCalculateDirections	40	static
+../source/utils/GPS.c:169:8:calculateLongitudeDistance	48	static
+../source/utils/GPS.c:177:8:calculateLatitudeDistance	40	static
+../source/utils/GPS.c:185:6:determineLongitudeDirection	24	static
+../source/utils/GPS.c:193:6:determineLatitudeDirection	24	static
