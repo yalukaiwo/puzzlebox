@@ -1,0 +1,103 @@
+/*
+ * game_control.c
+ *
+ *  Created on: Apr 10, 2025
+ *      Author: yalukaiwo
+ */
+
+#include "game_control.h"
+#include "gps_location.game.h"
+#include "stdio.h"
+
+game_controller_t gameControl;
+
+game_controller_t * initGameControl() {
+	char currentGame[1];
+	SD_Read(GAMECONTROL_FILENAME, currentGame, 1); // Read current game from memory
+
+	switch (currentGame[0]) { // Apply the saved game level
+	case '0':
+		gameControl.currentGame = TUTORIAL;
+		break;
+	case '1':
+		gameControl.currentGame = LOCATION;
+		break;
+	case '2':
+		gameControl.currentGame = MEMORY;
+		break;
+	case '3':
+		gameControl.currentGame = QUIZ;
+		break;
+	case '4':
+		gameControl.currentGame = PROXIMITY;
+		break;
+	case '5':
+		gameControl.currentGame = PIN;
+		break;
+	case '6':
+		gameControl.currentGame = VICTORY;
+		break;
+	default:
+		gameControl.currentGame = TUTORIAL;
+		break;
+	}
+
+	gameControl.gameFailFlag = false;
+	gameControl.gameSuccessFlag = false;
+}
+
+game_controller_t * getGameControl() {
+	return &gameControl;
+}
+
+void checkGameStatus() {
+	if (gameControl.gameFailFlag) // If the game fail flag is raised
+	{
+		// Display fail message
+
+		gameControl.gameFailFlag = false; // Disable the flag
+	    gameControl.currentGame = TUTORIAL; // Reset the game
+	    SD_Overwrite(GAMECONTROL_FILENAME, "0", 1); // Save to the sd card
+	}
+
+	if (gameControl.gameSuccessFlag) // If the game success flag is raised
+	{
+		// Display success message and open the box
+
+	    gameControl.gameSuccessFlag = false; // Disable the flag
+
+	    if (gameControl.currentGame == VICTORY)
+	    {
+	    	SD_Overwrite(GAMECONTROL_FILENAME, "0", 1); // Save to the sd card
+	    	gameControl.currentGame = TUTORIAL; // Reset the game
+	    }
+	    else
+	    {
+
+	    	gameControl.currentGame++;
+
+	    	switch (gameControl.currentGame) { // Save current game level to storage
+	    	case LOCATION:
+	    	    SD_Overwrite(GAMECONTROL_FILENAME, "1", 1);
+	    	    break;
+	    	case MEMORY:
+	    	    SD_Overwrite(GAMECONTROL_FILENAME, "2", 1);
+	    	    break;
+	    	case QUIZ:
+	    	    SD_Overwrite(GAMECONTROL_FILENAME, "3", 1);
+	    	    break;
+	    	case PROXIMITY:
+	    	    SD_Overwrite(GAMECONTROL_FILENAME, "4", 1);
+	    	    break;
+	    	case PIN:
+	    	    SD_Overwrite(GAMECONTROL_FILENAME, "5", 1);
+	    	    break;
+	    	case VICTORY:
+	    	    SD_Overwrite(GAMECONTROL_FILENAME, "6", 1);
+	    	    break;
+	    	default:
+	    		break;
+	    	}
+	    }
+	}
+}

@@ -9,48 +9,26 @@
 
 // LOCAL VARIABLES
 
-GPS_t GPS; // The module itself
-
 location_t currentLocation; // Current user location
 location_t targetLocation; // Target user location
 directions_t directions; // Direction from current location to target location
 connection_t connectionQuality; // Quality of the connection data
-int noFixLoops = 100; // Amount of loops without a fix
+unsigned long noFixLoops = 100; // Amount of loops without a fix
 
 char buffer[100];
 
 // Function Prototypes
 
-void updateData(); // Update the current data of the GPS
-void setDestination(double latitude, char latDirection, double longitude, char longDirection); // Update target destination
-location_t* getCurrentLocation(); // Get the current location
-connection_t* getConnectionQuality(); // Get the connection quality
-directions_t* getCurrentDirections(); // Get the current directions
-int isLocationRelevant(); // Check relevance of the location
-void parseGNGGA(char *buffer, location_t *location, connection_t *connection); // Parse the GNGGA string
-void GPSCalculateDirections(directions_t *directions, location_t *origin, location_t *destination); // Calculate directions to the destination
+
 double calculateLongitudeDistance(double fromLong, double toLong, double latitude); // Calculate the distance to the destination long-wise
 double calculateLatitudeDistance(double fromLat, double toLat); // Calculate the distance to the destination lat-wise
 char determineLongitudeDirection(double fromLong, double toLong); // Get the long direction
 char determineLatitudeDirection(double fromLat, double toLat); // Get the lat direction
 
 
-// Initialization function
-
-GPS_t initGPS() {
- GPS.getConnectionQuality = getConnectionQuality;
- GPS.getCurrentDirections = getCurrentDirections;
- GPS.getCurrentLocation = getCurrentLocation;
- GPS.isLocationRelevant = isLocationRelevant;
- GPS.setDestination = setDestination;
- GPS.updateData = updateData;
-
- return GPS;
-}
-
 // Public functions
 
-void updateData() {
+void GPS_updateData() {
 	while (lpuart2_rxcnt() > 0)
 	{
 		char c = lpuart2_getchar(); // Receive char from buffer
@@ -73,7 +51,7 @@ void updateData() {
 	}
 }
 
-void setDestination(double latitude, char latDirection, double longitude, char longDirection) {
+void GPS_setDestination(double latitude, char latDirection, double longitude, char longDirection) {
 	// Set the parameters accordingly and recalculate directions
 	targetLocation.latitude = latitude;
 	targetLocation.latDirection = latDirection;
@@ -83,27 +61,42 @@ void setDestination(double latitude, char latDirection, double longitude, char l
 	GPSCalculateDirections(&directions, &currentLocation, &targetLocation);
 }
 
-location_t* getCurrentLocation() {
+location_t* GPS_getCurrentLocation() {
 	return &currentLocation;
 }
 
-directions_t* getCurrentDirections() {
+directions_t* GPS_getCurrentDirections() {
 	return &directions;
 }
 
-connection_t* getConnectionQuality() {
+connection_t* GPS_getConnectionQuality() {
 	return &connectionQuality;
 }
 
-int isLocationRelevant() {
-	return noFixLoops < 10; // If the program went 10 loops without a fix, connection deemed unreliable
+int GPS_isLocationRelevant() {
+	return noFixLoops < 10 ? 1 : 0; // If the program went 10 loops without a fix, connection deemed unreliable
 }
 
 // Internal functions
 
+char *strsep(char **stringp, const char *delim) {
+    char *start = *stringp;
+    if (start) {
+        /* skip all characters in the token (not delimiters) */
+        char *p = start + strcspn(start, delim);
+        if (*p) {
+            *p++ = '\0';
+            *stringp = p;
+        } else {
+            *stringp = NULL;
+        }
+    }
+    return start;
+}
+
 void parseGNGGA(char *buffer, location_t *location, connection_t *connection)
 {
-	char *token = strtok(buffer, ","); // Tokenize the string
+	char *token = strsep(&buffer, ","); // Tokenize the string
 	int index = 0;
 
 	while (token != NULL) {
@@ -112,9 +105,12 @@ void parseGNGGA(char *buffer, location_t *location, connection_t *connection)
 		double rawValue;
 		int degrees;
 		double minutes;
+		int fix;
 
 		switch (index)
 		{
+		case 2:// time
+			connection->time = atof(token);
 		case 3: // Latitude
 			rawValue = atof(token);
 			degrees = (int)(rawValue / 100); // Extract degrees
@@ -134,6 +130,8 @@ void parseGNGGA(char *buffer, location_t *location, connection_t *connection)
 			location->longDirection = *token;
 			break;
 		case 7: // Fix type
+			fix = atoi(token);
+			connection->fixType = fix;
 			if (atoi(token) == 0) // 0 - no fix
 			{
 				noFixLoops++;
@@ -153,7 +151,7 @@ void parseGNGGA(char *buffer, location_t *location, connection_t *connection)
 		if (location->latDirection == 'S') location->latitude = -(location->latitude);
 		if (location->longDirection == 'W') location->longitude = -(location->longitude);
 
-		token = strtok(NULL, ",");
+		token = strsep(&buffer, ",");
 	}
 }
 

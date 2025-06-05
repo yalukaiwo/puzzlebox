@@ -49,8 +49,8 @@
 // -----------------------------------------------------------------------------
 static fifo_t tx;
 static fifo_t rx;
-static uint8_t tx_buffer[128];
-static uint8_t rx_buffer[128];
+static uint8_t tx_buffer[1024];
+static uint8_t rx_buffer[1024];
 
 // -----------------------------------------------------------------------------
 // Local function implementation
@@ -107,7 +107,7 @@ void lpuart2_init(const uint32_t baudrate)
     // SRE: [0] = Fast
     // PE:  [0] = Disables
     // PS:  [0] = n.a.
-    PORT0->PCR[13] = PORT_PCR_LK(1) | PORT_PCR_MUX(3);
+    PORT1->PCR[13] = PORT_PCR_LK(1) | PORT_PCR_MUX(3);
 
     // Configure LPUART0. Although there are a lot of configuration options, the
     // default configuration takes the following steps:

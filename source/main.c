@@ -37,11 +37,25 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+<<<<<<< HEAD
 
 #include "lpuart0_interrupt.h"
 #include "lpuart2_interrupt.h"
+=======
+#include <math.h>
+
+#include "lpuart0_interrupt.h"
+#include "lpuart2_interrupt.h"
+#include "gpio_output.h"
+>>>>>>> b38fe8ac2112362f0046921401c3524f02fc58c6
 
 #include "utils/GPS.h"
+#include "utils/SD.h"
+#include "utils/Logger.h"
+
+#include "games/game_control.h"
+#include "games/gps_location.game.h"
+#include "games/gps_proximity.game.h"
 
 // -----------------------------------------------------------------------------
 // Local type definitions
@@ -58,13 +72,11 @@
 
 
 
-void parseGNGGA(char *buffer, location_t *location, connection_t *connection);
-void GPSCalculateDirections(directions_t *directions, location_t *origin, location_t *destination);
-
 // -----------------------------------------------------------------------------
 // Local variables
 // -----------------------------------------------------------------------------
 
+static volatile long ms = 0;
 
 
 // -----------------------------------------------------------------------------
@@ -72,19 +84,65 @@ void GPSCalculateDirections(directions_t *directions, location_t *origin, locati
 // -----------------------------------------------------------------------------
 int main(void)
 {
+    SysTick_Config(48000);
     lpuart0_init(115200);
     lpuart2_init(9600);
+<<<<<<< HEAD
     lpi2c0_controller_init();
+=======
+    gpio_output_init();
+>>>>>>> b38fe8ac2112362f0046921401c3524f02fc58c6
 
-    GPS_t GPS = initGPS();
+    SD_Init();
 
-    GPS.setDestination(51.9848863,'N',5.8990061,'E');
+    game_controller_t *gameControl = initGameControl();
 
-    printf("GPS Test\n");
+    initGPSLocationGame();
+    initGPSProximityGame();
+
+    directions_t *directions;
+
+    gameControl->gameSuccessFlag = true;
+
+    __enable_irq();
 
     while(1)
     {
-    	GPS.updateData();
+    	GPS_updateData();
+    	directions = GPS_getCurrentDirections();
+
+    	checkGameStatus();
+
+    	if (ms >= 60000) {
+    		Logger_updateData();
+    		ms = 0;
+    	}
+
+    	switch (gameControl->currentGame) {
+    	case TUTORIAL:
+    		break;
+    	case LOCATION:
+    		gpsLocationGame();
+    		break;
+    	case MEMORY:
+    		gameControl->gameSuccessFlag = true;
+    		break;
+    	case QUIZ:
+    		gameControl->gameSuccessFlag = true;
+    	case PROXIMITY:
+    		gpsProximityGame();
+    		break;
+    	case PIN:
+    		gameControl->gameSuccessFlag = true;
+    		break;
+    	case  VICTORY:
+    		gameControl->gameSuccessFlag = true;
+    		break;
+    	default:
+    		gameControl->gameFailFlag = true;
+    		break;
+    	}
+
 
 
     }
@@ -93,6 +151,11 @@ int main(void)
 // -----------------------------------------------------------------------------
 // Local function implementation
 // -----------------------------------------------------------------------------
+
+void SysTick_Handler(void)
+{
+    ms++;
+}
 
 
 
