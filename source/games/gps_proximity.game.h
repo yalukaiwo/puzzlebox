@@ -9,8 +9,14 @@
 #define GAMES_GPS_PROXIMITY_GAME_H_
 
 #include "../utils/GPS.h"
+#include "../utils/SD.h"
+#include "stdlib.h"
+#include "stdio.h"
+#include "game_control.h"
+#include "math.h"
 
 #define LOCATION_RADIUS_M 10
+#define PROXIMITYGAME_FILENAME "gpsPD.txt"
 
 typedef struct {
 	location_t location;

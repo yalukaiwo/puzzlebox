@@ -49,8 +49,8 @@
 // -----------------------------------------------------------------------------
 static fifo_t tx;
 static fifo_t rx;
-static uint8_t tx_buffer[128];
-static uint8_t rx_buffer[128];
+static uint8_t tx_buffer[1024];
+static uint8_t rx_buffer[1024];
 
 // -----------------------------------------------------------------------------
 // Local function implementation

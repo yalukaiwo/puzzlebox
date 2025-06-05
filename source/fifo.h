@@ -44,7 +44,7 @@ typedef struct
     uint32_t size;
     uint32_t mask;
 
-}fifo_t;
+} fifo_t;
 
 void f_init(fifo_t *f, uint8_t *buffer, const uint32_t size);
 bool f_push(fifo_t *f, uint8_t data);

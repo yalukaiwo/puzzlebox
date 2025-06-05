@@ -6,14 +6,8 @@
  */
 
 #include "GPS.h"
-#include "math.h"
-#include "stdlib.h"
-#include "string.h"
-#include "../lpuart2_interrupt.h"
 
 // LOCAL VARIABLES
-
-GPS_t GPS; // The module itself
 
 location_t currentLocation; // Current user location
 location_t targetLocation; // Target user location
@@ -25,42 +19,16 @@ char buffer[100];
 
 // Function Prototypes
 
-void updateData(); // Update the current data of the GPS
-void setDestination(double latitude, char latDirection, double longitude, char longDirection); // Update target destination
-location_t* getCurrentLocation(); // Get the current location
-connection_t* getConnectionQuality(); // Get the connection quality
-directions_t* getCurrentDirections(); // Get the current directions
-int isLocationRelevant(); // Check relevance of the location
-void parseGNGGA(char *buffer, location_t *location, connection_t *connection); // Parse the GNGGA string
-void GPSCalculateDirections(directions_t *directions, location_t *origin, location_t *destination); // Calculate directions to the destination
+
 double calculateLongitudeDistance(double fromLong, double toLong, double latitude); // Calculate the distance to the destination long-wise
 double calculateLatitudeDistance(double fromLat, double toLat); // Calculate the distance to the destination lat-wise
 char determineLongitudeDirection(double fromLong, double toLong); // Get the long direction
 char determineLatitudeDirection(double fromLat, double toLat); // Get the lat direction
-char *strsep(char **stringp, const char *delim);
 
-
-// Initialization function
-
-GPS_t * initGPS() {
- GPS.getConnectionQuality = getConnectionQuality;
- GPS.getCurrentDirections = getCurrentDirections;
- GPS.getCurrentLocation = getCurrentLocation;
- GPS.isLocationRelevant = isLocationRelevant;
- GPS.setDestination = setDestination;
- GPS.updateData = updateData;
-
- return &GPS;
-}
-
-GPS_t * getGPS()
-{
-	return &GPS;
-}
 
 // Public functions
 
-void updateData() {
+void GPS_updateData() {
 	while (lpuart2_rxcnt() > 0)
 	{
 		char c = lpuart2_getchar(); // Receive char from buffer
@@ -83,7 +51,7 @@ void updateData() {
 	}
 }
 
-void setDestination(double latitude, char latDirection, double longitude, char longDirection) {
+void GPS_setDestination(double latitude, char latDirection, double longitude, char longDirection) {
 	// Set the parameters accordingly and recalculate directions
 	targetLocation.latitude = latitude;
 	targetLocation.latDirection = latDirection;
@@ -93,19 +61,19 @@ void setDestination(double latitude, char latDirection, double longitude, char l
 	GPSCalculateDirections(&directions, &currentLocation, &targetLocation);
 }
 
-location_t* getCurrentLocation() {
+location_t* GPS_getCurrentLocation() {
 	return &currentLocation;
 }
 
-directions_t* getCurrentDirections() {
+directions_t* GPS_getCurrentDirections() {
 	return &directions;
 }
 
-connection_t* getConnectionQuality() {
+connection_t* GPS_getConnectionQuality() {
 	return &connectionQuality;
 }
 
-int isLocationRelevant() {
+int GPS_isLocationRelevant() {
 	return noFixLoops < 10 ? 1 : 0; // If the program went 10 loops without a fix, connection deemed unreliable
 }
 
@@ -141,6 +109,8 @@ void parseGNGGA(char *buffer, location_t *location, connection_t *connection)
 
 		switch (index)
 		{
+		case 2:// time
+			connection->time = atof(token);
 		case 3: // Latitude
 			rawValue = atof(token);
 			degrees = (int)(rawValue / 100); // Extract degrees

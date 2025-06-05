@@ -8,6 +8,12 @@
 #ifndef UTILS_GPS_H_
 #define UTILS_GPS_H_
 
+#include "math.h"
+#include "stdlib.h"
+#include "stdio.h"
+#include <string.h>
+#include "../lpuart2_interrupt.h"
+
 // Defines
 
 #define M_PI 3.141592
@@ -31,23 +37,23 @@ typedef struct Directions {
 } directions_t;
 
 typedef struct Connection {
+	double time;
 	double HDOP;
 	int satelliteNumber;
 	int fixType;
 } connection_t;
 
-typedef struct GPS {
-	void (*updateData)(); // Update gps data
-	void (*setDestination)(double latitude, char latDirection, double longitude, char longDirection); // Set the destination coordinates
-	directions_t* (*getCurrentDirections)(); // Get current directions to the destination
-	location_t* (*getCurrentLocation)(); // Get the current location of the object
-	connection_t* (*getConnectionQuality)(); // Get connection quality parameters
-	int (*isLocationRelevant)(); // Get whether last gps ping was recently (1 / 0)
-} GPS_t;
-
 // Available functions outside module
 
-GPS_t * initGPS();
-GPS_t * getGPS();
+void GPS_updateData(); // Update the current data of the GPS
+void GPS_setDestination(double latitude, char latDirection, double longitude, char longDirection); // Update target destination
+location_t* GPS_getCurrentLocation(); // Get the current location
+connection_t* GPS_getConnectionQuality(); // Get the connection quality
+directions_t* GPS_getCurrentDirections(); // Get the current directions
+int GPS_isLocationRelevant(); // Check relevance of the location
+void GPS_parseGNGGA(char *buffer, location_t *location, connection_t *connection); // Parse the GNGGA string
+void GPS_CalculateDirections(directions_t *directions, location_t *origin, location_t *destination); // Calculate directions to the destination
+char* strsep(char **stringp, const char *delim);
+
 
 #endif /* UTILS_GPS_H_ */

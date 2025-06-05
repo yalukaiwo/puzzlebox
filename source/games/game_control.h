@@ -15,7 +15,8 @@ typedef enum Games
 	MEMORY,
 	QUIZ,
 	PROXIMITY,
-	PIN
+	PIN,
+	VICTORY
 } game_t;
 typedef enum Flag
 {
@@ -29,6 +30,8 @@ typedef struct Game_Control
 	flag_t gameSuccessFlag;
 	flag_t gameFailFlag;
 } game_controller_t;
+
+#define GAMECONTROL_FILENAME "gameS.txt"
 
 
 game_controller_t * initGameControl();

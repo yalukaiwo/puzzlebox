@@ -41,8 +41,10 @@
 
 #include "lpuart0_interrupt.h"
 #include "lpuart2_interrupt.h"
+#include "gpio_output.h"
 
 #include "utils/GPS.h"
+#include "utils/SD.h"
 
 #include "games/game_control.h"
 #include "games/gps_location.game.h"
@@ -67,17 +69,22 @@
 // Local variables
 // -----------------------------------------------------------------------------
 
+static volatile long ms = 0;
+
 
 // -----------------------------------------------------------------------------
 // Main application
 // -----------------------------------------------------------------------------
 int main(void)
 {
+    SysTick_Config(48000);
     lpuart0_init(115200);
     lpuart2_init(9600);
+    gpio_output_init();
+
+    SD_Init();
 
     game_controller_t *gameControl = initGameControl();
-    GPS_t *GPS = initGPS();
 
     initGPSLocationGame();
     initGPSProximityGame();
@@ -86,12 +93,19 @@ int main(void)
 
     gameControl->gameSuccessFlag = true;
 
+    __enable_irq();
+
     while(1)
     {
-    	GPS->updateData();
-    	directions = GPS->getCurrentDirections();
+    	GPS_updateData();
+    	directions = GPS_getCurrentDirections();
 
     	checkGameStatus();
+
+    	if (ms >= 60000) {
+    		Logger_updateData();
+    		ms = 0;
+    	}
 
     	switch (gameControl->currentGame) {
     	case TUTORIAL:
@@ -110,16 +124,27 @@ int main(void)
     	case PIN:
     		gameControl->gameSuccessFlag = true;
     		break;
+    	case  VICTORY:
+    		gameControl->gameSuccessFlag = true;
+    		break;
     	default:
     		gameControl->gameFailFlag = true;
     		break;
     	}
+
+
+
     }
 }
 
 // -----------------------------------------------------------------------------
 // Local function implementation
 // -----------------------------------------------------------------------------
+
+void SysTick_Handler(void)
+{
+    ms++;
+}
 
 
 

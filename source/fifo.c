@@ -70,6 +70,7 @@ bool f_push(fifo_t *f, uint8_t data)
         // Store data
         f->data[f->head] = data;
 
+
         // Increment count
         (f->cnt)++;
 
