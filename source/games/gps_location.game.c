@@ -76,7 +76,7 @@ void gpsLocationGame() {
 	if (distance < LOCATION_RADIUS_M) {
 		// success
 		printf("Success");
-		gameControl->gameSuccessFlag = true;
+		gameControl->gameSuccessFlag = TRUE;
 	}
 
 	// display the directions on the lcd display

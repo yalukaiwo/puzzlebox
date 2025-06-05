@@ -88,7 +88,7 @@ void gpsProximityGame() {
 	if (distance < LOCATION_RADIUS_M) {
 		// success
 		printf("Success");
-		gameControl->gameSuccessFlag = true;
+		gameControl->gameSuccessFlag = TRUE;
 	}
 
 	// buzz the buzzer and display on lcd (maybe)

@@ -37,17 +37,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-<<<<<<< HEAD
-
-#include "lpuart0_interrupt.h"
-#include "lpuart2_interrupt.h"
-=======
 #include <math.h>
 
 #include "lpuart0_interrupt.h"
 #include "lpuart2_interrupt.h"
+#include "lpi2c0_controller_polling.h"
 #include "gpio_output.h"
->>>>>>> b38fe8ac2112362f0046921401c3524f02fc58c6
 
 #include "utils/GPS.h"
 #include "utils/SD.h"
@@ -87,13 +82,10 @@ int main(void)
     SysTick_Config(48000);
     lpuart0_init(115200);
     lpuart2_init(9600);
-<<<<<<< HEAD
     lpi2c0_controller_init();
-=======
     gpio_output_init();
->>>>>>> b38fe8ac2112362f0046921401c3524f02fc58c6
 
-    SD_Init();
+    // SD_Init();
 
     game_controller_t *gameControl = initGameControl();
 
@@ -102,7 +94,7 @@ int main(void)
 
     directions_t *directions;
 
-    gameControl->gameSuccessFlag = true;
+    gameControl->gameSuccessFlag = TRUE;
 
     __enable_irq();
 
@@ -122,24 +114,25 @@ int main(void)
     	case TUTORIAL:
     		break;
     	case LOCATION:
-    		gpsLocationGame();
+    		gameControl->gameSuccessFlag = TRUE;
     		break;
     	case MEMORY:
-    		gameControl->gameSuccessFlag = true;
+    		gameControl->gameSuccessFlag = TRUE;
     		break;
     	case QUIZ:
-    		gameControl->gameSuccessFlag = true;
+    		gameControl->gameSuccessFlag = TRUE;
+    		break;
     	case PROXIMITY:
-    		gpsProximityGame();
+    		gameControl->gameSuccessFlag = TRUE;
     		break;
     	case PIN:
-    		gameControl->gameSuccessFlag = true;
+    		gameControl->gameSuccessFlag = TRUE;
     		break;
     	case  VICTORY:
-    		gameControl->gameSuccessFlag = true;
+    		gameControl->gameSuccessFlag = TRUE;
     		break;
     	default:
-    		gameControl->gameFailFlag = true;
+    		gameControl->gameFailFlag = TRUE;
     		break;
     	}
 

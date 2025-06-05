@@ -11,6 +11,7 @@ RM := rm -rf
 -include startup/subdir.mk
 -include source/utils/subdir.mk
 -include source/games/subdir.mk
+-include source/fatFs/subdir.mk
 -include source/subdir.mk
 -include device/subdir.mk
 ifneq ($(MAKECMDGOALS),clean)

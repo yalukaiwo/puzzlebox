@@ -42,8 +42,8 @@ game_controller_t * initGameControl() {
 		break;
 	}
 
-	gameControl.gameFailFlag = false;
-	gameControl.gameSuccessFlag = false;
+	gameControl.gameFailFlag = FALSE;
+	gameControl.gameSuccessFlag = FALSE;
 }
 
 game_controller_t * getGameControl() {
@@ -55,7 +55,7 @@ void checkGameStatus() {
 	{
 		// Display fail message
 
-		gameControl.gameFailFlag = false; // Disable the flag
+		gameControl.gameFailFlag = FALSE; // Disable the flag
 	    gameControl.currentGame = TUTORIAL; // Reset the game
 	    SD_Overwrite(GAMECONTROL_FILENAME, "0", 1); // Save to the sd card
 	}
@@ -64,7 +64,7 @@ void checkGameStatus() {
 	{
 		// Display success message and open the box
 
-	    gameControl.gameSuccessFlag = false; // Disable the flag
+	    gameControl.gameSuccessFlag = FALSE; // Disable the flag
 
 	    if (gameControl.currentGame == VICTORY)
 	    {

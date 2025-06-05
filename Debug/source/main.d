@@ -46,8 +46,14 @@ source/main.o source/main.d: ../source/main.c \
  C:\Users\safin\Downloads\nigga\project\device\periph/PERI_WUU.h \
  C:\Users\safin\Downloads\nigga\project\device\periph/PERI_WWDT.h \
  ../source/lpuart0_interrupt.h ../source/lpuart2_interrupt.h \
- ../source/lpi2c0_controller_polling.h ../source/utils/GPS.h \
- ../source/utils/../lpuart2_interrupt.h
+ ../source/lpi2c0_controller_polling.h ../source/gpio_output.h \
+ ../source/utils/GPS.h ../source/utils/../lpuart2_interrupt.h \
+ ../source/utils/SD.h ../source/utils/../fatFs/ff.h \
+ ../source/utils/../fatFs/ffconf.h ../source/utils/Logger.h \
+ ../source/utils/SD.h ../source/utils/GPS.h \
+ ../source/games/game_control.h ../source/games/gps_location.game.h \
+ ../source/games/../utils/GPS.h ../source/games/../utils/SD.h \
+ ../source/games/game_control.h ../source/games/gps_proximity.game.h
 C:\Users\safin\Downloads\nigga\project\device/MCXA153.h:
 C:\Users\safin\Downloads\nigga\project\device\periph/PERI_ADC.h:
 C:\Users\safin\Downloads\nigga\project\device/MCXA153_COMMON.h:
@@ -97,5 +103,18 @@ C:\Users\safin\Downloads\nigga\project\device\periph/PERI_WWDT.h:
 ../source/lpuart0_interrupt.h:
 ../source/lpuart2_interrupt.h:
 ../source/lpi2c0_controller_polling.h:
+../source/gpio_output.h:
 ../source/utils/GPS.h:
 ../source/utils/../lpuart2_interrupt.h:
+../source/utils/SD.h:
+../source/utils/../fatFs/ff.h:
+../source/utils/../fatFs/ffconf.h:
+../source/utils/Logger.h:
+../source/utils/SD.h:
+../source/utils/GPS.h:
+../source/games/game_control.h:
+../source/games/gps_location.game.h:
+../source/games/../utils/GPS.h:
+../source/games/../utils/SD.h:
+../source/games/game_control.h:
+../source/games/gps_proximity.game.h:

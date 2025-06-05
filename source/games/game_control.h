@@ -18,10 +18,11 @@ typedef enum Games
 	PIN,
 	VICTORY
 } game_t;
+
 typedef enum Flag
 {
-	false = 0,
-	true = 1
+	FALSE = 0,
+	TRUE = 1
 } flag_t;
 
 typedef struct Game_Control

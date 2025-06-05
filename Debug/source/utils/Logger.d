@@ -2,101 +2,101 @@ source/utils/Logger.o source/utils/Logger.d: ../source/utils/Logger.c \
  ../source/utils/Logger.h ../source/utils/SD.h \
  ../source/utils/../fatFs/ff.h ../source/utils/../fatFs/ffconf.h \
  ../source/utils/GPS.h ../source/utils/../lpuart2_interrupt.h \
- /Users/yalukaiwo/Documents/MCUXpressoIDE_24.12.148/workspace/project/device/MCXA153.h \
- /Users/yalukaiwo/Documents/MCUXpressoIDE_24.12.148/workspace/project/device/periph/PERI_ADC.h \
- /Users/yalukaiwo/Documents/MCUXpressoIDE_24.12.148/workspace/project/device/MCXA153_COMMON.h \
- /Users/yalukaiwo/Documents/MCUXpressoIDE_24.12.148/workspace/project/CMSIS/core_cm33.h \
- /Users/yalukaiwo/Documents/MCUXpressoIDE_24.12.148/workspace/project/CMSIS/cmsis_version.h \
- /Users/yalukaiwo/Documents/MCUXpressoIDE_24.12.148/workspace/project/CMSIS/cmsis_compiler.h \
- /Users/yalukaiwo/Documents/MCUXpressoIDE_24.12.148/workspace/project/CMSIS/cmsis_gcc.h \
- /Users/yalukaiwo/Documents/MCUXpressoIDE_24.12.148/workspace/project/device/system_MCXA153.h \
- /Users/yalukaiwo/Documents/MCUXpressoIDE_24.12.148/workspace/project/device/MCXA153_features.h \
- /Users/yalukaiwo/Documents/MCUXpressoIDE_24.12.148/workspace/project/device/periph/PERI_AOI.h \
- /Users/yalukaiwo/Documents/MCUXpressoIDE_24.12.148/workspace/project/device/periph/PERI_CDOG.h \
- /Users/yalukaiwo/Documents/MCUXpressoIDE_24.12.148/workspace/project/device/periph/PERI_CMC.h \
- /Users/yalukaiwo/Documents/MCUXpressoIDE_24.12.148/workspace/project/device/periph/PERI_CRC.h \
- /Users/yalukaiwo/Documents/MCUXpressoIDE_24.12.148/workspace/project/device/periph/PERI_CTIMER.h \
- /Users/yalukaiwo/Documents/MCUXpressoIDE_24.12.148/workspace/project/device/periph/PERI_DEBUGMAILBOX.h \
- /Users/yalukaiwo/Documents/MCUXpressoIDE_24.12.148/workspace/project/device/periph/PERI_DMA.h \
- /Users/yalukaiwo/Documents/MCUXpressoIDE_24.12.148/workspace/project/device/periph/PERI_EIM.h \
- /Users/yalukaiwo/Documents/MCUXpressoIDE_24.12.148/workspace/project/device/periph/PERI_EQDC.h \
- /Users/yalukaiwo/Documents/MCUXpressoIDE_24.12.148/workspace/project/device/periph/PERI_ERM.h \
- /Users/yalukaiwo/Documents/MCUXpressoIDE_24.12.148/workspace/project/device/periph/PERI_FMC.h \
- /Users/yalukaiwo/Documents/MCUXpressoIDE_24.12.148/workspace/project/device/periph/PERI_FMU.h \
- /Users/yalukaiwo/Documents/MCUXpressoIDE_24.12.148/workspace/project/device/periph/PERI_FMUTEST.h \
- /Users/yalukaiwo/Documents/MCUXpressoIDE_24.12.148/workspace/project/device/periph/PERI_FREQME.h \
- /Users/yalukaiwo/Documents/MCUXpressoIDE_24.12.148/workspace/project/device/periph/PERI_GLIKEY.h \
- /Users/yalukaiwo/Documents/MCUXpressoIDE_24.12.148/workspace/project/device/periph/PERI_GPIO.h \
- /Users/yalukaiwo/Documents/MCUXpressoIDE_24.12.148/workspace/project/device/periph/PERI_I3C.h \
- /Users/yalukaiwo/Documents/MCUXpressoIDE_24.12.148/workspace/project/device/periph/PERI_INPUTMUX.h \
- /Users/yalukaiwo/Documents/MCUXpressoIDE_24.12.148/workspace/project/device/periph/PERI_LPCMP.h \
- /Users/yalukaiwo/Documents/MCUXpressoIDE_24.12.148/workspace/project/device/periph/PERI_LPI2C.h \
- /Users/yalukaiwo/Documents/MCUXpressoIDE_24.12.148/workspace/project/device/periph/PERI_LPSPI.h \
- /Users/yalukaiwo/Documents/MCUXpressoIDE_24.12.148/workspace/project/device/periph/PERI_LPTMR.h \
- /Users/yalukaiwo/Documents/MCUXpressoIDE_24.12.148/workspace/project/device/periph/PERI_LPUART.h \
- /Users/yalukaiwo/Documents/MCUXpressoIDE_24.12.148/workspace/project/device/periph/PERI_MRCC.h \
- /Users/yalukaiwo/Documents/MCUXpressoIDE_24.12.148/workspace/project/device/periph/PERI_OSTIMER.h \
- /Users/yalukaiwo/Documents/MCUXpressoIDE_24.12.148/workspace/project/device/periph/PERI_PORT.h \
- /Users/yalukaiwo/Documents/MCUXpressoIDE_24.12.148/workspace/project/device/periph/PERI_PWM.h \
- /Users/yalukaiwo/Documents/MCUXpressoIDE_24.12.148/workspace/project/device/periph/PERI_SCG.h \
- /Users/yalukaiwo/Documents/MCUXpressoIDE_24.12.148/workspace/project/device/periph/PERI_SPC.h \
- /Users/yalukaiwo/Documents/MCUXpressoIDE_24.12.148/workspace/project/device/periph/PERI_SYSCON.h \
- /Users/yalukaiwo/Documents/MCUXpressoIDE_24.12.148/workspace/project/device/periph/PERI_TRDC.h \
- /Users/yalukaiwo/Documents/MCUXpressoIDE_24.12.148/workspace/project/device/periph/PERI_USB.h \
- /Users/yalukaiwo/Documents/MCUXpressoIDE_24.12.148/workspace/project/device/periph/PERI_UTICK.h \
- /Users/yalukaiwo/Documents/MCUXpressoIDE_24.12.148/workspace/project/device/periph/PERI_VBAT.h \
- /Users/yalukaiwo/Documents/MCUXpressoIDE_24.12.148/workspace/project/device/periph/PERI_WAKETIMER.h \
- /Users/yalukaiwo/Documents/MCUXpressoIDE_24.12.148/workspace/project/device/periph/PERI_WUU.h \
- /Users/yalukaiwo/Documents/MCUXpressoIDE_24.12.148/workspace/project/device/periph/PERI_WWDT.h
+ C:\Users\safin\Downloads\nigga\project\device/MCXA153.h \
+ C:\Users\safin\Downloads\nigga\project\device\periph/PERI_ADC.h \
+ C:\Users\safin\Downloads\nigga\project\device/MCXA153_COMMON.h \
+ C:\Users\safin\Downloads\nigga\project\CMSIS/core_cm33.h \
+ C:\Users\safin\Downloads\nigga\project\CMSIS/cmsis_version.h \
+ C:\Users\safin\Downloads\nigga\project\CMSIS/cmsis_compiler.h \
+ C:\Users\safin\Downloads\nigga\project\CMSIS/cmsis_gcc.h \
+ C:\Users\safin\Downloads\nigga\project\device/system_MCXA153.h \
+ C:\Users\safin\Downloads\nigga\project\device/MCXA153_features.h \
+ C:\Users\safin\Downloads\nigga\project\device\periph/PERI_AOI.h \
+ C:\Users\safin\Downloads\nigga\project\device\periph/PERI_CDOG.h \
+ C:\Users\safin\Downloads\nigga\project\device\periph/PERI_CMC.h \
+ C:\Users\safin\Downloads\nigga\project\device\periph/PERI_CRC.h \
+ C:\Users\safin\Downloads\nigga\project\device\periph/PERI_CTIMER.h \
+ C:\Users\safin\Downloads\nigga\project\device\periph/PERI_DEBUGMAILBOX.h \
+ C:\Users\safin\Downloads\nigga\project\device\periph/PERI_DMA.h \
+ C:\Users\safin\Downloads\nigga\project\device\periph/PERI_EIM.h \
+ C:\Users\safin\Downloads\nigga\project\device\periph/PERI_EQDC.h \
+ C:\Users\safin\Downloads\nigga\project\device\periph/PERI_ERM.h \
+ C:\Users\safin\Downloads\nigga\project\device\periph/PERI_FMC.h \
+ C:\Users\safin\Downloads\nigga\project\device\periph/PERI_FMU.h \
+ C:\Users\safin\Downloads\nigga\project\device\periph/PERI_FMUTEST.h \
+ C:\Users\safin\Downloads\nigga\project\device\periph/PERI_FREQME.h \
+ C:\Users\safin\Downloads\nigga\project\device\periph/PERI_GLIKEY.h \
+ C:\Users\safin\Downloads\nigga\project\device\periph/PERI_GPIO.h \
+ C:\Users\safin\Downloads\nigga\project\device\periph/PERI_I3C.h \
+ C:\Users\safin\Downloads\nigga\project\device\periph/PERI_INPUTMUX.h \
+ C:\Users\safin\Downloads\nigga\project\device\periph/PERI_LPCMP.h \
+ C:\Users\safin\Downloads\nigga\project\device\periph/PERI_LPI2C.h \
+ C:\Users\safin\Downloads\nigga\project\device\periph/PERI_LPSPI.h \
+ C:\Users\safin\Downloads\nigga\project\device\periph/PERI_LPTMR.h \
+ C:\Users\safin\Downloads\nigga\project\device\periph/PERI_LPUART.h \
+ C:\Users\safin\Downloads\nigga\project\device\periph/PERI_MRCC.h \
+ C:\Users\safin\Downloads\nigga\project\device\periph/PERI_OSTIMER.h \
+ C:\Users\safin\Downloads\nigga\project\device\periph/PERI_PORT.h \
+ C:\Users\safin\Downloads\nigga\project\device\periph/PERI_PWM.h \
+ C:\Users\safin\Downloads\nigga\project\device\periph/PERI_SCG.h \
+ C:\Users\safin\Downloads\nigga\project\device\periph/PERI_SPC.h \
+ C:\Users\safin\Downloads\nigga\project\device\periph/PERI_SYSCON.h \
+ C:\Users\safin\Downloads\nigga\project\device\periph/PERI_TRDC.h \
+ C:\Users\safin\Downloads\nigga\project\device\periph/PERI_USB.h \
+ C:\Users\safin\Downloads\nigga\project\device\periph/PERI_UTICK.h \
+ C:\Users\safin\Downloads\nigga\project\device\periph/PERI_VBAT.h \
+ C:\Users\safin\Downloads\nigga\project\device\periph/PERI_WAKETIMER.h \
+ C:\Users\safin\Downloads\nigga\project\device\periph/PERI_WUU.h \
+ C:\Users\safin\Downloads\nigga\project\device\periph/PERI_WWDT.h
 ../source/utils/Logger.h:
 ../source/utils/SD.h:
 ../source/utils/../fatFs/ff.h:
 ../source/utils/../fatFs/ffconf.h:
 ../source/utils/GPS.h:
 ../source/utils/../lpuart2_interrupt.h:
-/Users/yalukaiwo/Documents/MCUXpressoIDE_24.12.148/workspace/project/device/MCXA153.h:
-/Users/yalukaiwo/Documents/MCUXpressoIDE_24.12.148/workspace/project/device/periph/PERI_ADC.h:
-/Users/yalukaiwo/Documents/MCUXpressoIDE_24.12.148/workspace/project/device/MCXA153_COMMON.h:
-/Users/yalukaiwo/Documents/MCUXpressoIDE_24.12.148/workspace/project/CMSIS/core_cm33.h:
-/Users/yalukaiwo/Documents/MCUXpressoIDE_24.12.148/workspace/project/CMSIS/cmsis_version.h:
-/Users/yalukaiwo/Documents/MCUXpressoIDE_24.12.148/workspace/project/CMSIS/cmsis_compiler.h:
-/Users/yalukaiwo/Documents/MCUXpressoIDE_24.12.148/workspace/project/CMSIS/cmsis_gcc.h:
-/Users/yalukaiwo/Documents/MCUXpressoIDE_24.12.148/workspace/project/device/system_MCXA153.h:
-/Users/yalukaiwo/Documents/MCUXpressoIDE_24.12.148/workspace/project/device/MCXA153_features.h:
-/Users/yalukaiwo/Documents/MCUXpressoIDE_24.12.148/workspace/project/device/periph/PERI_AOI.h:
-/Users/yalukaiwo/Documents/MCUXpressoIDE_24.12.148/workspace/project/device/periph/PERI_CDOG.h:
-/Users/yalukaiwo/Documents/MCUXpressoIDE_24.12.148/workspace/project/device/periph/PERI_CMC.h:
-/Users/yalukaiwo/Documents/MCUXpressoIDE_24.12.148/workspace/project/device/periph/PERI_CRC.h:
-/Users/yalukaiwo/Documents/MCUXpressoIDE_24.12.148/workspace/project/device/periph/PERI_CTIMER.h:
-/Users/yalukaiwo/Documents/MCUXpressoIDE_24.12.148/workspace/project/device/periph/PERI_DEBUGMAILBOX.h:
-/Users/yalukaiwo/Documents/MCUXpressoIDE_24.12.148/workspace/project/device/periph/PERI_DMA.h:
-/Users/yalukaiwo/Documents/MCUXpressoIDE_24.12.148/workspace/project/device/periph/PERI_EIM.h:
-/Users/yalukaiwo/Documents/MCUXpressoIDE_24.12.148/workspace/project/device/periph/PERI_EQDC.h:
-/Users/yalukaiwo/Documents/MCUXpressoIDE_24.12.148/workspace/project/device/periph/PERI_ERM.h:
-/Users/yalukaiwo/Documents/MCUXpressoIDE_24.12.148/workspace/project/device/periph/PERI_FMC.h:
-/Users/yalukaiwo/Documents/MCUXpressoIDE_24.12.148/workspace/project/device/periph/PERI_FMU.h:
-/Users/yalukaiwo/Documents/MCUXpressoIDE_24.12.148/workspace/project/device/periph/PERI_FMUTEST.h:
-/Users/yalukaiwo/Documents/MCUXpressoIDE_24.12.148/workspace/project/device/periph/PERI_FREQME.h:
-/Users/yalukaiwo/Documents/MCUXpressoIDE_24.12.148/workspace/project/device/periph/PERI_GLIKEY.h:
-/Users/yalukaiwo/Documents/MCUXpressoIDE_24.12.148/workspace/project/device/periph/PERI_GPIO.h:
-/Users/yalukaiwo/Documents/MCUXpressoIDE_24.12.148/workspace/project/device/periph/PERI_I3C.h:
-/Users/yalukaiwo/Documents/MCUXpressoIDE_24.12.148/workspace/project/device/periph/PERI_INPUTMUX.h:
-/Users/yalukaiwo/Documents/MCUXpressoIDE_24.12.148/workspace/project/device/periph/PERI_LPCMP.h:
-/Users/yalukaiwo/Documents/MCUXpressoIDE_24.12.148/workspace/project/device/periph/PERI_LPI2C.h:
-/Users/yalukaiwo/Documents/MCUXpressoIDE_24.12.148/workspace/project/device/periph/PERI_LPSPI.h:
-/Users/yalukaiwo/Documents/MCUXpressoIDE_24.12.148/workspace/project/device/periph/PERI_LPTMR.h:
-/Users/yalukaiwo/Documents/MCUXpressoIDE_24.12.148/workspace/project/device/periph/PERI_LPUART.h:
-/Users/yalukaiwo/Documents/MCUXpressoIDE_24.12.148/workspace/project/device/periph/PERI_MRCC.h:
-/Users/yalukaiwo/Documents/MCUXpressoIDE_24.12.148/workspace/project/device/periph/PERI_OSTIMER.h:
-/Users/yalukaiwo/Documents/MCUXpressoIDE_24.12.148/workspace/project/device/periph/PERI_PORT.h:
-/Users/yalukaiwo/Documents/MCUXpressoIDE_24.12.148/workspace/project/device/periph/PERI_PWM.h:
-/Users/yalukaiwo/Documents/MCUXpressoIDE_24.12.148/workspace/project/device/periph/PERI_SCG.h:
-/Users/yalukaiwo/Documents/MCUXpressoIDE_24.12.148/workspace/project/device/periph/PERI_SPC.h:
-/Users/yalukaiwo/Documents/MCUXpressoIDE_24.12.148/workspace/project/device/periph/PERI_SYSCON.h:
-/Users/yalukaiwo/Documents/MCUXpressoIDE_24.12.148/workspace/project/device/periph/PERI_TRDC.h:
-/Users/yalukaiwo/Documents/MCUXpressoIDE_24.12.148/workspace/project/device/periph/PERI_USB.h:
-/Users/yalukaiwo/Documents/MCUXpressoIDE_24.12.148/workspace/project/device/periph/PERI_UTICK.h:
-/Users/yalukaiwo/Documents/MCUXpressoIDE_24.12.148/workspace/project/device/periph/PERI_VBAT.h:
-/Users/yalukaiwo/Documents/MCUXpressoIDE_24.12.148/workspace/project/device/periph/PERI_WAKETIMER.h:
-/Users/yalukaiwo/Documents/MCUXpressoIDE_24.12.148/workspace/project/device/periph/PERI_WUU.h:
-/Users/yalukaiwo/Documents/MCUXpressoIDE_24.12.148/workspace/project/device/periph/PERI_WWDT.h:
+C:\Users\safin\Downloads\nigga\project\device/MCXA153.h:
+C:\Users\safin\Downloads\nigga\project\device\periph/PERI_ADC.h:
+C:\Users\safin\Downloads\nigga\project\device/MCXA153_COMMON.h:
+C:\Users\safin\Downloads\nigga\project\CMSIS/core_cm33.h:
+C:\Users\safin\Downloads\nigga\project\CMSIS/cmsis_version.h:
+C:\Users\safin\Downloads\nigga\project\CMSIS/cmsis_compiler.h:
+C:\Users\safin\Downloads\nigga\project\CMSIS/cmsis_gcc.h:
+C:\Users\safin\Downloads\nigga\project\device/system_MCXA153.h:
+C:\Users\safin\Downloads\nigga\project\device/MCXA153_features.h:
+C:\Users\safin\Downloads\nigga\project\device\periph/PERI_AOI.h:
+C:\Users\safin\Downloads\nigga\project\device\periph/PERI_CDOG.h:
+C:\Users\safin\Downloads\nigga\project\device\periph/PERI_CMC.h:
+C:\Users\safin\Downloads\nigga\project\device\periph/PERI_CRC.h:
+C:\Users\safin\Downloads\nigga\project\device\periph/PERI_CTIMER.h:
+C:\Users\safin\Downloads\nigga\project\device\periph/PERI_DEBUGMAILBOX.h:
+C:\Users\safin\Downloads\nigga\project\device\periph/PERI_DMA.h:
+C:\Users\safin\Downloads\nigga\project\device\periph/PERI_EIM.h:
+C:\Users\safin\Downloads\nigga\project\device\periph/PERI_EQDC.h:
+C:\Users\safin\Downloads\nigga\project\device\periph/PERI_ERM.h:
+C:\Users\safin\Downloads\nigga\project\device\periph/PERI_FMC.h:
+C:\Users\safin\Downloads\nigga\project\device\periph/PERI_FMU.h:
+C:\Users\safin\Downloads\nigga\project\device\periph/PERI_FMUTEST.h:
+C:\Users\safin\Downloads\nigga\project\device\periph/PERI_FREQME.h:
+C:\Users\safin\Downloads\nigga\project\device\periph/PERI_GLIKEY.h:
+C:\Users\safin\Downloads\nigga\project\device\periph/PERI_GPIO.h:
+C:\Users\safin\Downloads\nigga\project\device\periph/PERI_I3C.h:
+C:\Users\safin\Downloads\nigga\project\device\periph/PERI_INPUTMUX.h:
+C:\Users\safin\Downloads\nigga\project\device\periph/PERI_LPCMP.h:
+C:\Users\safin\Downloads\nigga\project\device\periph/PERI_LPI2C.h:
+C:\Users\safin\Downloads\nigga\project\device\periph/PERI_LPSPI.h:
+C:\Users\safin\Downloads\nigga\project\device\periph/PERI_LPTMR.h:
+C:\Users\safin\Downloads\nigga\project\device\periph/PERI_LPUART.h:
+C:\Users\safin\Downloads\nigga\project\device\periph/PERI_MRCC.h:
+C:\Users\safin\Downloads\nigga\project\device\periph/PERI_OSTIMER.h:
+C:\Users\safin\Downloads\nigga\project\device\periph/PERI_PORT.h:
+C:\Users\safin\Downloads\nigga\project\device\periph/PERI_PWM.h:
+C:\Users\safin\Downloads\nigga\project\device\periph/PERI_SCG.h:
+C:\Users\safin\Downloads\nigga\project\device\periph/PERI_SPC.h:
+C:\Users\safin\Downloads\nigga\project\device\periph/PERI_SYSCON.h:
+C:\Users\safin\Downloads\nigga\project\device\periph/PERI_TRDC.h:
+C:\Users\safin\Downloads\nigga\project\device\periph/PERI_USB.h:
+C:\Users\safin\Downloads\nigga\project\device\periph/PERI_UTICK.h:
+C:\Users\safin\Downloads\nigga\project\device\periph/PERI_VBAT.h:
+C:\Users\safin\Downloads\nigga\project\device\periph/PERI_WAKETIMER.h:
+C:\Users\safin\Downloads\nigga\project\device\periph/PERI_WUU.h:
+C:\Users\safin\Downloads\nigga\project\device\periph/PERI_WWDT.h:

@@ -47,7 +47,10 @@ source/games/gps_location.game.o source/games/gps_location.game.d: \
  C:\Users\safin\Downloads\nigga\project\device\periph/PERI_VBAT.h \
  C:\Users\safin\Downloads\nigga\project\device\periph/PERI_WAKETIMER.h \
  C:\Users\safin\Downloads\nigga\project\device\periph/PERI_WUU.h \
- C:\Users\safin\Downloads\nigga\project\device\periph/PERI_WWDT.h
+ C:\Users\safin\Downloads\nigga\project\device\periph/PERI_WWDT.h \
+ ../source/games/../utils/SD.h ../source/games/../utils/../fatFs/ff.h \
+ ../source/games/../utils/../fatFs/ffconf.h \
+ ../source/games/game_control.h
 ../source/games/gps_location.game.h:
 ../source/games/../utils/GPS.h:
 ../source/games/../utils/../lpuart2_interrupt.h:
@@ -97,3 +100,7 @@ C:\Users\safin\Downloads\nigga\project\device\periph/PERI_VBAT.h:
 C:\Users\safin\Downloads\nigga\project\device\periph/PERI_WAKETIMER.h:
 C:\Users\safin\Downloads\nigga\project\device\periph/PERI_WUU.h:
 C:\Users\safin\Downloads\nigga\project\device\periph/PERI_WWDT.h:
+../source/games/../utils/SD.h:
+../source/games/../utils/../fatFs/ff.h:
+../source/games/../utils/../fatFs/ffconf.h:
+../source/games/game_control.h:

@@ -4,13 +4,19 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
-../source/games/gps_location.game.c 
+../source/games/game_control.c \
+../source/games/gps_location.game.c \
+../source/games/gps_proximity.game.c 
 
 C_DEPS += \
-./source/games/gps_location.game.d 
+./source/games/game_control.d \
+./source/games/gps_location.game.d \
+./source/games/gps_proximity.game.d 
 
 OBJS += \
-./source/games/gps_location.game.o 
+./source/games/game_control.o \
+./source/games/gps_location.game.o \
+./source/games/gps_proximity.game.o 
 
 
 # Each subdirectory must supply rules for building sources it contributes
@@ -25,7 +31,7 @@ source/games/%.o: ../source/games/%.c source/games/subdir.mk
 clean: clean-source-2f-games
 
 clean-source-2f-games:
-	-$(RM) ./source/games/gps_location.game.d ./source/games/gps_location.game.o
+	-$(RM) ./source/games/game_control.d ./source/games/game_control.o ./source/games/gps_location.game.d ./source/games/gps_location.game.o ./source/games/gps_proximity.game.d ./source/games/gps_proximity.game.o
 
 .PHONY: clean-source-2f-games
 

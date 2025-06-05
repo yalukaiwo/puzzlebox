@@ -5,6 +5,7 @@
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
 ../source/fifo.c \
+../source/gpio_output.c \
 ../source/lpi2c0_controller_polling.c \
 ../source/lpuart0_interrupt.c \
 ../source/lpuart2_interrupt.c \
@@ -14,6 +15,7 @@ C_SRCS += \
 
 C_DEPS += \
 ./source/fifo.d \
+./source/gpio_output.d \
 ./source/lpi2c0_controller_polling.d \
 ./source/lpuart0_interrupt.d \
 ./source/lpuart2_interrupt.d \
@@ -23,6 +25,7 @@ C_DEPS += \
 
 OBJS += \
 ./source/fifo.o \
+./source/gpio_output.o \
 ./source/lpi2c0_controller_polling.o \
 ./source/lpuart0_interrupt.o \
 ./source/lpuart2_interrupt.o \
@@ -43,7 +46,7 @@ source/%.o: ../source/%.c source/subdir.mk
 clean: clean-source
 
 clean-source:
-	-$(RM) ./source/fifo.d ./source/fifo.o ./source/lpi2c0_controller_polling.d ./source/lpi2c0_controller_polling.o ./source/lpuart0_interrupt.d ./source/lpuart0_interrupt.o ./source/lpuart2_interrupt.d ./source/lpuart2_interrupt.o ./source/main.d ./source/main.o ./source/retarget.d ./source/retarget.o ./source/semihost_hardfault.d ./source/semihost_hardfault.o
+	-$(RM) ./source/fifo.d ./source/fifo.o ./source/gpio_output.d ./source/gpio_output.o ./source/lpi2c0_controller_polling.d ./source/lpi2c0_controller_polling.o ./source/lpuart0_interrupt.d ./source/lpuart0_interrupt.o ./source/lpuart2_interrupt.d ./source/lpuart2_interrupt.o ./source/main.d ./source/main.o ./source/retarget.d ./source/retarget.o ./source/semihost_hardfault.d ./source/semihost_hardfault.o
 
 .PHONY: clean-source
 
