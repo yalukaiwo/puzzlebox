@@ -45,6 +45,7 @@
 
 #include "utils/GPS.h"
 #include "utils/SD.h"
+#include "utils/Logger.h"
 
 #include "games/game_control.h"
 #include "games/gps_location.game.h"
