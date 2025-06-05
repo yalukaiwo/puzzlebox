@@ -24,6 +24,9 @@ double calculateLongitudeDistance(double fromLong, double toLong, double latitud
 double calculateLatitudeDistance(double fromLat, double toLat); // Calculate the distance to the destination lat-wise
 char determineLongitudeDirection(double fromLong, double toLong); // Get the long direction
 char determineLatitudeDirection(double fromLat, double toLat); // Get the lat direction
+void parseGNGGA(char *buffer, location_t *location, connection_t *connection); // Parse the GNGGA string
+void GPSCalculateDirections(directions_t *directions, location_t *origin, location_t *destination); // Calculate directions to the destination
+
 
 
 // Public functions

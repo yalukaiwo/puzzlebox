@@ -51,8 +51,6 @@ location_t* GPS_getCurrentLocation(); // Get the current location
 connection_t* GPS_getConnectionQuality(); // Get the connection quality
 directions_t* GPS_getCurrentDirections(); // Get the current directions
 int GPS_isLocationRelevant(); // Check relevance of the location
-void GPS_parseGNGGA(char *buffer, location_t *location, connection_t *connection); // Parse the GNGGA string
-void GPS_CalculateDirections(directions_t *directions, location_t *origin, location_t *destination); // Calculate directions to the destination
 char* strsep(char **stringp, const char *delim);
 
 
