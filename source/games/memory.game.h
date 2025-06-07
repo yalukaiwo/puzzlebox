@@ -5,11 +5,19 @@
  *      Author: adibh
  */
 
-#ifndef GAMES_MEMORY_GAME_H_
-#define GAMES_MEMORY_GAME_H_
+#ifndef MEMORY_GAME_H
+#define MEMORY_GAME_H
 
-void initMemoryGame();
+#ifdef __cplusplus
+extern "C" {
+#endif
 
-void memoryGame();
+void memory_game_init(void);
+void memory_game_loop(void);
 
-#endif /* GAMES_MEMORY_GAME_H_ */
+#ifdef __cplusplus
+}
+#endif
+
+#endif // MEMORY_GAME_H
+
