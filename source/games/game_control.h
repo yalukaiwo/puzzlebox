@@ -39,5 +39,8 @@ game_controller_t * initGameControl();
 game_controller_t * getGameControl();
 void checkGameStatus();
 
+#define GAME_STATUS_SUCCESS()   (getGameControl()->gameSuccessFlag = TRUE)
+#define GAME_STATUS_FAILURE()   (getGameControl()->gameFailFlag = TRUE)
+
 
 #endif /* GAME_CONTROL_H_ */

@@ -15,9 +15,11 @@ OBJS :=
 # Every subdirectory with source files must be described here
 SUBDIRS := \
 device \
+source/Keypad \
 source/fatFs \
 source \
 source/games \
+source/lcdDriver \
 source/utils \
 startup \
 

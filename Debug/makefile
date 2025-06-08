@@ -10,8 +10,10 @@ RM := rm -rf
 -include sources.mk
 -include startup/subdir.mk
 -include source/utils/subdir.mk
+-include source/lcdDriver/subdir.mk
 -include source/games/subdir.mk
 -include source/fatFs/subdir.mk
+-include source/Keypad/subdir.mk
 -include source/subdir.mk
 -include device/subdir.mk
 ifneq ($(MAKECMDGOALS),clean)
