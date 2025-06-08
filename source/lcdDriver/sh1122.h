@@ -19,6 +19,9 @@ void SH1122_DrawPixel(uint8_t x, uint8_t y, bool color);
 void SH1122_DrawChar(uint8_t x, uint8_t y, char c);
 void SH1122_DrawText(uint8_t x, uint8_t y, const char *text);
 void SH1122_UpdateScreen(void);
+void SH1122_Display(void);
+void SH1122_SetCursor(uint8_t x, uint8_t y);
+void SH1122_WriteString(const char *str);
 
 #ifdef __cplusplus
 }

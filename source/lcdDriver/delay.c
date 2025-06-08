@@ -1,8 +1,8 @@
 
 #include "lcdDriver/delay.h"
 #include "fsl_device_registers.h"
-//#include "fsl_debug_console.h"
-//#include "fsl_clock.h"
+#include "Keypad/fsl_debug_console.h"
+#include "Keypad/fsl_clock.h"
 
 void Delay_us(uint32_t us) {
     uint32_t cycles_per_us = CLOCK_GetCoreSysClkFreq() / 1000000;
