@@ -4,17 +4,26 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
+../source/utils/Buttons.c \
+../source/utils/Buzzer.c \
 ../source/utils/GPS.c \
+../source/utils/Leds.c \
 ../source/utils/Logger.c \
 ../source/utils/SD.c 
 
 C_DEPS += \
+./source/utils/Buttons.d \
+./source/utils/Buzzer.d \
 ./source/utils/GPS.d \
+./source/utils/Leds.d \
 ./source/utils/Logger.d \
 ./source/utils/SD.d 
 
 OBJS += \
+./source/utils/Buttons.o \
+./source/utils/Buzzer.o \
 ./source/utils/GPS.o \
+./source/utils/Leds.o \
 ./source/utils/Logger.o \
 ./source/utils/SD.o 
 
@@ -31,7 +40,7 @@ source/utils/%.o: ../source/utils/%.c source/utils/subdir.mk
 clean: clean-source-2f-utils
 
 clean-source-2f-utils:
-	-$(RM) ./source/utils/GPS.d ./source/utils/GPS.o ./source/utils/Logger.d ./source/utils/Logger.o ./source/utils/SD.d ./source/utils/SD.o
+	-$(RM) ./source/utils/Buttons.d ./source/utils/Buttons.o ./source/utils/Buzzer.d ./source/utils/Buzzer.o ./source/utils/GPS.d ./source/utils/GPS.o ./source/utils/Leds.d ./source/utils/Leds.o ./source/utils/Logger.d ./source/utils/Logger.o ./source/utils/SD.d ./source/utils/SD.o
 
 .PHONY: clean-source-2f-utils
 

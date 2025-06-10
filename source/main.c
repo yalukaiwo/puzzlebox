@@ -85,7 +85,7 @@ int main(void)
     lpi2c0_controller_init();
     gpio_output_init();
 
-    // SD_Init();
+    SD_Init();
 
     game_controller_t *gameControl = initGameControl();
 
