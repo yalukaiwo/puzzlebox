@@ -5,9 +5,14 @@
  *      Author: adibh
  */
 
-#ifndef UTILS_BUTTONS_H_
-#define UTILS_BUTTONS_H_
+#ifndef BUTTON_CONTROL_H
+#define BUTTON_CONTROL_H
 
-void Buttons_read(int id);
+#include <stdint.h>
+#include <stdbool.h>
 
-#endif /* UTILS_BUTTONS_H_ */
+void buttons_init(void);
+bool button_is_pressed(uint8_t button_number);
+
+#endif
+

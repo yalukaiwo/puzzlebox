@@ -5,9 +5,12 @@
  *      Author: adibh
  */
 
-#ifndef UTILS_BUZZER_H_
-#define UTILS_BUZZER_H_
+#ifndef BUZZER_PWM_H
+#define BUZZER_PWM_H
 
+void buzzer_pwm_init(void);
+void buzzer_beep_error(void);
+void buzzer_beep_win(void);
 
+#endif
 
-#endif /* UTILS_BUZZER_H_ */

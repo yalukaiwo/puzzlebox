@@ -4,17 +4,26 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
+../source/utils/Buttons.c \
+../source/utils/Buzzer.c \
 ../source/utils/GPS.c \
+../source/utils/Leds.c \
 ../source/utils/Logger.c \
 ../source/utils/SD.c 
 
 C_DEPS += \
+./source/utils/Buttons.d \
+./source/utils/Buzzer.d \
 ./source/utils/GPS.d \
+./source/utils/Leds.d \
 ./source/utils/Logger.d \
 ./source/utils/SD.d 
 
 OBJS += \
+./source/utils/Buttons.o \
+./source/utils/Buzzer.o \
 ./source/utils/GPS.o \
+./source/utils/Leds.o \
 ./source/utils/Logger.o \
 ./source/utils/SD.o 
 
@@ -23,7 +32,9 @@ OBJS += \
 source/utils/%.o: ../source/utils/%.c source/utils/subdir.mk
 	@echo 'Building file: $<'
 	@echo 'Invoking: MCU C Compiler'
-	arm-none-eabi-gcc -std=gnu99 -DCPU_MCXA153VLH -DCPU_MCXA153VLH_cm33_nodsp -DMCUXPRESSO_SDK -DSDK_DEBUGCONSOLE=0 -DMCUX_META_BUILD -DPRINTF_FLOAT_ENABLE=1 -D__MCUXPRESSO -D__USE_CMSIS -DDEBUG -D__REDLIB__ -I"/Users/yalukaiwo/Documents/MCUXpressoIDE_24.12.148/workspace/project/source" -I"/Users/yalukaiwo/Documents/MCUXpressoIDE_24.12.148/workspace/project/CMSIS" -I"/Users/yalukaiwo/Documents/MCUXpressoIDE_24.12.148/workspace/project/CMSIS/m-profile" -I"/Users/yalukaiwo/Documents/MCUXpressoIDE_24.12.148/workspace/project/device" -I"/Users/yalukaiwo/Documents/MCUXpressoIDE_24.12.148/workspace/project/device/periph" -O0 -fno-common -g3 -gdwarf-4 -mcpu=cortex-m33+nodsp -c -ffunction-sections -fdata-sections -fno-builtin -fmerge-constants -fmacro-prefix-map="$(<D)/"= -mcpu=cortex-m33+nodsp -mthumb -D__REDLIB__ -fstack-usage -specs=redlib.specs -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)" -MT"$(@:%.o=%.d)" -o "$@" "$<"
+	arm-none-eabi-gcc -std=gnu99 -DCPU_MCXA153VLH -DCPU_MCXA153VLH_cm33_nodsp -DMCUXPRESSO_SDK -DSDK_DEBUGCONSOLE=0 -DMCUX_META_BUILD -DPRINTF_FLOAT_ENABLE=1 -D__MCUXPRESSO -D__USE_CMSIS -DDEBUG -D__REDLIB__ -I"C:\Users\adibh\MCUXpressoIDE\workspace\project\source" -I"C:\Users\adibh\MCUXpressoIDE\workspace\project\CMSIS" -I"C:\Users\adibh\MCUXpressoIDE\workspace\project\CMSIS\m-profile" -I"C:\Users\adibh\MCUXpressoIDE\workspace\project\device" -I"C:\Users\adibh\MCUXpressoIDE\workspace\project\device\periph" -I"${workspace_loc:${ProjDirPath}/device
+}" -I"${workspace_loc:${ProjDirPath}/device/periph
+}" -O0 -fno-common -g3 -gdwarf-4 -mcpu=cortex-m33+nodsp -c -ffunction-sections -fdata-sections -fno-builtin -fmerge-constants -fmacro-prefix-map="$(<D)/"= -mcpu=cortex-m33+nodsp -mthumb -D__REDLIB__ -fstack-usage -specs=redlib.specs -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)" -MT"$(@:%.o=%.d)" -o "$@" "$<"
 	@echo 'Finished building: $<'
 	@echo ' '
 
@@ -31,7 +42,7 @@ source/utils/%.o: ../source/utils/%.c source/utils/subdir.mk
 clean: clean-source-2f-utils
 
 clean-source-2f-utils:
-	-$(RM) ./source/utils/GPS.d ./source/utils/GPS.o ./source/utils/Logger.d ./source/utils/Logger.o ./source/utils/SD.d ./source/utils/SD.o
+	-$(RM) ./source/utils/Buttons.d ./source/utils/Buttons.o ./source/utils/Buzzer.d ./source/utils/Buzzer.o ./source/utils/GPS.d ./source/utils/GPS.o ./source/utils/Leds.d ./source/utils/Leds.o ./source/utils/Logger.d ./source/utils/Logger.o ./source/utils/SD.d ./source/utils/SD.o
 
 .PHONY: clean-source-2f-utils
 

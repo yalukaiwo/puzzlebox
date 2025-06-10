@@ -5,9 +5,14 @@
  *      Author: adibh
  */
 
-#ifndef UTILS_LEDS_H_
-#define UTILS_LEDS_H_
+#ifndef LED_CONTROL_H
+#define LED_CONTROL_H
 
+#include <stdint.h>
 
+void leds_init(void);
+void led_on(uint8_t led_number);
+void led_off(uint8_t led_number);
 
-#endif /* UTILS_LEDS_H_ */
+#endif
+

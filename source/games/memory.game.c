@@ -4,10 +4,10 @@
  *  Created on: 7 Jun 2025
  *      Author: adibh
  */
-#include "memory_game.h"
-#include "button_control.h"
-#include "led_control.h"
-#include "buzzer_pwm.h"
+#include "memory.game.h"
+#include "utils/Buttons.h"
+#include "utils/Leds.h"
+#include "utils/Buzzer.h"
 #include "utils.h"
 #include <stdlib.h>
 

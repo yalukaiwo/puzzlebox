@@ -51,4 +51,6 @@ void gpio_output_init(void)
     //
     // PDD13: [1] = Output
     GPIO1->PDDR |= (1<<5);
+
+
 }
