@@ -1,8 +1,8 @@
 /*! ***************************************************************************
  *
- * \brief     Low level driver for the Standard Counter or Timer (PWM0)
- * \file      ctimer1_pwm.h
- * \author    Hugo Arends
+ * \brief     Source for buzzer driver
+ * \file      buzzer.c
+ * \author    Hugo Arends (extended)
  * \date      February 2024
  *
  * \see       NXP. (2024). MCX A153, A152, A143, A142 Reference Manual. Rev. 4,
@@ -34,15 +34,22 @@
  *
  ******************************************************************************/
 
-#ifndef CTIMER1_PWM_H
-#define CTIMER1_PWM_H
-
-#include <MCXA153.h>
-#include <stdbool.h>
+#include "buzzer.h"
 
 // -----------------------------------------------------------------------------
-// Shared function prototypes
+// Function implementation
 // -----------------------------------------------------------------------------
-void ctimer1_pwm_init(void);
 
-#endif // CTIMER1_PWM_H
+void Buzzer_buzz(int intensity_percent)
+{
+    if (intensity_percent < 0)
+        intensity_percent = 0;
+    else if (intensity_percent > 100)
+        intensity_percent = 100;
+
+    // Convert intensity percentage to PWM duty cycle value
+    uint16_t duty = (uint16_t)((intensity_percent * 1000) / 100);
+
+    // Set the duty cycle on match register (MAT2 = VAL2)
+    PWM0->SM[2].VAL2 = -duty;
+}

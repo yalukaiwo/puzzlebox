@@ -1,8 +1,8 @@
 /*! ***************************************************************************
  *
- * \brief     Main application
- * \file      main.c
- * \author    Hugo Arends
+ * \brief     Source for buzzer driver
+ * \file      buzzer.c
+ * \author    Hugo Arends (extended)
  * \date      February 2024
  *
  * \see       NXP. (2024). MCX A153, A152, A143, A142 Reference Manual. Rev. 4,
@@ -32,53 +32,30 @@
  *            FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
  *            OTHER DEALINGS IN THE SOFTWARE.
  *
- *****************************************************************************/
+ ******************************************************************************/
 
-#include <MCXA153.h>
-#include "ctimer1_pwm.h"
-
-// -----------------------------------------------------------------------------
-// Local type definitions
-// -----------------------------------------------------------------------------
+#include "buzzer.h"
 
 // -----------------------------------------------------------------------------
-// Local function prototypes
+// Function implementation
 // -----------------------------------------------------------------------------
 
-// -----------------------------------------------------------------------------
-// Local variables
-// -----------------------------------------------------------------------------
-
-// -----------------------------------------------------------------------------
-// Main application
-// -----------------------------------------------------------------------------
-int main(void)
+void Buzzer_buzz(int intensity_percent)
 {
-    ctimer1_pwm_init();
+    if (intensity_percent < 0)
+        intensity_percent = 0;
+    else if (intensity_percent > 100)
+        intensity_percent = 100;
 
-    while (1)
-    {
-        // Loop to change duty cycle to simulate intensity control
-        for (int duty = 50; duty <= 450; duty += 50)
-        {
-            PWM0->SM[2].VAL[2] = -duty;
-            PWM0->SM[2].VAL[3] = duty;
-            PWM0->MCTRL |= PWM_MCTRL_LDOK(1 << 2);
+    // Luka instructed to ensure correct MUX setup for PWM0_X2 on P3_14
+    // This sets the correct pin function (ALT5) only once
+    MRCC0->MRCC_GLB_CC1_SET = MRCC_MRCC_GLB_CC1_PORT3(1);    // Enable clock for PORT3
+    MRCC0->MRCC_GLB_RST1_SET = MRCC_MRCC_GLB_RST1_PORT3(1);  // Release reset for PORT3
+    PORT3->PCR[14] = PORT_PCR_MUX(5);  // Set P3_14 as PWM0_X2 (ALT5)
 
-            for (volatile int i = 0; i < 500000; i++);
-        }
+    // Convert intensity percentage to PWM duty cycle value
+    uint16_t duty = (uint16_t)((intensity_percent * 1000) / 100);
 
-        for (int duty = 400; duty >= 50; duty -= 50)
-        {
-            PWM0->SM[2].VAL[2] = -duty;
-            PWM0->SM[2].VAL[3] = duty;
-            PWM0->MCTRL |= PWM_MCTRL_LDOK(1 << 2);
-
-            for (volatile int i = 0; i < 500000; i++);
-        }
-    }
+    // Set the duty cycle on match register (MAT2 = VAL2)
+    PWM0->SM[2].VAL2 = -duty;
 }
-
-// -----------------------------------------------------------------------------
-// Local function implementation
-// -----------------------------------------------------------------------------
