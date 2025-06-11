@@ -52,6 +52,9 @@
 #include "games/gps_location.game.h"
 #include "games/gps_proximity.game.h"
 
+#include <MCXA153.h>
+#include "ctimer1_pwm.h"
+
 // -----------------------------------------------------------------------------
 // Local type definitions
 // -----------------------------------------------------------------------------
@@ -136,7 +139,15 @@ int main(void)
     		break;
     	}
 
+    	int main(void)
+    	{
+    	    ctimer1_pwm_init();
 
+    	    while(1)
+    	    {
+
+    	    }
+    	}
 
     }
 }
