@@ -52,6 +52,9 @@
 #include "games/gps_location.game.h"
 #include "games/gps_proximity.game.h"
 
+#include "ctimer1_pwm.h"  // Added for PWM initialization
+#include "utils/buzzer.h"       // Buzzer control function declaration
+
 // -----------------------------------------------------------------------------
 // Local type definitions
 // -----------------------------------------------------------------------------
@@ -84,6 +87,8 @@ int main(void)
     lpuart2_init(9600);
     lpi2c0_controller_init();
     gpio_output_init();
+
+    ctimer1_pwm_init();  // Initialize PWM0_X2 for buzzer
 
     SD_Init();
 
@@ -129,15 +134,13 @@ int main(void)
     		gameControl->gameSuccessFlag = TRUE;
     		break;
     	case  VICTORY:
+    		Buzzer_buzz(75); // Buzz at 75% intensity on victory
     		gameControl->gameSuccessFlag = TRUE;
     		break;
     	default:
     		gameControl->gameFailFlag = TRUE;
     		break;
     	}
-
-
-
     }
 }
 
@@ -149,7 +152,3 @@ void SysTick_Handler(void)
 {
     ms++;
 }
-
-
-
-
