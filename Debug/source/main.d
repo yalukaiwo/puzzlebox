@@ -48,15 +48,13 @@ source/main.o source/main.d: ../source/main.c \
  ../source/lpuart0_interrupt.h ../source/lpuart2_interrupt.h \
  ../source/lcdDriver/lcd.h ../source/gpio_output.h ../source/utils/GPS.h \
  ../source/utils/../lpuart2_interrupt.h ../source/Keypad/keypad.h \
- C:\Users\safin\Downloads\nigga\project\source/Keypad/board.h \
- C:\Users\safin\Downloads\nigga\project\source/Keypad/clock_config.h \
+ ../source/Keypad/fsl_gpio.h \
  C:\Users\safin\Downloads\nigga\project\source/Keypad/fsl_common.h \
  C:\Users\safin\Downloads\nigga\project\device/fsl_device_registers.h \
  C:\Users\safin\Downloads\nigga\project\device/MCXA153.h \
  C:\Users\safin\Downloads\nigga\project\source/Keypad/fsl_common_arm.h \
  C:\Users\safin\Downloads\nigga\project\source/Keypad/fsl_clock.h \
  C:\Users\safin\Downloads\nigga\project\source/Keypad/fsl_reset.h \
- C:\Users\safin\Downloads\nigga\project\source/Keypad/fsl_gpio.h \
  ../source/utils/Logger.h ../source/utils/SD.h \
  ../source/utils/../fatFs/ff.h ../source/utils/../fatFs/ffconf.h \
  ../source/utils/GPS.h ../source/utils/SD.h \
@@ -119,15 +117,13 @@ C:\Users\safin\Downloads\nigga\project\device\periph/PERI_WWDT.h:
 ../source/utils/GPS.h:
 ../source/utils/../lpuart2_interrupt.h:
 ../source/Keypad/keypad.h:
-C:\Users\safin\Downloads\nigga\project\source/Keypad/board.h:
-C:\Users\safin\Downloads\nigga\project\source/Keypad/clock_config.h:
+../source/Keypad/fsl_gpio.h:
 C:\Users\safin\Downloads\nigga\project\source/Keypad/fsl_common.h:
 C:\Users\safin\Downloads\nigga\project\device/fsl_device_registers.h:
 C:\Users\safin\Downloads\nigga\project\device/MCXA153.h:
 C:\Users\safin\Downloads\nigga\project\source/Keypad/fsl_common_arm.h:
 C:\Users\safin\Downloads\nigga\project\source/Keypad/fsl_clock.h:
 C:\Users\safin\Downloads\nigga\project\source/Keypad/fsl_reset.h:
-C:\Users\safin\Downloads\nigga\project\source/Keypad/fsl_gpio.h:
 ../source/utils/Logger.h:
 ../source/utils/SD.h:
 ../source/utils/../fatFs/ff.h:
