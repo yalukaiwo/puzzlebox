@@ -139,18 +139,19 @@ int main(void)
     		break;
     	}
 
-    	int main(void)
-    	{
-    	    ctimer1_pwm_init();
+    }
+    int main(void)
+    {
+        ctimer1_pwm_init();
 
-    	    while(1)
-    	    {
+        while(1)
+        {
 
-    	    }
-    	}
-
+        }
     }
 }
+
+
 
 // -----------------------------------------------------------------------------
 // Local function implementation

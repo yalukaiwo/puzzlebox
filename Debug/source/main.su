@@ -1,4 +1,4 @@
-/Users/yalukaiwo/Documents/MCUXpressoIDE_24.12.148/workspace/project/CMSIS/core_cm33.h:2555:22:__NVIC_SetPriority	16	static
-/Users/yalukaiwo/Documents/MCUXpressoIDE_24.12.148/workspace/project/CMSIS/core_cm33.h:3108:26:SysTick_Config	16	static
-../source/main.c:80:5:main	16	static
-../source/main.c:148:6:SysTick_Handler	4	static
+C:\Users\adibh\MCUXpressoIDE\workspace\project\CMSIS/core_cm33.h:2555:22:__NVIC_SetPriority	16	static
+C:\Users\adibh\MCUXpressoIDE\workspace\project\CMSIS/core_cm33.h:3108:26:SysTick_Config	16	static
+../source/main.c:83:5:main	24	static
+../source/main.c:160:6:SysTick_Handler	4	static

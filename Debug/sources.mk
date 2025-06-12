@@ -15,8 +15,8 @@ OBJS :=
 # Every subdirectory with source files must be described here
 SUBDIRS := \
 device \
-source/fatFs \
 source \
+source/fatFs \
 source/games \
 source/utils \
 startup \
