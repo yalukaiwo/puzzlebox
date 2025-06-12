@@ -55,6 +55,9 @@
 #include <MCXA153.h>
 #include "ctimer1_pwm.h"
 
+#include "utils/button.h"
+
+
 // -----------------------------------------------------------------------------
 // Local type definitions
 // -----------------------------------------------------------------------------
@@ -149,6 +152,14 @@ int main(void)
 
         }
     }
+    if (Buttons_isPressed(0)) {
+        // BTN1 is pressed
+    }
+
+    if (Buttons_isAnyPressed()) {
+        // At least one button is pressed
+    }
+
 }
 
 

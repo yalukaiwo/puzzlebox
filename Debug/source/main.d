@@ -54,7 +54,7 @@ source/main.o source/main.d: ../source/main.c \
  ../source/games/game_control.h ../source/games/gps_location.game.h \
  ../source/games/../utils/GPS.h ../source/games/../utils/SD.h \
  ../source/games/game_control.h ../source/games/gps_proximity.game.h \
- ../source/ctimer1_pwm.h
+ ../source/ctimer1_pwm.h ../source/utils/button.h
 C:\Users\adibh\MCUXpressoIDE\workspace\project\device/MCXA153.h:
 C:\Users\adibh\MCUXpressoIDE\workspace\project\device\periph/PERI_ADC.h:
 C:\Users\adibh\MCUXpressoIDE\workspace\project\device/MCXA153_COMMON.h:
@@ -120,3 +120,4 @@ C:\Users\adibh\MCUXpressoIDE\workspace\project\device\periph/PERI_WWDT.h:
 ../source/games/game_control.h:
 ../source/games/gps_proximity.game.h:
 ../source/ctimer1_pwm.h:
+../source/utils/button.h:

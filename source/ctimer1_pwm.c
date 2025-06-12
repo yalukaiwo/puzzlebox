@@ -110,7 +110,7 @@ void ctimer1_pwm_init(void)
     //
     // In PWM mode, use match channel 3 to set the PWM cycle length. The other
     // channels can be used for matches
-    CTIMER1->MR[2] = 900;
+    CTIMER1->MR[2] = 1000;
     CTIMER1->MR[3] = 1000-1;
 
     // MR2S: [0] = Does not stop Timer Counter (TC) if MR0 matches Timer Counter
