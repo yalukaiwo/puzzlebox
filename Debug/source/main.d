@@ -46,9 +46,8 @@ source/main.o source/main.d: ../source/main.c \
  C:\Users\safin\Downloads\nigga\project\device\periph/PERI_WUU.h \
  C:\Users\safin\Downloads\nigga\project\device\periph/PERI_WWDT.h \
  ../source/lpuart0_interrupt.h ../source/lpuart2_interrupt.h \
- ../source/lcdDriver/lpi2c0_controller_polling.h ../source/gpio_output.h \
- ../source/utils/GPS.h ../source/utils/../lpuart2_interrupt.h \
- ../source/Keypad/keypad.h \
+ ../source/lcdDriver/lcd.h ../source/gpio_output.h ../source/utils/GPS.h \
+ ../source/utils/../lpuart2_interrupt.h ../source/Keypad/keypad.h \
  C:\Users\safin\Downloads\nigga\project\source/Keypad/board.h \
  C:\Users\safin\Downloads\nigga\project\source/Keypad/clock_config.h \
  C:\Users\safin\Downloads\nigga\project\source/Keypad/fsl_common.h \
@@ -60,11 +59,13 @@ source/main.o source/main.d: ../source/main.c \
  C:\Users\safin\Downloads\nigga\project\source/Keypad/fsl_gpio.h \
  ../source/utils/Logger.h ../source/utils/SD.h \
  ../source/utils/../fatFs/ff.h ../source/utils/../fatFs/ffconf.h \
- ../source/utils/GPS.h ../source/utils/SD.h ../source/lcdDriver/oled_ui.h \
- ../source/lcdDriver/delay.h ../source/games/game_control.h \
- ../source/games/gps_location.game.h ../source/games/../utils/GPS.h \
- ../source/games/../utils/SD.h ../source/games/game_control.h \
- ../source/games/gps_proximity.game.h ../source/games/trivia.h
+ ../source/utils/GPS.h ../source/utils/SD.h \
+ ../source/games/game_control.h ../source/games/gps_location.game.h \
+ ../source/games/../utils/GPS.h ../source/games/../utils/SD.h \
+ ../source/games/game_control.h ../source/games/gps_proximity.game.h \
+ ../source/games/trivia.h ../source/games/code_game.h \
+ C:\Users\safin\Downloads\nigga\project\source/games/game_control.h \
+ ../source/games/trivia_game.h ../source/games/pin_game.h
 C:\Users\safin\Downloads\nigga\project\device/MCXA153.h:
 C:\Users\safin\Downloads\nigga\project\device\periph/PERI_ADC.h:
 C:\Users\safin\Downloads\nigga\project\device/MCXA153_COMMON.h:
@@ -113,7 +114,7 @@ C:\Users\safin\Downloads\nigga\project\device\periph/PERI_WUU.h:
 C:\Users\safin\Downloads\nigga\project\device\periph/PERI_WWDT.h:
 ../source/lpuart0_interrupt.h:
 ../source/lpuart2_interrupt.h:
-../source/lcdDriver/lpi2c0_controller_polling.h:
+../source/lcdDriver/lcd.h:
 ../source/gpio_output.h:
 ../source/utils/GPS.h:
 ../source/utils/../lpuart2_interrupt.h:
@@ -133,8 +134,6 @@ C:\Users\safin\Downloads\nigga\project\source/Keypad/fsl_gpio.h:
 ../source/utils/../fatFs/ffconf.h:
 ../source/utils/GPS.h:
 ../source/utils/SD.h:
-../source/lcdDriver/oled_ui.h:
-../source/lcdDriver/delay.h:
 ../source/games/game_control.h:
 ../source/games/gps_location.game.h:
 ../source/games/../utils/GPS.h:
@@ -142,3 +141,7 @@ C:\Users\safin\Downloads\nigga\project\source/Keypad/fsl_gpio.h:
 ../source/games/game_control.h:
 ../source/games/gps_proximity.game.h:
 ../source/games/trivia.h:
+../source/games/code_game.h:
+C:\Users\safin\Downloads\nigga\project\source/games/game_control.h:
+../source/games/trivia_game.h:
+../source/games/pin_game.h:

@@ -6,17 +6,20 @@
 C_SRCS += \
 ../source/utils/GPS.c \
 ../source/utils/Logger.c \
-../source/utils/SD.c 
+../source/utils/SD.c \
+../source/utils/delay.c 
 
 C_DEPS += \
 ./source/utils/GPS.d \
 ./source/utils/Logger.d \
-./source/utils/SD.d 
+./source/utils/SD.d \
+./source/utils/delay.d 
 
 OBJS += \
 ./source/utils/GPS.o \
 ./source/utils/Logger.o \
-./source/utils/SD.o 
+./source/utils/SD.o \
+./source/utils/delay.o 
 
 
 # Each subdirectory must supply rules for building sources it contributes
@@ -31,7 +34,7 @@ source/utils/%.o: ../source/utils/%.c source/utils/subdir.mk
 clean: clean-source-2f-utils
 
 clean-source-2f-utils:
-	-$(RM) ./source/utils/GPS.d ./source/utils/GPS.o ./source/utils/Logger.d ./source/utils/Logger.o ./source/utils/SD.d ./source/utils/SD.o
+	-$(RM) ./source/utils/GPS.d ./source/utils/GPS.o ./source/utils/Logger.d ./source/utils/Logger.o ./source/utils/SD.d ./source/utils/SD.o ./source/utils/delay.d ./source/utils/delay.o
 
 .PHONY: clean-source-2f-utils
 
