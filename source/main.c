@@ -16,7 +16,6 @@
 #include "games/game_control.h"
 #include "games/gps_location.game.h"
 #include "games/gps_proximity.game.h"
-#include "games/trivia.h"
 
 #include "games/code_game.h"
 #include "games/trivia_game.h"

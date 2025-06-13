@@ -24,11 +24,4 @@
 		<nature>org.eclipse.cdt.managedbuilder.core.managedBuildNature</nature>
 		<nature>org.eclipse.cdt.managedbuilder.core.ScannerConfigNature</nature>
 	</natures>
-	<linkedResources>
-		<link>
-			<name>source/games/trivia.c</name>
-			<type>1</type>
-			<locationURI>PARENT-3-PROJECT_LOC/Desktop/Final%20Safin/project/source/games/trivia.c</locationURI>
-		</link>
-	</linkedResources>
 </projectDescription>

@@ -21,7 +21,7 @@ void Game_Memory(game_controller_t *gc)
         for (uint8_t t = 8; t > 0; t--) {
             lcd_clear();
             lcd_set_cursor(0, 0);
-            lcd_print("Remember code:");
+            lcd_print("Remember The code:");
             lcd_set_cursor(1, 0);
             lcd_print(code_str);
             Delay_ms(1000);

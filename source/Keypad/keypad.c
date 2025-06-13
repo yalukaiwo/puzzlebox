@@ -5,7 +5,7 @@
 #include "fsl_reset.h"
 
 const uint8_t row_pins[KEYPAD_ROWS] = {12, 13, 14, 15}; // GPIO1_12 to 15
-const uint8_t col_pins[KEYPAD_COLS] = {29, 11, 6, 7};   // GPIO1_29, 11, 6, 7
+const uint8_t col_pins[KEYPAD_COLS] = {29, 11, 6, 7};   // GPIO1_29, has to change the pins
 
 static const char keymap[KEYPAD_ROWS][KEYPAD_COLS] = {
     {'1', '2', '3', 'A'},

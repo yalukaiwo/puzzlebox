@@ -61,7 +61,7 @@ source/main.o source/main.d: ../source/main.c \
  ../source/games/game_control.h ../source/games/gps_location.game.h \
  ../source/games/../utils/GPS.h ../source/games/../utils/SD.h \
  ../source/games/game_control.h ../source/games/gps_proximity.game.h \
- ../source/games/trivia.h ../source/games/code_game.h \
+ ../source/games/code_game.h \
  C:\Users\safin\Downloads\nigga\project\source/games/game_control.h \
  ../source/games/trivia_game.h ../source/games/pin_game.h
 C:\Users\safin\Downloads\nigga\project\device/MCXA153.h:
@@ -136,7 +136,6 @@ C:\Users\safin\Downloads\nigga\project\source/Keypad/fsl_reset.h:
 ../source/games/../utils/SD.h:
 ../source/games/game_control.h:
 ../source/games/gps_proximity.game.h:
-../source/games/trivia.h:
 ../source/games/code_game.h:
 C:\Users\safin\Downloads\nigga\project\source/games/game_control.h:
 ../source/games/trivia_game.h:

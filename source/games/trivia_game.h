@@ -5,4 +5,4 @@
 
 void Game_Trivia(game_controller_t *gc);
 
-#endif
+#endif // TRIVIA_GAME_H
