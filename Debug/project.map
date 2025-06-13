@@ -185,6 +185,21 @@ Discarded input sections
  .text.GPS_isLocationRelevant
                 0x00000000       0x20 ./source/utils/GPS.o
  .debug_macro   0x00000000      0xb02 ./source/utils/GPS.o
+ .group         0x00000000        0xc ./source/utils/Lock.o
+ .text          0x00000000        0x0 ./source/utils/Lock.o
+ .data          0x00000000        0x0 ./source/utils/Lock.o
+ .bss           0x00000000        0x0 ./source/utils/Lock.o
+ .debug_info    0x00000000       0x21 ./source/utils/Lock.o
+ .debug_abbrev  0x00000000       0x13 ./source/utils/Lock.o
+ .debug_aranges
+                0x00000000       0x18 ./source/utils/Lock.o
+ .debug_macro   0x00000000       0x11 ./source/utils/Lock.o
+ .debug_macro   0x00000000      0xb02 ./source/utils/Lock.o
+ .debug_line    0x00000000       0x37 ./source/utils/Lock.o
+ .debug_str     0x00000000     0x2f0c ./source/utils/Lock.o
+ .comment       0x00000000       0x45 ./source/utils/Lock.o
+ .ARM.attributes
+                0x00000000       0x32 ./source/utils/Lock.o
  .group         0x00000000        0xc ./source/utils/Logger.o
  .group         0x00000000        0xc ./source/utils/Logger.o
  .group         0x00000000        0xc ./source/utils/Logger.o
@@ -697,6 +712,33 @@ Discarded input sections
  .debug_macro   0x00000000      0x10b ./source/games/gps_proximity.game.o
  .debug_macro   0x00000000       0xe8 ./source/games/gps_proximity.game.o
  .debug_macro   0x00000000       0x10 ./source/games/gps_proximity.game.o
+ .group         0x00000000        0xc ./source/games/memory.game.o
+ .text          0x00000000        0x0 ./source/games/memory.game.o
+ .data          0x00000000        0x0 ./source/games/memory.game.o
+ .bss           0x00000000        0x0 ./source/games/memory.game.o
+ .bss.sequences
+                0x00000000       0x64 ./source/games/memory.game.o
+ .bss.currentRound
+                0x00000000        0x4 ./source/games/memory.game.o
+ .bss.isRoundActive
+                0x00000000        0x4 ./source/games/memory.game.o
+ .text.initMemoryGame
+                0x00000000        0xc ./source/games/memory.game.o
+ .text.memoryGame
+                0x00000000        0xc ./source/games/memory.game.o
+ .debug_info    0x00000000       0xa8 ./source/games/memory.game.o
+ .debug_abbrev  0x00000000       0x6a ./source/games/memory.game.o
+ .debug_aranges
+                0x00000000       0x28 ./source/games/memory.game.o
+ .debug_ranges  0x00000000       0x18 ./source/games/memory.game.o
+ .debug_macro   0x00000000       0x1b ./source/games/memory.game.o
+ .debug_macro   0x00000000      0xb02 ./source/games/memory.game.o
+ .debug_line    0x00000000       0x73 ./source/games/memory.game.o
+ .debug_str     0x00000000     0x2f75 ./source/games/memory.game.o
+ .comment       0x00000000       0x45 ./source/games/memory.game.o
+ .debug_frame   0x00000000       0x50 ./source/games/memory.game.o
+ .ARM.attributes
+                0x00000000       0x32 ./source/games/memory.game.o
  .group         0x00000000        0xc ./source/fatFs/ff.o
  .group         0x00000000        0xc ./source/fatFs/ff.o
  .group         0x00000000        0xc ./source/fatFs/ff.o
@@ -2101,11 +2143,13 @@ Linker script and memory map
 
 LOAD ./startup/startup_mcxa153.o
 LOAD ./source/utils/GPS.o
+LOAD ./source/utils/Lock.o
 LOAD ./source/utils/Logger.o
 LOAD ./source/utils/SD.o
 LOAD ./source/games/game_control.o
 LOAD ./source/games/gps_location.game.o
 LOAD ./source/games/gps_proximity.game.o
+LOAD ./source/games/memory.game.o
 LOAD ./source/fatFs/ff.o
 LOAD ./source/fatFs/sdmm.o
 LOAD ./source/fifo.o
@@ -2140,7 +2184,7 @@ END GROUP
                 0x04003000                        __top_SRAMX1 = 0x4003000
                 0x04003000                        __top_RAM3 = 0x4003000
 
-.text           0x00000000     0x8fa4
+.text           0x00000000     0x8f94
  FILL mask 0xff
                 0x00000000                        __vectors_start__ = ABSOLUTE (.)
  *(SORT_BY_ALIGNMENT(.isr_vector))
@@ -2150,13 +2194,13 @@ END GROUP
                 0x0000016c                        . = ALIGN (0x4)
                 0x0000016c                        __section_table_start = .
                 0x0000016c                        __data_section_table = .
-                0x0000016c        0x4 LONG 0x8fa4 LOADADDR (.data)
+                0x0000016c        0x4 LONG 0x8f94 LOADADDR (.data)
                 0x00000170        0x4 LONG 0x20000000 ADDR (.data)
                 0x00000174        0x4 LONG 0x10 SIZEOF (.data)
-                0x00000178        0x4 LONG 0x8fa4 LOADADDR (.data_RAM2)
+                0x00000178        0x4 LONG 0x8f94 LOADADDR (.data_RAM2)
                 0x0000017c        0x4 LONG 0x4000000 ADDR (.data_RAM2)
                 0x00000180        0x4 LONG 0x0 SIZEOF (.data_RAM2)
-                0x00000184        0x4 LONG 0x8fa4 LOADADDR (.data_RAM3)
+                0x00000184        0x4 LONG 0x8f94 LOADADDR (.data_RAM3)
                 0x00000188        0x4 LONG 0x4002000 ADDR (.data_RAM3)
                 0x0000018c        0x4 LONG 0x0 SIZEOF (.data_RAM3)
                 0x00000190                        __data_section_table_end = .
@@ -2361,631 +2405,631 @@ END GROUP
                 0x000040b4       0xdc ./source/fatFs/sdmm.o
                 0x000040b4                disk_write
  .text.gpio_output_init
-                0x00004190       0x70 ./source/gpio_output.o
+                0x00004190       0x60 ./source/gpio_output.o
                 0x00004190                gpio_output_init
  .text.lpi2c0_controller_init
-                0x00004200       0x84 ./source/lpi2c0_controller_polling.o
-                0x00004200                lpi2c0_controller_init
+                0x000041f0       0x84 ./source/lpi2c0_controller_polling.o
+                0x000041f0                lpi2c0_controller_init
  .text.__NVIC_EnableIRQ
-                0x00004284       0x38 ./source/lpuart0_interrupt.o
+                0x00004274       0x38 ./source/lpuart0_interrupt.o
  .text.__NVIC_ClearPendingIRQ
-                0x000042bc       0x3c ./source/lpuart0_interrupt.o
+                0x000042ac       0x3c ./source/lpuart0_interrupt.o
  .text.__NVIC_SetPriority
-                0x000042f8       0x54 ./source/lpuart0_interrupt.o
+                0x000042e8       0x54 ./source/lpuart0_interrupt.o
  .text.lpuart0_init
-                0x0000434c       0xc4 ./source/lpuart0_interrupt.o
-                0x0000434c                lpuart0_init
+                0x0000433c       0xc4 ./source/lpuart0_interrupt.o
+                0x0000433c                lpuart0_init
  .text.lpuart0_putchar
-                0x00004410       0x40 ./source/lpuart0_interrupt.o
-                0x00004410                lpuart0_putchar
+                0x00004400       0x40 ./source/lpuart0_interrupt.o
+                0x00004400                lpuart0_putchar
  .text.lpuart0_getchar
-                0x00004450       0x30 ./source/lpuart0_interrupt.o
-                0x00004450                lpuart0_getchar
+                0x00004440       0x30 ./source/lpuart0_interrupt.o
+                0x00004440                lpuart0_getchar
  .text.LPUART0_IRQHandler
-                0x00004480       0x7c ./source/lpuart0_interrupt.o
-                0x00004480                LPUART0_IRQHandler
+                0x00004470       0x7c ./source/lpuart0_interrupt.o
+                0x00004470                LPUART0_IRQHandler
  .text.__NVIC_EnableIRQ
-                0x000044fc       0x38 ./source/lpuart2_interrupt.o
+                0x000044ec       0x38 ./source/lpuart2_interrupt.o
  .text.__NVIC_ClearPendingIRQ
-                0x00004534       0x3c ./source/lpuart2_interrupt.o
+                0x00004524       0x3c ./source/lpuart2_interrupt.o
  .text.__NVIC_SetPriority
-                0x00004570       0x54 ./source/lpuart2_interrupt.o
+                0x00004560       0x54 ./source/lpuart2_interrupt.o
  .text.lpuart2_init
-                0x000045c4       0xc8 ./source/lpuart2_interrupt.o
-                0x000045c4                lpuart2_init
+                0x000045b4       0xc8 ./source/lpuart2_interrupt.o
+                0x000045b4                lpuart2_init
  .text.lpuart2_getchar
-                0x0000468c       0x30 ./source/lpuart2_interrupt.o
-                0x0000468c                lpuart2_getchar
+                0x0000467c       0x30 ./source/lpuart2_interrupt.o
+                0x0000467c                lpuart2_getchar
  .text.lpuart2_rxcnt
-                0x000046bc       0x14 ./source/lpuart2_interrupt.o
-                0x000046bc                lpuart2_rxcnt
+                0x000046ac       0x14 ./source/lpuart2_interrupt.o
+                0x000046ac                lpuart2_rxcnt
  .text.LPUART2_IRQHandler
-                0x000046d0       0x7c ./source/lpuart2_interrupt.o
-                0x000046d0                LPUART2_IRQHandler
+                0x000046c0       0x7c ./source/lpuart2_interrupt.o
+                0x000046c0                LPUART2_IRQHandler
  .text.__NVIC_SetPriority
-                0x0000474c       0x54 ./source/main.o
+                0x0000473c       0x54 ./source/main.o
  .text.SysTick_Config
-                0x000047a0       0x44 ./source/main.o
- .text.main     0x000047e4       0xcc ./source/main.o
-                0x000047e4                main
+                0x00004790       0x44 ./source/main.o
+ .text.main     0x000047d4       0xcc ./source/main.o
+                0x000047d4                main
  .text.SysTick_Handler
-                0x000048b0       0x1c ./source/main.o
-                0x000048b0                SysTick_Handler
+                0x000048a0       0x1c ./source/main.o
+                0x000048a0                SysTick_Handler
  .text.SystemInit
-                0x000048cc      0x120 ./device/system_MCXA153.o
-                0x000048cc                SystemInit
- .text.sprintf  0x000049ec       0x6c /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(fpprintf.o)
-                0x000049ec                sprintf
+                0x000048bc      0x120 ./device/system_MCXA153.o
+                0x000048bc                SystemInit
+ .text.sprintf  0x000049dc       0x6c /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(fpprintf.o)
+                0x000049dc                sprintf
  .text.vsnprintf
-                0x00004a58       0x68 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(fpprintf.o)
-                0x00004a58                vsnprintf
- .text.printf   0x00004ac0       0x54 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(fpprintf.o)
-                0x00004ac0                printf
- .text._initio  0x00004b14       0x78 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(initio.o)
-                0x00004b14                _initio
+                0x00004a48       0x68 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(fpprintf.o)
+                0x00004a48                vsnprintf
+ .text.printf   0x00004ab0       0x54 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(fpprintf.o)
+                0x00004ab0                printf
+ .text._initio  0x00004b04       0x78 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(initio.o)
+                0x00004b04                _initio
  .text.__vfprintf
-                0x00004b8c      0xb70 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(printf.o)
-                0x00004b8c                __vfprintf
- .text.ch_val   0x000056fc       0x30 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(scanf.o)
+                0x00004b7c      0xb70 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(printf.o)
+                0x00004b7c                __vfprintf
+ .text.ch_val   0x000056ec       0x30 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(scanf.o)
  .text._strtoul
-                0x0000572c       0xb4 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(scanf.o)
+                0x0000571c       0xb4 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(scanf.o)
  .text.cr_rd_int
-                0x000057e0      0x1a0 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(scanf.o)
- .text.strtod   0x00005980       0x34 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(scanf.o)
-                0x00005980                strtod
- .text.strtol   0x000059b4       0x80 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(scanf.o)
-                0x000059b4                strtol
- .text.atof     0x00005a34       0x14 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(scanf.o)
-                0x00005a34                atof
- .text.atoi     0x00005a48       0x18 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(scanf.o)
-                0x00005a48                atoi
+                0x000057d0      0x1a0 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(scanf.o)
+ .text.strtod   0x00005970       0x34 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(scanf.o)
+                0x00005970                strtod
+ .text.strtol   0x000059a4       0x80 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(scanf.o)
+                0x000059a4                strtol
+ .text.atof     0x00005a24       0x14 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(scanf.o)
+                0x00005a24                atof
+ .text.atoi     0x00005a38       0x18 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(scanf.o)
+                0x00005a38                atoi
  .text.__filbuf
-                0x00005a60      0x178 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(__fillbuf.o)
-                0x00005a60                __filbuf
- .text._ldexpl  0x00005bd8       0x48 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(_ldexpl.o)
-                0x00005bd8                _ldexpl
+                0x00005a50      0x178 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(__fillbuf.o)
+                0x00005a50                __filbuf
+ .text._ldexpl  0x00005bc8       0x48 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(_ldexpl.o)
+                0x00005bc8                _ldexpl
  .text._Cwritebuf
-                0x00005c20       0x6c /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(_writebuf.o)
-                0x00005c20                _Cwritebuf
- .text.malloc   0x00005c8c       0xc8 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(alloc.o)
-                0x00005c8c                malloc
+                0x00005c10       0x6c /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(_writebuf.o)
+                0x00005c10                _Cwritebuf
+ .text.malloc   0x00005c7c       0xc8 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(alloc.o)
+                0x00005c7c                malloc
  .text._Csys_alloc
-                0x00005d54       0x20 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(alloc.o)
-                0x00005d54                _Csys_alloc
- .text.fflush   0x00005d74       0x3c /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(fflush.o)
-                0x00005d74                fflush
- .text.fseek    0x00005db0       0xf8 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(fseek.o)
-                0x00005db0                fseek
- .text.ftell    0x00005ea8       0x44 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(ftell.o)
-                0x00005ea8                ftell
- .text._sbrk    0x00005eec       0x3c /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(_cr_sbrk.o)
-                0x00005eec                _sbrk
+                0x00005d44       0x20 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(alloc.o)
+                0x00005d44                _Csys_alloc
+ .text.fflush   0x00005d64       0x3c /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(fflush.o)
+                0x00005d64                fflush
+ .text.fseek    0x00005da0       0xf8 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(fseek.o)
+                0x00005da0                fseek
+ .text.ftell    0x00005e98       0x44 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(ftell.o)
+                0x00005e98                ftell
+ .text._sbrk    0x00005edc       0x3c /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(_cr_sbrk.o)
+                0x00005edc                _sbrk
  .text.__check_heap_overflow
-                0x00005f28       0x18 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(_cr_check_heap.o)
-                0x00005f28                __check_heap_overflow
+                0x00005f18       0x18 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(_cr_check_heap.o)
+                0x00005f18                __check_heap_overflow
  .text.__aeabi_dmul
-                0x00005f40       0xfc /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/thumb/v8-m.main/nofp/libcr_eabihelpers.a(double.o)
-                0x00005f40                __aeabi_dmul
+                0x00005f30       0xfc /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/thumb/v8-m.main/nofp/libcr_eabihelpers.a(double.o)
+                0x00005f30                __aeabi_dmul
  .text.__aeabi_ddiv
-                0x0000603c      0x134 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/thumb/v8-m.main/nofp/libcr_eabihelpers.a(double.o)
-                0x0000603c                __aeabi_ddiv
+                0x0000602c      0x134 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/thumb/v8-m.main/nofp/libcr_eabihelpers.a(double.o)
+                0x0000602c                __aeabi_ddiv
  .text.__aeabi_dsub
-                0x00006170      0x1b4 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/thumb/v8-m.main/nofp/libcr_eabihelpers.a(double.o)
-                0x00006170                __aeabi_dsub
+                0x00006160      0x1b4 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/thumb/v8-m.main/nofp/libcr_eabihelpers.a(double.o)
+                0x00006160                __aeabi_dsub
  .text.__aeabi_dadd
-                0x00006324      0x118 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/thumb/v8-m.main/nofp/libcr_eabihelpers.a(double.o)
-                0x00006324                __aeabi_dadd
+                0x00006314      0x118 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/thumb/v8-m.main/nofp/libcr_eabihelpers.a(double.o)
+                0x00006314                __aeabi_dadd
  .text.__aeabi_d2f
-                0x0000643c       0x58 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/thumb/v8-m.main/nofp/libcr_eabihelpers.a(double.o)
-                0x0000643c                __aeabi_d2f
+                0x0000642c       0x58 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/thumb/v8-m.main/nofp/libcr_eabihelpers.a(double.o)
+                0x0000642c                __aeabi_d2f
  .text.__sys_appexit
-                0x00006494        0xc /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_semihost_nf.a(__sys_appexit.o)
-                0x00006494                __exit
-                0x00006494                __sys_appexit
+                0x00006484        0xc /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_semihost_nf.a(__sys_appexit.o)
+                0x00006484                __exit
+                0x00006484                __sys_appexit
  .text.Reserved16_IRQHandler
-                0x000064a0        0x8 ./startup/startup_mcxa153.o
-                0x000064a0                Reserved16_IRQHandler
+                0x00006490        0x8 ./startup/startup_mcxa153.o
+                0x00006490                Reserved16_IRQHandler
  .text.CMC_IRQHandler
-                0x000064a8        0x8 ./startup/startup_mcxa153.o
-                0x000064a8                CMC_IRQHandler
+                0x00006498        0x8 ./startup/startup_mcxa153.o
+                0x00006498                CMC_IRQHandler
  .text.DMA_CH0_IRQHandler
-                0x000064b0        0x8 ./startup/startup_mcxa153.o
-                0x000064b0                DMA_CH0_IRQHandler
+                0x000064a0        0x8 ./startup/startup_mcxa153.o
+                0x000064a0                DMA_CH0_IRQHandler
  .text.DMA_CH1_IRQHandler
-                0x000064b8        0x8 ./startup/startup_mcxa153.o
-                0x000064b8                DMA_CH1_IRQHandler
+                0x000064a8        0x8 ./startup/startup_mcxa153.o
+                0x000064a8                DMA_CH1_IRQHandler
  .text.DMA_CH2_IRQHandler
-                0x000064c0        0x8 ./startup/startup_mcxa153.o
-                0x000064c0                DMA_CH2_IRQHandler
+                0x000064b0        0x8 ./startup/startup_mcxa153.o
+                0x000064b0                DMA_CH2_IRQHandler
  .text.DMA_CH3_IRQHandler
-                0x000064c8        0x8 ./startup/startup_mcxa153.o
-                0x000064c8                DMA_CH3_IRQHandler
+                0x000064b8        0x8 ./startup/startup_mcxa153.o
+                0x000064b8                DMA_CH3_IRQHandler
  .text.Reserved22_IRQHandler
-                0x000064d0        0x8 ./startup/startup_mcxa153.o
-                0x000064d0                Reserved22_IRQHandler
+                0x000064c0        0x8 ./startup/startup_mcxa153.o
+                0x000064c0                Reserved22_IRQHandler
  .text.Reserved23_IRQHandler
-                0x000064d8        0x8 ./startup/startup_mcxa153.o
-                0x000064d8                Reserved23_IRQHandler
+                0x000064c8        0x8 ./startup/startup_mcxa153.o
+                0x000064c8                Reserved23_IRQHandler
  .text.Reserved24_IRQHandler
-                0x000064e0        0x8 ./startup/startup_mcxa153.o
-                0x000064e0                Reserved24_IRQHandler
+                0x000064d0        0x8 ./startup/startup_mcxa153.o
+                0x000064d0                Reserved24_IRQHandler
  .text.Reserved25_IRQHandler
-                0x000064e8        0x8 ./startup/startup_mcxa153.o
-                0x000064e8                Reserved25_IRQHandler
+                0x000064d8        0x8 ./startup/startup_mcxa153.o
+                0x000064d8                Reserved25_IRQHandler
  .text.ERM0_SINGLE_BIT_IRQHandler
-                0x000064f0        0x8 ./startup/startup_mcxa153.o
-                0x000064f0                ERM0_SINGLE_BIT_IRQHandler
+                0x000064e0        0x8 ./startup/startup_mcxa153.o
+                0x000064e0                ERM0_SINGLE_BIT_IRQHandler
  .text.ERM0_MULTI_BIT_IRQHandler
-                0x000064f8        0x8 ./startup/startup_mcxa153.o
-                0x000064f8                ERM0_MULTI_BIT_IRQHandler
+                0x000064e8        0x8 ./startup/startup_mcxa153.o
+                0x000064e8                ERM0_MULTI_BIT_IRQHandler
  .text.FMU0_IRQHandler
-                0x00006500        0x8 ./startup/startup_mcxa153.o
-                0x00006500                FMU0_IRQHandler
+                0x000064f0        0x8 ./startup/startup_mcxa153.o
+                0x000064f0                FMU0_IRQHandler
  .text.GLIKEY0_IRQHandler
-                0x00006508        0x8 ./startup/startup_mcxa153.o
-                0x00006508                GLIKEY0_IRQHandler
+                0x000064f8        0x8 ./startup/startup_mcxa153.o
+                0x000064f8                GLIKEY0_IRQHandler
  .text.MBC0_IRQHandler
-                0x00006510        0x8 ./startup/startup_mcxa153.o
-                0x00006510                MBC0_IRQHandler
+                0x00006500        0x8 ./startup/startup_mcxa153.o
+                0x00006500                MBC0_IRQHandler
  .text.SCG0_IRQHandler
-                0x00006518        0x8 ./startup/startup_mcxa153.o
-                0x00006518                SCG0_IRQHandler
+                0x00006508        0x8 ./startup/startup_mcxa153.o
+                0x00006508                SCG0_IRQHandler
  .text.SPC0_IRQHandler
-                0x00006520        0x8 ./startup/startup_mcxa153.o
-                0x00006520                SPC0_IRQHandler
+                0x00006510        0x8 ./startup/startup_mcxa153.o
+                0x00006510                SPC0_IRQHandler
  .text.Reserved33_IRQHandler
-                0x00006528        0x8 ./startup/startup_mcxa153.o
-                0x00006528                Reserved33_IRQHandler
+                0x00006518        0x8 ./startup/startup_mcxa153.o
+                0x00006518                Reserved33_IRQHandler
  .text.WUU0_IRQHandler
-                0x00006530        0x8 ./startup/startup_mcxa153.o
-                0x00006530                WUU0_IRQHandler
+                0x00006520        0x8 ./startup/startup_mcxa153.o
+                0x00006520                WUU0_IRQHandler
  .text.Reserved35_IRQHandler
-                0x00006538        0x8 ./startup/startup_mcxa153.o
-                0x00006538                Reserved35_IRQHandler
+                0x00006528        0x8 ./startup/startup_mcxa153.o
+                0x00006528                Reserved35_IRQHandler
  .text.Reserved36_IRQHandler
-                0x00006540        0x8 ./startup/startup_mcxa153.o
-                0x00006540                Reserved36_IRQHandler
+                0x00006530        0x8 ./startup/startup_mcxa153.o
+                0x00006530                Reserved36_IRQHandler
  .text.Reserved37_IRQHandler
-                0x00006548        0x8 ./startup/startup_mcxa153.o
-                0x00006548                Reserved37_IRQHandler
+                0x00006538        0x8 ./startup/startup_mcxa153.o
+                0x00006538                Reserved37_IRQHandler
  .text.Reserved38_IRQHandler
-                0x00006550        0x8 ./startup/startup_mcxa153.o
-                0x00006550                Reserved38_IRQHandler
+                0x00006540        0x8 ./startup/startup_mcxa153.o
+                0x00006540                Reserved38_IRQHandler
  .text.Reserved39_IRQHandler
-                0x00006558        0x8 ./startup/startup_mcxa153.o
-                0x00006558                Reserved39_IRQHandler
+                0x00006548        0x8 ./startup/startup_mcxa153.o
+                0x00006548                Reserved39_IRQHandler
  .text.I3C0_IRQHandler
-                0x00006560        0x8 ./startup/startup_mcxa153.o
-                0x00006560                I3C0_IRQHandler
+                0x00006550        0x8 ./startup/startup_mcxa153.o
+                0x00006550                I3C0_IRQHandler
  .text.Reserved41_IRQHandler
-                0x00006568        0x8 ./startup/startup_mcxa153.o
-                0x00006568                Reserved41_IRQHandler
+                0x00006558        0x8 ./startup/startup_mcxa153.o
+                0x00006558                Reserved41_IRQHandler
  .text.LPI2C0_IRQHandler
-                0x00006570        0x8 ./startup/startup_mcxa153.o
-                0x00006570                LPI2C0_IRQHandler
+                0x00006560        0x8 ./startup/startup_mcxa153.o
+                0x00006560                LPI2C0_IRQHandler
  .text.Reserved43_IRQHandler
-                0x00006578        0x8 ./startup/startup_mcxa153.o
-                0x00006578                Reserved43_IRQHandler
+                0x00006568        0x8 ./startup/startup_mcxa153.o
+                0x00006568                Reserved43_IRQHandler
  .text.LPSPI0_IRQHandler
-                0x00006580        0x8 ./startup/startup_mcxa153.o
-                0x00006580                LPSPI0_IRQHandler
+                0x00006570        0x8 ./startup/startup_mcxa153.o
+                0x00006570                LPSPI0_IRQHandler
  .text.LPSPI1_IRQHandler
-                0x00006588        0x8 ./startup/startup_mcxa153.o
-                0x00006588                LPSPI1_IRQHandler
+                0x00006578        0x8 ./startup/startup_mcxa153.o
+                0x00006578                LPSPI1_IRQHandler
  .text.Reserved46_IRQHandler
-                0x00006590        0x8 ./startup/startup_mcxa153.o
-                0x00006590                Reserved46_IRQHandler
+                0x00006580        0x8 ./startup/startup_mcxa153.o
+                0x00006580                Reserved46_IRQHandler
  .text.LPUART1_IRQHandler
-                0x00006598        0x8 ./startup/startup_mcxa153.o
-                0x00006598                LPUART1_IRQHandler
+                0x00006588        0x8 ./startup/startup_mcxa153.o
+                0x00006588                LPUART1_IRQHandler
  .text.Reserved50_IRQHandler
-                0x000065a0        0x8 ./startup/startup_mcxa153.o
-                0x000065a0                Reserved50_IRQHandler
+                0x00006590        0x8 ./startup/startup_mcxa153.o
+                0x00006590                Reserved50_IRQHandler
  .text.Reserved51_IRQHandler
-                0x000065a8        0x8 ./startup/startup_mcxa153.o
-                0x000065a8                Reserved51_IRQHandler
+                0x00006598        0x8 ./startup/startup_mcxa153.o
+                0x00006598                Reserved51_IRQHandler
  .text.USB0_IRQHandler
-                0x000065b0        0x8 ./startup/startup_mcxa153.o
-                0x000065b0                USB0_IRQHandler
+                0x000065a0        0x8 ./startup/startup_mcxa153.o
+                0x000065a0                USB0_IRQHandler
  .text.Reserved53_IRQHandler
-                0x000065b8        0x8 ./startup/startup_mcxa153.o
-                0x000065b8                Reserved53_IRQHandler
+                0x000065a8        0x8 ./startup/startup_mcxa153.o
+                0x000065a8                Reserved53_IRQHandler
  .text.CDOG0_IRQHandler
-                0x000065c0        0x8 ./startup/startup_mcxa153.o
-                0x000065c0                CDOG0_IRQHandler
+                0x000065b0        0x8 ./startup/startup_mcxa153.o
+                0x000065b0                CDOG0_IRQHandler
  .text.CTIMER0_IRQHandler
-                0x000065c8        0x8 ./startup/startup_mcxa153.o
-                0x000065c8                CTIMER0_IRQHandler
+                0x000065b8        0x8 ./startup/startup_mcxa153.o
+                0x000065b8                CTIMER0_IRQHandler
  .text.CTIMER1_IRQHandler
-                0x000065d0        0x8 ./startup/startup_mcxa153.o
-                0x000065d0                CTIMER1_IRQHandler
+                0x000065c0        0x8 ./startup/startup_mcxa153.o
+                0x000065c0                CTIMER1_IRQHandler
  .text.CTIMER2_IRQHandler
-                0x000065d8        0x8 ./startup/startup_mcxa153.o
-                0x000065d8                CTIMER2_IRQHandler
+                0x000065c8        0x8 ./startup/startup_mcxa153.o
+                0x000065c8                CTIMER2_IRQHandler
  .text.Reserved58_IRQHandler
-                0x000065e0        0x8 ./startup/startup_mcxa153.o
-                0x000065e0                Reserved58_IRQHandler
+                0x000065d0        0x8 ./startup/startup_mcxa153.o
+                0x000065d0                Reserved58_IRQHandler
  .text.Reserved59_IRQHandler
-                0x000065e8        0x8 ./startup/startup_mcxa153.o
-                0x000065e8                Reserved59_IRQHandler
+                0x000065d8        0x8 ./startup/startup_mcxa153.o
+                0x000065d8                Reserved59_IRQHandler
  .text.FLEXPWM0_RELOAD_ERROR_IRQHandler
-                0x000065f0        0x8 ./startup/startup_mcxa153.o
-                0x000065f0                FLEXPWM0_RELOAD_ERROR_IRQHandler
+                0x000065e0        0x8 ./startup/startup_mcxa153.o
+                0x000065e0                FLEXPWM0_RELOAD_ERROR_IRQHandler
  .text.FLEXPWM0_FAULT_IRQHandler
-                0x000065f8        0x8 ./startup/startup_mcxa153.o
-                0x000065f8                FLEXPWM0_FAULT_IRQHandler
+                0x000065e8        0x8 ./startup/startup_mcxa153.o
+                0x000065e8                FLEXPWM0_FAULT_IRQHandler
  .text.FLEXPWM0_SUBMODULE0_IRQHandler
-                0x00006600        0x8 ./startup/startup_mcxa153.o
-                0x00006600                FLEXPWM0_SUBMODULE0_IRQHandler
+                0x000065f0        0x8 ./startup/startup_mcxa153.o
+                0x000065f0                FLEXPWM0_SUBMODULE0_IRQHandler
  .text.FLEXPWM0_SUBMODULE1_IRQHandler
-                0x00006608        0x8 ./startup/startup_mcxa153.o
-                0x00006608                FLEXPWM0_SUBMODULE1_IRQHandler
+                0x000065f8        0x8 ./startup/startup_mcxa153.o
+                0x000065f8                FLEXPWM0_SUBMODULE1_IRQHandler
  .text.FLEXPWM0_SUBMODULE2_IRQHandler
-                0x00006610        0x8 ./startup/startup_mcxa153.o
-                0x00006610                FLEXPWM0_SUBMODULE2_IRQHandler
+                0x00006600        0x8 ./startup/startup_mcxa153.o
+                0x00006600                FLEXPWM0_SUBMODULE2_IRQHandler
  .text.Reserved65_IRQHandler
-                0x00006618        0x8 ./startup/startup_mcxa153.o
-                0x00006618                Reserved65_IRQHandler
+                0x00006608        0x8 ./startup/startup_mcxa153.o
+                0x00006608                Reserved65_IRQHandler
  .text.QDC0_COMPARE_IRQHandler
-                0x00006620        0x8 ./startup/startup_mcxa153.o
-                0x00006620                QDC0_COMPARE_IRQHandler
+                0x00006610        0x8 ./startup/startup_mcxa153.o
+                0x00006610                QDC0_COMPARE_IRQHandler
  .text.QDC0_HOME_IRQHandler
-                0x00006628        0x8 ./startup/startup_mcxa153.o
-                0x00006628                QDC0_HOME_IRQHandler
+                0x00006618        0x8 ./startup/startup_mcxa153.o
+                0x00006618                QDC0_HOME_IRQHandler
  .text.QDC0_WATCHDOG_IRQHandler
-                0x00006630        0x8 ./startup/startup_mcxa153.o
-                0x00006630                QDC0_WATCHDOG_IRQHandler
+                0x00006620        0x8 ./startup/startup_mcxa153.o
+                0x00006620                QDC0_WATCHDOG_IRQHandler
  .text.QDC0_INDEX_IRQHandler
-                0x00006638        0x8 ./startup/startup_mcxa153.o
-                0x00006638                QDC0_INDEX_IRQHandler
+                0x00006628        0x8 ./startup/startup_mcxa153.o
+                0x00006628                QDC0_INDEX_IRQHandler
  .text.FREQME0_IRQHandler
-                0x00006640        0x8 ./startup/startup_mcxa153.o
-                0x00006640                FREQME0_IRQHandler
+                0x00006630        0x8 ./startup/startup_mcxa153.o
+                0x00006630                FREQME0_IRQHandler
  .text.LPTMR0_IRQHandler
-                0x00006648        0x8 ./startup/startup_mcxa153.o
-                0x00006648                LPTMR0_IRQHandler
+                0x00006638        0x8 ./startup/startup_mcxa153.o
+                0x00006638                LPTMR0_IRQHandler
  .text.Reserved72_IRQHandler
-                0x00006650        0x8 ./startup/startup_mcxa153.o
-                0x00006650                Reserved72_IRQHandler
+                0x00006640        0x8 ./startup/startup_mcxa153.o
+                0x00006640                Reserved72_IRQHandler
  .text.OS_EVENT_IRQHandler
-                0x00006658        0x8 ./startup/startup_mcxa153.o
-                0x00006658                OS_EVENT_IRQHandler
+                0x00006648        0x8 ./startup/startup_mcxa153.o
+                0x00006648                OS_EVENT_IRQHandler
  .text.WAKETIMER0_IRQHandler
-                0x00006660        0x8 ./startup/startup_mcxa153.o
-                0x00006660                WAKETIMER0_IRQHandler
+                0x00006650        0x8 ./startup/startup_mcxa153.o
+                0x00006650                WAKETIMER0_IRQHandler
  .text.UTICK0_IRQHandler
-                0x00006668        0x8 ./startup/startup_mcxa153.o
-                0x00006668                UTICK0_IRQHandler
+                0x00006658        0x8 ./startup/startup_mcxa153.o
+                0x00006658                UTICK0_IRQHandler
  .text.WWDT0_IRQHandler
-                0x00006670        0x8 ./startup/startup_mcxa153.o
-                0x00006670                WWDT0_IRQHandler
+                0x00006660        0x8 ./startup/startup_mcxa153.o
+                0x00006660                WWDT0_IRQHandler
  .text.Reserved77_IRQHandler
-                0x00006678        0x8 ./startup/startup_mcxa153.o
-                0x00006678                Reserved77_IRQHandler
+                0x00006668        0x8 ./startup/startup_mcxa153.o
+                0x00006668                Reserved77_IRQHandler
  .text.ADC0_IRQHandler
-                0x00006680        0x8 ./startup/startup_mcxa153.o
-                0x00006680                ADC0_IRQHandler
+                0x00006670        0x8 ./startup/startup_mcxa153.o
+                0x00006670                ADC0_IRQHandler
  .text.Reserved79_IRQHandler
-                0x00006688        0x8 ./startup/startup_mcxa153.o
-                0x00006688                Reserved79_IRQHandler
+                0x00006678        0x8 ./startup/startup_mcxa153.o
+                0x00006678                Reserved79_IRQHandler
  .text.CMP0_IRQHandler
-                0x00006690        0x8 ./startup/startup_mcxa153.o
-                0x00006690                CMP0_IRQHandler
+                0x00006680        0x8 ./startup/startup_mcxa153.o
+                0x00006680                CMP0_IRQHandler
  .text.CMP1_IRQHandler
-                0x00006698        0x8 ./startup/startup_mcxa153.o
-                0x00006698                CMP1_IRQHandler
+                0x00006688        0x8 ./startup/startup_mcxa153.o
+                0x00006688                CMP1_IRQHandler
  .text.Reserved82_IRQHandler
-                0x000066a0        0x8 ./startup/startup_mcxa153.o
-                0x000066a0                Reserved82_IRQHandler
+                0x00006690        0x8 ./startup/startup_mcxa153.o
+                0x00006690                Reserved82_IRQHandler
  .text.Reserved83_IRQHandler
-                0x000066a8        0x8 ./startup/startup_mcxa153.o
-                0x000066a8                Reserved83_IRQHandler
+                0x00006698        0x8 ./startup/startup_mcxa153.o
+                0x00006698                Reserved83_IRQHandler
  .text.Reserved84_IRQHandler
-                0x000066b0        0x8 ./startup/startup_mcxa153.o
-                0x000066b0                Reserved84_IRQHandler
+                0x000066a0        0x8 ./startup/startup_mcxa153.o
+                0x000066a0                Reserved84_IRQHandler
  .text.Reserved85_IRQHandler
-                0x000066b8        0x8 ./startup/startup_mcxa153.o
-                0x000066b8                Reserved85_IRQHandler
+                0x000066a8        0x8 ./startup/startup_mcxa153.o
+                0x000066a8                Reserved85_IRQHandler
  .text.Reserved86_IRQHandler
-                0x000066c0        0x8 ./startup/startup_mcxa153.o
-                0x000066c0                Reserved86_IRQHandler
+                0x000066b0        0x8 ./startup/startup_mcxa153.o
+                0x000066b0                Reserved86_IRQHandler
  .text.GPIO0_IRQHandler
-                0x000066c8        0x8 ./startup/startup_mcxa153.o
-                0x000066c8                GPIO0_IRQHandler
+                0x000066b8        0x8 ./startup/startup_mcxa153.o
+                0x000066b8                GPIO0_IRQHandler
  .text.GPIO1_IRQHandler
-                0x000066d0        0x8 ./startup/startup_mcxa153.o
-                0x000066d0                GPIO1_IRQHandler
+                0x000066c0        0x8 ./startup/startup_mcxa153.o
+                0x000066c0                GPIO1_IRQHandler
  .text.GPIO2_IRQHandler
-                0x000066d8        0x8 ./startup/startup_mcxa153.o
-                0x000066d8                GPIO2_IRQHandler
+                0x000066c8        0x8 ./startup/startup_mcxa153.o
+                0x000066c8                GPIO2_IRQHandler
  .text.GPIO3_IRQHandler
-                0x000066e0        0x8 ./startup/startup_mcxa153.o
-                0x000066e0                GPIO3_IRQHandler
- .text.strsep   0x000066e8       0x50 ./source/utils/GPS.o
-                0x000066e8                strsep
+                0x000066d0        0x8 ./startup/startup_mcxa153.o
+                0x000066d0                GPIO3_IRQHandler
+ .text.strsep   0x000066d8       0x50 ./source/utils/GPS.o
+                0x000066d8                strsep
  .text.GPSCalculateDirections
-                0x00006738       0x86 ./source/utils/GPS.o
-                0x00006738                GPSCalculateDirections
+                0x00006728       0x86 ./source/utils/GPS.o
+                0x00006728                GPSCalculateDirections
  .text.determineLongitudeDirection
-                0x000067be       0x2e ./source/utils/GPS.o
-                0x000067be                determineLongitudeDirection
+                0x000067ae       0x2e ./source/utils/GPS.o
+                0x000067ae                determineLongitudeDirection
  .text.determineLatitudeDirection
-                0x000067ec       0x2e ./source/utils/GPS.o
-                0x000067ec                determineLatitudeDirection
- .text.ld_word  0x0000681a       0x30 ./source/fatFs/ff.o
+                0x000067dc       0x2e ./source/utils/GPS.o
+                0x000067dc                determineLatitudeDirection
+ .text.ld_word  0x0000680a       0x30 ./source/fatFs/ff.o
  .text.ld_dword
-                0x0000684a       0x44 ./source/fatFs/ff.o
- .text.st_word  0x0000688e       0x34 ./source/fatFs/ff.o
+                0x0000683a       0x44 ./source/fatFs/ff.o
+ .text.st_word  0x0000687e       0x34 ./source/fatFs/ff.o
  .text.st_dword
-                0x000068c2       0x56 ./source/fatFs/ff.o
- .text.dbc_1st  0x00006918       0x3e ./source/fatFs/ff.o
- .text.dbc_2nd  0x00006956       0x52 ./source/fatFs/ff.o
+                0x000068b2       0x56 ./source/fatFs/ff.o
+ .text.dbc_1st  0x00006908       0x3e ./source/fatFs/ff.o
+ .text.dbc_2nd  0x00006946       0x52 ./source/fatFs/ff.o
  .text.sync_window
-                0x000069a8       0x78 ./source/fatFs/ff.o
+                0x00006998       0x78 ./source/fatFs/ff.o
  .text.move_window
-                0x00006a20       0x5a ./source/fatFs/ff.o
+                0x00006a10       0x5a ./source/fatFs/ff.o
  .text.clst2sect
-                0x00006a7a       0x3c ./source/fatFs/ff.o
- .text.get_fat  0x00006ab6      0x14e ./source/fatFs/ff.o
- .text.put_fat  0x00006c04      0x1d4 ./source/fatFs/ff.o
+                0x00006a6a       0x3c ./source/fatFs/ff.o
+ .text.get_fat  0x00006aa6      0x14e ./source/fatFs/ff.o
+ .text.put_fat  0x00006bf4      0x1d4 ./source/fatFs/ff.o
  .text.remove_chain
-                0x00006dd8       0xca ./source/fatFs/ff.o
+                0x00006dc8       0xca ./source/fatFs/ff.o
  .text.create_chain
-                0x00006ea2      0x1aa ./source/fatFs/ff.o
+                0x00006e92      0x1aa ./source/fatFs/ff.o
  .text.dir_clear
-                0x0000704c       0x90 ./source/fatFs/ff.o
- .text.dir_sdi  0x000070dc       0xf6 ./source/fatFs/ff.o
+                0x0000703c       0x90 ./source/fatFs/ff.o
+ .text.dir_sdi  0x000070cc       0xf6 ./source/fatFs/ff.o
  .text.dir_next
-                0x000071d2      0x12c ./source/fatFs/ff.o
+                0x000071c2      0x12c ./source/fatFs/ff.o
  .text.dir_alloc
-                0x000072fe       0x8e ./source/fatFs/ff.o
+                0x000072ee       0x8e ./source/fatFs/ff.o
  .text.ld_clust
-                0x0000738c       0x3e ./source/fatFs/ff.o
+                0x0000737c       0x3e ./source/fatFs/ff.o
  .text.st_clust
-                0x000073ca       0x40 ./source/fatFs/ff.o
+                0x000073ba       0x40 ./source/fatFs/ff.o
  .text.dir_find
-                0x0000740a       0xaa ./source/fatFs/ff.o
+                0x000073fa       0xaa ./source/fatFs/ff.o
  .text.dir_register
-                0x000074b4       0x64 ./source/fatFs/ff.o
+                0x000074a4       0x64 ./source/fatFs/ff.o
  .text.follow_path
-                0x00007518      0x11c ./source/fatFs/ff.o
+                0x00007508      0x11c ./source/fatFs/ff.o
  .text.find_volume
-                0x00007634       0xbe ./source/fatFs/ff.o
+                0x00007624       0xbe ./source/fatFs/ff.o
  .text.validate
-                0x000076f2       0x6a ./source/fatFs/ff.o
- .text.f_read   0x0000775c      0x21a ./source/fatFs/ff.o
-                0x0000775c                f_read
- .text.f_write  0x00007976      0x2ba ./source/fatFs/ff.o
-                0x00007976                f_write
- .text.f_close  0x00007c30       0x40 ./source/fatFs/ff.o
-                0x00007c30                f_close
+                0x000076e2       0x6a ./source/fatFs/ff.o
+ .text.f_read   0x0000774c      0x21a ./source/fatFs/ff.o
+                0x0000774c                f_read
+ .text.f_write  0x00007966      0x2ba ./source/fatFs/ff.o
+                0x00007966                f_write
+ .text.f_close  0x00007c20       0x40 ./source/fatFs/ff.o
+                0x00007c20                f_close
  .text.putc_bfd
-                0x00007c70       0x70 ./source/fatFs/ff.o
+                0x00007c60       0x70 ./source/fatFs/ff.o
  .text.putc_flush
-                0x00007ce0       0x4a ./source/fatFs/ff.o
+                0x00007cd0       0x4a ./source/fatFs/ff.o
  .text.putc_init
-                0x00007d2a       0x22 ./source/fatFs/ff.o
- .text.dly_us   0x00007d4c       0x32 ./source/fatFs/sdmm.o
-                0x00007d4c                dly_us
+                0x00007d1a       0x22 ./source/fatFs/ff.o
+ .text.dly_us   0x00007d3c       0x32 ./source/fatFs/sdmm.o
+                0x00007d3c                dly_us
  .text.wait_ready
-                0x00007d7e       0x48 ./source/fatFs/sdmm.o
+                0x00007d6e       0x48 ./source/fatFs/sdmm.o
  .text.rcvr_datablock
-                0x00007dc6       0x62 ./source/fatFs/sdmm.o
+                0x00007db6       0x62 ./source/fatFs/sdmm.o
  .text.xmit_datablock
-                0x00007e28       0x6a ./source/fatFs/sdmm.o
+                0x00007e18       0x6a ./source/fatFs/sdmm.o
  .text.send_cmd
-                0x00007e92       0xda ./source/fatFs/sdmm.o
+                0x00007e82       0xda ./source/fatFs/sdmm.o
  .text.disk_ioctl
-                0x00007f6c      0x116 ./source/fatFs/sdmm.o
-                0x00007f6c                disk_ioctl
- .text.f_init   0x00008082       0x4a ./source/fifo.o
-                0x00008082                f_init
- .text.f_push   0x000080cc       0x6a ./source/fifo.o
-                0x000080cc                f_push
- .text.f_pop    0x00008136       0x66 ./source/fifo.o
-                0x00008136                f_pop
- .text.f_cnt    0x0000819c       0x16 ./source/fifo.o
-                0x0000819c                f_cnt
+                0x00007f5c      0x116 ./source/fatFs/sdmm.o
+                0x00007f5c                disk_ioctl
+ .text.f_init   0x00008072       0x4a ./source/fifo.o
+                0x00008072                f_init
+ .text.f_push   0x000080bc       0x6a ./source/fifo.o
+                0x000080bc                f_push
+ .text.f_pop    0x00008126       0x66 ./source/fifo.o
+                0x00008126                f_pop
+ .text.f_cnt    0x0000818c       0x16 ./source/fifo.o
+                0x0000818c                f_cnt
  .text.__sys_write
-                0x000081b2       0x56 ./source/retarget.o
-                0x000081b2                __sys_write
+                0x000081a2       0x56 ./source/retarget.o
+                0x000081a2                __sys_write
  .text.__sys_readc
-                0x00008208        0xe ./source/retarget.o
-                0x00008208                __sys_readc
+                0x000081f8        0xe ./source/retarget.o
+                0x000081f8                __sys_readc
  .text.HardFault_Handler
-                0x00008216       0x36 ./source/semihost_hardfault.o
-                0x00008216                HardFault_Handler
+                0x00008206       0x36 ./source/semihost_hardfault.o
+                0x00008206                HardFault_Handler
  .text.SystemInitHook
-                0x0000824c        0xc ./device/system_MCXA153.o
-                0x0000824c                SystemInitHook
- .text.__main   0x00008258        0xe /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_semihost_nf.a(_cr__main.o)
-                0x00008258                __main
-                0x00008258                __CR_SEMIHOST
- .text.memcpy   0x00008266        0x4 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(memcpy.o)
-                0x00008266                memcpy
- .text.memset   0x0000826a        0x4 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(memset.o)
-                0x0000826a                memset
- .text.fabs     0x0000826e       0x1c /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(fabs.o)
-                0x0000826e                fabs
+                0x0000823c        0xc ./device/system_MCXA153.o
+                0x0000823c                SystemInitHook
+ .text.__main   0x00008248        0xe /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_semihost_nf.a(_cr__main.o)
+                0x00008248                __main
+                0x00008248                __CR_SEMIHOST
+ .text.memcpy   0x00008256        0x4 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(memcpy.o)
+                0x00008256                memcpy
+ .text.memset   0x0000825a        0x4 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(memset.o)
+                0x0000825a                memset
+ .text.fabs     0x0000825e       0x1c /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(fabs.o)
+                0x0000825e                fabs
  .text.fp_round
-                0x0000828a       0x4c /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(fpprintf.o)
+                0x0000827a       0x4c /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(fpprintf.o)
  .text.pr_dec.constprop.0
-                0x000082d6       0x24 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(fpprintf.o)
- .text.memcmp   0x000082fa       0x42 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(memcmp.o)
-                0x000082fa                memcmp
- .text.sscanf   0x0000833c       0x3e /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(scanf.o)
-                0x0000833c                sscanf
- .text.setvbuf  0x0000837a       0x3e /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(setvbuf.o)
-                0x0000837a                setvbuf
- .text.strchr   0x000083b8       0x18 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(strchr.o)
-                0x000083b8                strchr
- .text.strcspn  0x000083d0       0x1e /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(strcspn.o)
-                0x000083d0                strcspn
- .text.strlen   0x000083ee       0x4e /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(strlen.o)
-                0x000083ee                strlen
- .text.strncat  0x0000843c       0x28 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(strncat.o)
-                0x0000843c                strncat
- .text.strncmp  0x00008464       0x54 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(strncmp.o)
-                0x00008464                strncmp
- .text.ungetc   0x000084b8       0x32 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(ungetc.o)
-                0x000084b8                ungetc
+                0x000082c6       0x24 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(fpprintf.o)
+ .text.memcmp   0x000082ea       0x42 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(memcmp.o)
+                0x000082ea                memcmp
+ .text.sscanf   0x0000832c       0x3e /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(scanf.o)
+                0x0000832c                sscanf
+ .text.setvbuf  0x0000836a       0x3e /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(setvbuf.o)
+                0x0000836a                setvbuf
+ .text.strchr   0x000083a8       0x18 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(strchr.o)
+                0x000083a8                strchr
+ .text.strcspn  0x000083c0       0x1e /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(strcspn.o)
+                0x000083c0                strcspn
+ .text.strlen   0x000083de       0x4e /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(strlen.o)
+                0x000083de                strlen
+ .text.strncat  0x0000842c       0x28 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(strncat.o)
+                0x0000842c                strncat
+ .text.strncmp  0x00008454       0x54 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(strncmp.o)
+                0x00008454                strncmp
+ .text.ungetc   0x000084a8       0x32 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(ungetc.o)
+                0x000084a8                ungetc
  .text._Csys_read_
-                0x000084ea       0x22 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(__fillbuf.o)
-                0x000084ea                _Csys_read_
+                0x000084da       0x22 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(__fillbuf.o)
+                0x000084da                _Csys_read_
  .text._deferredlazyseek
-                0x0000850c       0x40 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(_deferredlazyseek.o)
-                0x0000850c                _deferredlazyseek
+                0x000084fc       0x40 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(_deferredlazyseek.o)
+                0x000084fc                _deferredlazyseek
  .text.__flsbuf
-                0x0000854c      0x126 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(_deferredlazyseek.o)
-                0x0000854c                __flsbuf
- .text._fdopen  0x00008672       0x68 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(_fdopen.o)
-                0x00008672                _fdopen
- .text._fflush  0x000086da       0x52 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(_fflush.o)
-                0x000086da                _fflush
- .text._frexpl  0x0000872c       0x5a /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(_frexpl.o)
-                0x0000872c                _frexpl
- .text.free     0x00008786       0x30 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(alloc.o)
-                0x00008786                free
- .text.fclose   0x000087b6       0x58 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(fclose.o)
-                0x000087b6                fclose
- .text.remove   0x0000880e       0x14 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(remove.o)
-                0x0000880e                remove
+                0x0000853c      0x126 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(_deferredlazyseek.o)
+                0x0000853c                __flsbuf
+ .text._fdopen  0x00008662       0x68 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(_fdopen.o)
+                0x00008662                _fdopen
+ .text._fflush  0x000086ca       0x52 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(_fflush.o)
+                0x000086ca                _fflush
+ .text._frexpl  0x0000871c       0x5a /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(_frexpl.o)
+                0x0000871c                _frexpl
+ .text.free     0x00008776       0x30 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(alloc.o)
+                0x00008776                free
+ .text.fclose   0x000087a6       0x58 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(fclose.o)
+                0x000087a6                fclose
+ .text.remove   0x000087fe       0x14 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(remove.o)
+                0x000087fe                remove
  .text._do_fflush
-                0x00008822       0x40 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(_do_fflush.o)
-                0x00008822                _do_fflush
+                0x00008812       0x40 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(_do_fflush.o)
+                0x00008812                _do_fflush
  .text.__aeabi_division_uldivmod
-                0x00008862      0x174 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/thumb/v8-m.main/nofp/libcr_eabihelpers.a(division_64.o)
-                0x00008862                __aeabi_uldivmod
-                0x00008866                __bhs_ldivmod1
+                0x00008852      0x174 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/thumb/v8-m.main/nofp/libcr_eabihelpers.a(division_64.o)
+                0x00008852                __aeabi_uldivmod
+                0x00008856                __bhs_ldivmod1
  .text.__aeabi_division_idiv0
-                0x000089d6        0x2 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/thumb/v8-m.main/nofp/libcr_eabihelpers.a(division_idiv0.o)
-                0x000089d6                __aeabi_idiv0
+                0x000089c6        0x2 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/thumb/v8-m.main/nofp/libcr_eabihelpers.a(division_idiv0.o)
+                0x000089c6                __aeabi_idiv0
  .text.__aeabi_d2iz
-                0x000089d8       0x42 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/thumb/v8-m.main/nofp/libcr_eabihelpers.a(double.o)
-                0x000089d8                __aeabi_d2iz
+                0x000089c8       0x42 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/thumb/v8-m.main/nofp/libcr_eabihelpers.a(double.o)
+                0x000089c8                __aeabi_d2iz
  .text.__bhs_ui2d
-                0x00008a1a       0x46 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/thumb/v8-m.main/nofp/libcr_eabihelpers.a(double.o)
-                0x00008a1a                __bhs_ui2d
+                0x00008a0a       0x46 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/thumb/v8-m.main/nofp/libcr_eabihelpers.a(double.o)
+                0x00008a0a                __bhs_ui2d
  .text.__aeabi_i2d
-                0x00008a60       0x10 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/thumb/v8-m.main/nofp/libcr_eabihelpers.a(double.o)
-                0x00008a60                __aeabi_i2d
+                0x00008a50       0x10 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/thumb/v8-m.main/nofp/libcr_eabihelpers.a(double.o)
+                0x00008a50                __aeabi_i2d
  .text.__aeabi_dcmpeq
-                0x00008a70       0x30 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/thumb/v8-m.main/nofp/libcr_eabihelpers.a(double.o)
-                0x00008a70                __aeabi_dcmpeq
+                0x00008a60       0x30 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/thumb/v8-m.main/nofp/libcr_eabihelpers.a(double.o)
+                0x00008a60                __aeabi_dcmpeq
  .text.__aeabi_dcmplt
-                0x00008aa0       0x56 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/thumb/v8-m.main/nofp/libcr_eabihelpers.a(double.o)
-                0x00008aa0                __aeabi_dcmplt
+                0x00008a90       0x56 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/thumb/v8-m.main/nofp/libcr_eabihelpers.a(double.o)
+                0x00008a90                __aeabi_dcmplt
  .text.__aeabi_dcmpgt
-                0x00008af6       0x56 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/thumb/v8-m.main/nofp/libcr_eabihelpers.a(double.o)
-                0x00008af6                __aeabi_dcmpgt
+                0x00008ae6       0x56 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/thumb/v8-m.main/nofp/libcr_eabihelpers.a(double.o)
+                0x00008ae6                __aeabi_dcmpgt
  .text.__aeabi_dcmple
-                0x00008b4c       0x54 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/thumb/v8-m.main/nofp/libcr_eabihelpers.a(double.o)
-                0x00008b4c                __aeabi_dcmple
+                0x00008b3c       0x54 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/thumb/v8-m.main/nofp/libcr_eabihelpers.a(double.o)
+                0x00008b3c                __aeabi_dcmple
  .text.__aeabi_dcmpge
-                0x00008ba0       0x5a /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/thumb/v8-m.main/nofp/libcr_eabihelpers.a(double.o)
-                0x00008ba0                __aeabi_dcmpge
+                0x00008b90       0x5a /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/thumb/v8-m.main/nofp/libcr_eabihelpers.a(double.o)
+                0x00008b90                __aeabi_dcmpge
  .text.__aeabi_memcpy
-                0x00008bfa       0x34 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/thumb/v8-m.main/nofp/libcr_eabihelpers.a(memcpy.o)
-                0x00008bfa                __aeabi_memcpy
-                0x00008c04                __aeabi_memcpy4
-                0x00008c04                __aeabi_memcpy8
+                0x00008bea       0x34 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/thumb/v8-m.main/nofp/libcr_eabihelpers.a(memcpy.o)
+                0x00008bea                __aeabi_memcpy
+                0x00008bf4                __aeabi_memcpy4
+                0x00008bf4                __aeabi_memcpy8
  .text.__aeabi_memset_lowlevel
-                0x00008c2e       0x32 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/thumb/v8-m.main/nofp/libcr_eabihelpers.a(memcpy.o)
-                0x00008c2e                __aeabi_lowlevel_memset
+                0x00008c1e       0x32 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/thumb/v8-m.main/nofp/libcr_eabihelpers.a(memcpy.o)
+                0x00008c1e                __aeabi_lowlevel_memset
  .text.__sys_close
-                0x00008c60        0xc /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_semihost_nf.a(__sys_close.o)
-                0x00008c60                __sys_close
+                0x00008c50        0xc /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_semihost_nf.a(__sys_close.o)
+                0x00008c50                __sys_close
  .text.__sys_flen
-                0x00008c6c        0xc /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_semihost_nf.a(__sys_flen.o)
-                0x00008c6c                __sys_flen
+                0x00008c5c        0xc /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_semihost_nf.a(__sys_flen.o)
+                0x00008c5c                __sys_flen
  .text.__sys_istty
-                0x00008c78        0xc /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_semihost_nf.a(__sys_istty.o)
-                0x00008c78                __sys_istty
+                0x00008c68        0xc /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_semihost_nf.a(__sys_istty.o)
+                0x00008c68                __sys_istty
  .text.__sys_read
-                0x00008c84        0xc /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_semihost_nf.a(__sys_read.o)
-                0x00008c84                __sys_read
+                0x00008c74        0xc /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_semihost_nf.a(__sys_read.o)
+                0x00008c74                __sys_read
  .text.__sys_remove
-                0x00008c90        0xc /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_semihost_nf.a(__sys_remove.o)
-                0x00008c90                __sys_remove
+                0x00008c80        0xc /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_semihost_nf.a(__sys_remove.o)
+                0x00008c80                __sys_remove
  .text.__sys_seek
-                0x00008c9c        0xc /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_semihost_nf.a(__sys_seek.o)
-                0x00008c9c                __sys_seek
+                0x00008c8c        0xc /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_semihost_nf.a(__sys_seek.o)
+                0x00008c8c                __sys_seek
  .text.__sys_tmpnam
-                0x00008ca8        0xc /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_semihost_nf.a(__sys_tmpnam.o)
-                0x00008ca8                __sys_tmpnam
+                0x00008c98        0xc /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_semihost_nf.a(__sys_tmpnam.o)
+                0x00008c98                __sys_tmpnam
  *(SORT_BY_ALIGNMENT(.rodata) SORT_BY_ALIGNMENT(.rodata.*) SORT_BY_ALIGNMENT(.constdata) SORT_BY_ALIGNMENT(.constdata.*))
  .rodata.GPS_updateData.str1.4
-                0x00008cb4       0xe3 ./source/utils/GPS.o
+                0x00008ca4       0xe3 ./source/utils/GPS.o
                                   0x7 (size before relaxing)
  .rodata.parseGNGGA.str1.4
-                0x00008d97        0x2 ./source/utils/GPS.o
+                0x00008d87        0x2 ./source/utils/GPS.o
  .rodata.Logger_updateData.str1.4
-                0x00008d97       0x28 ./source/utils/Logger.o
+                0x00008d87       0x28 ./source/utils/Logger.o
  .rodata.SD_Writeln.str1.4
-                0x00008d97        0x5 ./source/utils/SD.o
+                0x00008d87        0x5 ./source/utils/SD.o
  .rodata.initGameControl.str1.4
-                0x00008d97        0xa ./source/games/game_control.o
+                0x00008d87        0xa ./source/games/game_control.o
  .rodata.checkGameStatus.str1.4
-                0x00008d97       0x1a ./source/games/game_control.o
+                0x00008d87       0x1a ./source/games/game_control.o
  .rodata.initGPSLocationGame.str1.4
-                0x00008d97       0x4f ./source/games/gps_location.game.o
+                0x00008d87       0x4f ./source/games/gps_location.game.o
  .rodata.initGPSProximityGame.str1.4
-                0x00008d97       0x4f ./source/games/gps_proximity.game.o
+                0x00008d87       0x4f ./source/games/gps_proximity.game.o
  .rodata.create_name.str1.4
-                0x00008d97        0xf ./source/fatFs/ff.o
+                0x00008d87        0xf ./source/fatFs/ff.o
  .rodata.check_fs.str1.4
-                0x00008d97        0x9 ./source/fatFs/ff.o
+                0x00008d87        0x9 ./source/fatFs/ff.o
  .rodata.ftoa.str1.4
-                0x00008d97        0xb ./source/fatFs/ff.o
- *fill*         0x00008d97        0x1 ff
+                0x00008d87        0xb ./source/fatFs/ff.o
+ *fill*         0x00008d87        0x1 ff
  .rodata.__num_Ciob_streams
-                0x00008d98        0x4 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_semihost_nf.a(__ciob.o)
-                0x00008d98                __num_Ciob_streams
+                0x00008d88        0x4 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_semihost_nf.a(__ciob.o)
+                0x00008d88                __num_Ciob_streams
  .rodata.fp_display.str1.1
-                0x00008d9c       0x87 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(fpprintf.o)
+                0x00008d8c       0x87 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(fpprintf.o)
                                  0x35 (size before relaxing)
  .rodata._initio.str1.1
-                0x00008e23        0x4 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(initio.o)
+                0x00008e13        0x4 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(initio.o)
  .rodata.__vfprintf.str1.1
-                0x00008e23       0x38 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(printf.o)
+                0x00008e13       0x38 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(printf.o)
  .rodata.strtod.str1.1
-                0x00008e23        0x6 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(scanf.o)
+                0x00008e13        0x6 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(scanf.o)
  .rodata._Csys_alloc.str1.1
-                0x00008e23       0x18 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(alloc.o)
+                0x00008e13       0x18 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(alloc.o)
  .rodata.__ctype
-                0x00008e23      0x180 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(ctype.o)
-                0x00008e23                __ctype
-                0x00008fa4                        . = ALIGN (0x4)
- *fill*         0x00008fa3        0x1 ff
+                0x00008e13      0x180 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(ctype.o)
+                0x00008e13                __ctype
+                0x00008f94                        . = ALIGN (0x4)
+ *fill*         0x00008f93        0x1 ff
 
-.glue_7         0x00008fa4        0x0
- .glue_7        0x00008fa4        0x0 linker stubs
+.glue_7         0x00008f94        0x0
+ .glue_7        0x00008f94        0x0 linker stubs
 
-.glue_7t        0x00008fa4        0x0
- .glue_7t       0x00008fa4        0x0 linker stubs
+.glue_7t        0x00008f94        0x0
+ .glue_7t       0x00008f94        0x0 linker stubs
 
-.vfp11_veneer   0x00008fa4        0x0
- .vfp11_veneer  0x00008fa4        0x0 linker stubs
+.vfp11_veneer   0x00008f94        0x0
+ .vfp11_veneer  0x00008f94        0x0 linker stubs
 
-.v4_bx          0x00008fa4        0x0
- .v4_bx         0x00008fa4        0x0 linker stubs
+.v4_bx          0x00008f94        0x0
+ .v4_bx         0x00008f94        0x0 linker stubs
 
-.iplt           0x00008fa4        0x0
- .iplt          0x00008fa4        0x0 ./startup/startup_mcxa153.o
+.iplt           0x00008f94        0x0
+ .iplt          0x00008f94        0x0 ./startup/startup_mcxa153.o
 
-.rel.dyn        0x00008fa4        0x0
- .rel.iplt      0x00008fa4        0x0 ./startup/startup_mcxa153.o
+.rel.dyn        0x00008f94        0x0
+ .rel.iplt      0x00008f94        0x0 ./startup/startup_mcxa153.o
 
 .ARM.extab
  *(SORT_BY_ALIGNMENT(.ARM.extab*) SORT_BY_ALIGNMENT(.gnu.linkonce.armextab.*))
 
-.ARM.exidx      0x00008fa4        0x0
-                0x00008fa4                        __exidx_start = .
+.ARM.exidx      0x00008f94        0x0
+                0x00008f94                        __exidx_start = .
  *(SORT_BY_ALIGNMENT(.ARM.exidx*) SORT_BY_ALIGNMENT(.gnu.linkonce.armexidx.*))
-                0x00008fa4                        __exidx_end = .
-                0x00008fa4                        _etext = .
+                0x00008f94                        __exidx_end = .
+                0x00008f94                        _etext = .
 
-.data_RAM2      0x04000000        0x0 load address 0x00008fa4
+.data_RAM2      0x04000000        0x0 load address 0x00008f94
  FILL mask 0xff
                 [!provide]                        PROVIDE (__start_data_RAM2 = .)
                 [!provide]                        PROVIDE (__start_data_SRAMX0 = .)
@@ -2999,7 +3043,7 @@ END GROUP
                 [!provide]                        PROVIDE (__end_data_RAM2 = .)
                 [!provide]                        PROVIDE (__end_data_SRAMX0 = .)
 
-.data_RAM3      0x04002000        0x0 load address 0x00008fa4
+.data_RAM3      0x04002000        0x0 load address 0x00008f94
  FILL mask 0xff
                 [!provide]                        PROVIDE (__start_data_RAM3 = .)
                 [!provide]                        PROVIDE (__start_data_SRAMX1 = .)
@@ -3020,7 +3064,7 @@ END GROUP
                 0x20000000                        . = ALIGN (0x4)
                 0x20000000                        _end_uninit_RESERVED = .
 
-.data           0x20000000       0x10 load address 0x00008fa4
+.data           0x20000000       0x10 load address 0x00008f94
  FILL mask 0xff
                 0x20000000                        _data = .
                 [!provide]                        PROVIDE (__start_data_RAM = .)
@@ -3045,7 +3089,7 @@ END GROUP
                 [!provide]                        PROVIDE (__end_data_RAM = .)
                 [!provide]                        PROVIDE (__end_data_SRAM = .)
 
-.igot.plt       0x20000010        0x0 load address 0x00008fb4
+.igot.plt       0x20000010        0x0 load address 0x00008fa4
  .igot.plt      0x20000010        0x0 ./startup/startup_mcxa153.o
 
 .bss_RAM2       0x04000000        0x0
@@ -3192,8 +3236,8 @@ END GROUP
                 0x20005a00                        . = ALIGN (0x4)
                 0x20006000                        _vStackTop = (. + _StackSize)
                 0x00000000                        _image_start = LOADADDR (.text)
-                0x00008fb4                        _image_end = (LOADADDR (.data) + SIZEOF (.data))
-                0x00008fb4                        _image_size = (_image_end - _image_start)
+                0x00008fa4                        _image_end = (LOADADDR (.data) + SIZEOF (.data))
+                0x00008fa4                        _image_size = (_image_end - _image_start)
 OUTPUT(project.axf elf32-littlearm)
 LOAD linker stubs
 
@@ -3615,7 +3659,7 @@ LOAD linker stubs
  .debug_macro   0x00016449       0x11 ./source/semihost_hardfault.o
  .debug_macro   0x0001645a      0x220 ./device/system_MCXA153.o
 
-.debug_line     0x00000000    0x13163
+.debug_line     0x00000000    0x1315d
  .debug_line    0x00000000      0x8ff ./startup/startup_mcxa153.o
  .debug_line    0x000008ff      0x94e ./source/utils/GPS.o
  .debug_line    0x0000124d      0x701 ./source/utils/Logger.o
@@ -3626,53 +3670,53 @@ LOAD linker stubs
  .debug_line    0x00003418     0x2b90 ./source/fatFs/ff.o
  .debug_line    0x00005fa8      0xda5 ./source/fatFs/sdmm.o
  .debug_line    0x00006d4d      0x774 ./source/fifo.o
- .debug_line    0x000074c1      0x68c ./source/gpio_output.o
- .debug_line    0x00007b4d      0x7fc ./source/lpi2c0_controller_polling.o
- .debug_line    0x00008349      0x848 ./source/lpuart0_interrupt.o
- .debug_line    0x00008b91      0x848 ./source/lpuart2_interrupt.o
- .debug_line    0x000093d9      0x8d5 ./source/main.o
- .debug_line    0x00009cae      0x6ad ./source/retarget.o
- .debug_line    0x0000a35b       0x59 ./source/semihost_hardfault.o
- .debug_line    0x0000a3b4      0x727 ./device/system_MCXA153.o
- .debug_line    0x0000aadb       0xc4 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_semihost_nf.a(_cr__main.o)
- .debug_line    0x0000ab9f      0x10b /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(memcpy.o)
- .debug_line    0x0000acaa       0xb3 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(memset.o)
- .debug_line    0x0000ad5d       0xd1 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(cos.o)
- .debug_line    0x0000ae2e       0x63 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(fabs.o)
- .debug_line    0x0000ae91     0x110b /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(fpprintf.o)
- .debug_line    0x0000bf9c      0x1b9 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(initio.o)
- .debug_line    0x0000c155      0x101 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(memcmp.o)
- .debug_line    0x0000c256     0x10fd /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(printf.o)
- .debug_line    0x0000d353     0x17b6 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(scanf.o)
- .debug_line    0x0000eb09      0x15c /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(setvbuf.o)
- .debug_line    0x0000ec65       0x6a /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(strchr.o)
- .debug_line    0x0000eccf       0xf4 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(strcspn.o)
- .debug_line    0x0000edc3      0x141 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(strlen.o)
- .debug_line    0x0000ef04       0xeb /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(strncat.o)
- .debug_line    0x0000efef      0x12b /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(strncmp.o)
- .debug_line    0x0000f11a      0x151 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(ungetc.o)
- .debug_line    0x0000f26b      0x40a /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(__fillbuf.o)
- .debug_line    0x0000f675      0x359 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(_deferredlazyseek.o)
- .debug_line    0x0000f9ce      0x18c /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(_fdopen.o)
- .debug_line    0x0000fb5a      0x18f /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(_fflush.o)
- .debug_line    0x0000fce9      0x14b /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(_frexpl.o)
- .debug_line    0x0000fe34      0x16b /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(_ldexpl.o)
- .debug_line    0x0000ff9f      0x1b1 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(_sincos.o)
- .debug_line    0x00010150      0x19d /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(_writebuf.o)
- .debug_line    0x000102ed      0x3ed /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(alloc.o)
- .debug_line    0x000106da      0x202 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(ctype.o)
- .debug_line    0x000108dc       0x86 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(errno.o)
- .debug_line    0x00010962      0x17f /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(fclose.o)
- .debug_line    0x00010ae1      0x151 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(fflush.o)
- .debug_line    0x00010c32      0x2a2 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(fseek.o)
- .debug_line    0x00010ed4      0x17a /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(ftell.o)
- .debug_line    0x0001104e      0x15c /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(remove.o)
- .debug_line    0x000111aa       0x59 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(__init_alloc.o)
- .debug_line    0x00011203      0x16b /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(_cr_sbrk.o)
- .debug_line    0x0001136e      0x16c /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(_do_fflush.o)
- .debug_line    0x000114da       0x61 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(_cr_check_heap.o)
- .debug_line    0x0001153b     0x1b3e /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/thumb/v8-m.main/nofp/libcr_eabihelpers.a(double.o)
- .debug_line    0x00013079       0xea /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_semihost_nf.a(__ciob.o)
+ .debug_line    0x000074c1      0x686 ./source/gpio_output.o
+ .debug_line    0x00007b47      0x7fc ./source/lpi2c0_controller_polling.o
+ .debug_line    0x00008343      0x848 ./source/lpuart0_interrupt.o
+ .debug_line    0x00008b8b      0x848 ./source/lpuart2_interrupt.o
+ .debug_line    0x000093d3      0x8d5 ./source/main.o
+ .debug_line    0x00009ca8      0x6ad ./source/retarget.o
+ .debug_line    0x0000a355       0x59 ./source/semihost_hardfault.o
+ .debug_line    0x0000a3ae      0x727 ./device/system_MCXA153.o
+ .debug_line    0x0000aad5       0xc4 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_semihost_nf.a(_cr__main.o)
+ .debug_line    0x0000ab99      0x10b /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(memcpy.o)
+ .debug_line    0x0000aca4       0xb3 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(memset.o)
+ .debug_line    0x0000ad57       0xd1 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(cos.o)
+ .debug_line    0x0000ae28       0x63 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(fabs.o)
+ .debug_line    0x0000ae8b     0x110b /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(fpprintf.o)
+ .debug_line    0x0000bf96      0x1b9 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(initio.o)
+ .debug_line    0x0000c14f      0x101 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(memcmp.o)
+ .debug_line    0x0000c250     0x10fd /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(printf.o)
+ .debug_line    0x0000d34d     0x17b6 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(scanf.o)
+ .debug_line    0x0000eb03      0x15c /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(setvbuf.o)
+ .debug_line    0x0000ec5f       0x6a /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(strchr.o)
+ .debug_line    0x0000ecc9       0xf4 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(strcspn.o)
+ .debug_line    0x0000edbd      0x141 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(strlen.o)
+ .debug_line    0x0000eefe       0xeb /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(strncat.o)
+ .debug_line    0x0000efe9      0x12b /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(strncmp.o)
+ .debug_line    0x0000f114      0x151 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(ungetc.o)
+ .debug_line    0x0000f265      0x40a /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(__fillbuf.o)
+ .debug_line    0x0000f66f      0x359 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(_deferredlazyseek.o)
+ .debug_line    0x0000f9c8      0x18c /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(_fdopen.o)
+ .debug_line    0x0000fb54      0x18f /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(_fflush.o)
+ .debug_line    0x0000fce3      0x14b /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(_frexpl.o)
+ .debug_line    0x0000fe2e      0x16b /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(_ldexpl.o)
+ .debug_line    0x0000ff99      0x1b1 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(_sincos.o)
+ .debug_line    0x0001014a      0x19d /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(_writebuf.o)
+ .debug_line    0x000102e7      0x3ed /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(alloc.o)
+ .debug_line    0x000106d4      0x202 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(ctype.o)
+ .debug_line    0x000108d6       0x86 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(errno.o)
+ .debug_line    0x0001095c      0x17f /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(fclose.o)
+ .debug_line    0x00010adb      0x151 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(fflush.o)
+ .debug_line    0x00010c2c      0x2a2 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(fseek.o)
+ .debug_line    0x00010ece      0x17a /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(ftell.o)
+ .debug_line    0x00011048      0x15c /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(remove.o)
+ .debug_line    0x000111a4       0x59 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(__init_alloc.o)
+ .debug_line    0x000111fd      0x16b /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(_cr_sbrk.o)
+ .debug_line    0x00011368      0x16c /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(_do_fflush.o)
+ .debug_line    0x000114d4       0x61 /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(_cr_check_heap.o)
+ .debug_line    0x00011535     0x1b3e /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/thumb/v8-m.main/nofp/libcr_eabihelpers.a(double.o)
+ .debug_line    0x00013073       0xea /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_semihost_nf.a(__ciob.o)
 
 .debug_str      0x00000000    0xabbf1
  .debug_str     0x00000000    0xabbf1 ./startup/startup_mcxa153.o
@@ -4442,6 +4486,7 @@ connectionQuality                                 ./source/utils/GPS.o
 cos                                               /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(cos.o)
                                                   ./source/utils/GPS.o
 currentLocation                                   ./source/utils/GPS.o
+currentRound                                      ./source/games/memory.game.o
 data_init                                         ./startup/startup_mcxa153.o
 determineLatitudeDirection                        ./source/utils/GPS.o
 determineLongitudeDirection                       ./source/utils/GPS.o
@@ -4549,6 +4594,8 @@ initGPSProximityGame                              ./source/games/gps_proximity.g
                                                   ./source/main.o
 initGameControl                                   ./source/games/game_control.o
                                                   ./source/main.o
+initMemoryGame                                    ./source/games/memory.game.o
+isRoundActive                                     ./source/games/memory.game.o
 isalnum                                           /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(ctype.o)
 isalpha                                           /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(ctype.o)
 iscntrl                                           /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(ctype.o)
@@ -4591,6 +4638,7 @@ memcmp                                            /Applications/MCUXpressoIDE_24
 memcpy                                            /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(memcpy.o)
                                                   /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(alloc.o)
                                                   ./source/fatFs/ff.o
+memoryGame                                        ./source/games/memory.game.o
 memset                                            /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(memset.o)
                                                   /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(fclose.o)
                                                   /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(alloc.o)
@@ -4614,6 +4662,7 @@ remove                                            /Applications/MCUXpressoIDE_24
                                                   /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(fclose.o)
 rename                                            /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(remove.o)
 scanf                                             /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(scanf.o)
+sequences                                         ./source/games/memory.game.o
 setvbuf                                           /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(setvbuf.o)
                                                   /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(initio.o)
 snprintf                                          /Applications/MCUXpressoIDE_24.12.148/ide/plugins/com.nxp.mcuxpresso.tools.macosx_24.12.0.202407110909/tools/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/nofp/libcr_c.a(fpprintf.o)

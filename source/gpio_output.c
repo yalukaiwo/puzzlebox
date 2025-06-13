@@ -31,7 +31,7 @@ void gpio_output_init(void)
     // SRE: [0] = Fast
     // PE:  [0] = Disables
     // PS:  [0] = n.a.
-    PORT1->PCR[5] |= PORT_PCR_LK(1) | PORT_PCR_MUX(0);
+    PORT1->PCR[7] |= PORT_PCR_LK(1) | PORT_PCR_MUX(0);
 
     // From section 12.5 Initialization (NXP, 2024)
     //
@@ -45,10 +45,5 @@ void gpio_output_init(void)
     // 1. a.
     //
     // PDO13: [1] = Logic level 1 – LEDs off
-    GPIO1->PDOR &= (1<<5);
-
-    // 1. b.
-    //
-    // PDD13: [1] = Output
-    GPIO1->PDDR |= (1<<5);
+    GPIO1->PCOR = (1 << 7);
 }

@@ -47,6 +47,7 @@
 #include "utils/GPS.h"
 #include "utils/SD.h"
 #include "utils/Logger.h"
+#include "utils/Millis.h"
 
 #include "games/game_control.h"
 #include "games/gps_location.game.h"
@@ -71,7 +72,7 @@
 // Local variables
 // -----------------------------------------------------------------------------
 
-static volatile long ms = 0;
+static volatile long prevMillis = 0;
 
 
 // -----------------------------------------------------------------------------
@@ -79,8 +80,8 @@ static volatile long ms = 0;
 // -----------------------------------------------------------------------------
 int main(void)
 {
-    SysTick_Config(48000);
-    lpuart0_init(115200);
+	Millis_init();
+	lpuart0_init(115200);
     lpuart2_init(9600);
     lpi2c0_controller_init();
     gpio_output_init();
@@ -100,14 +101,15 @@ int main(void)
 
     while(1)
     {
+    	long currentMillis = millis();
     	GPS_updateData();
     	directions = GPS_getCurrentDirections();
 
     	checkGameStatus();
 
-    	if (ms >= 60000) {
+    	if (currentMillis - prevMillis >= 60000) {
     		Logger_updateData();
-    		ms = 0;
+    		prevMillis = currentMillis;
     	}
 
     	switch (gameControl->currentGame) {
@@ -144,12 +146,6 @@ int main(void)
 // -----------------------------------------------------------------------------
 // Local function implementation
 // -----------------------------------------------------------------------------
-
-void SysTick_Handler(void)
-{
-    ms++;
-}
-
 
 
 
