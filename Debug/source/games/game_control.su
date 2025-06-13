@@ -1,3 +1,0 @@
-../source/games/game_control.c:14:21:initGameControl	16	static
-../source/games/game_control.c:49:21:getGameControl	4	static
-../source/games/game_control.c:53:6:checkGameStatus	8	static
