@@ -104,27 +104,18 @@ int _read(int fd, const void *buf, size_t count)
 
 int __sys_write(int handle, char *buffer, int size)
 {
-    if (NULL == buffer)
-    {
-        // return -1 if error
+    if (buffer == NULL || (handle != 1 && handle != 2)) {
         return -1;
     }
 
-    // This function only writes to "standard out" and "standard err" for
-    // all other file handles it returns failure
-    if ((handle != 1) && (handle != 2))
-    {
-        return -1;
-    }
-
-    // Send data
-    for(size_t i=0; i<size; i++)
-    {
-        lpuart0_putchar(((char *)buffer)[i]);
+    for (int i = 0; i < size; i++) {
+        while (!(LPUART0->STAT & LPUART_STAT_TDRE_MASK)); // Wait for TX ready
+        LPUART0->DATA = buffer[i]; // Send character
     }
 
     return size;
 }
+
 
 int __sys_readc(void)
 {

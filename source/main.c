@@ -20,6 +20,8 @@
 #include "games/code_game.h"
 #include "games/trivia_game.h"
 #include "games/pin_game.h"
+#include <stdbool.h>
+
 
 // Global for PIN comparison
 uint16_t secret_code;
