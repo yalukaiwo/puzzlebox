@@ -2,10 +2,9 @@
  * button.h
  *
  *  Created on: 12 Jun 2025
- *      Author: adibh
+ *      Author: Adib
  */
 
-// buttons.h
 #ifndef BUTTON_H_
 #define BUTTON_H_
 
@@ -17,4 +16,3 @@ bool Buttons_isPressed(int index);        // Check if specific button (0–3) is
 bool Buttons_isAnyPressed(void);          // Check if any button is pressed
 
 #endif /* BUTTON_H_ */
-

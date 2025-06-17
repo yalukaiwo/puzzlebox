@@ -91,11 +91,11 @@ void ctimer1_pwm_init(void)
     //
     // Enable modules and leave others unchanged
     // CTIMER1: [1] = Peripheral clock is enabled
-    MRCC0->MRCC_GLB_CC0_SET = MRCC_MRCC_GLB_CC0_CTIMER1(1);
+    MRCC0->MRCC_GLB_CC0_SET = MRCC_MRCC_GLB_CC0_CTIMER1(0);
 
     // Release modules from reset and leave others unchanged
     // CTIMER1: [1] = Peripheral is released from reset
-    MRCC0->MRCC_GLB_RST0_SET = MRCC_MRCC_GLB_RST0_CTIMER1(1);
+    MRCC0->MRCC_GLB_RST0_SET = MRCC_MRCC_GLB_RST0_CTIMER1(0);
 
     // 4.
     //
@@ -110,7 +110,7 @@ void ctimer1_pwm_init(void)
     //
     // In PWM mode, use match channel 3 to set the PWM cycle length. The other
     // channels can be used for matches
-    CTIMER1->MR[2] = 1000;
+    CTIMER1->MR[2] = 900;
     CTIMER1->MR[3] = 1000-1;
 
     // MR2S: [0] = Does not stop Timer Counter (TC) if MR0 matches Timer Counter
@@ -130,11 +130,11 @@ void ctimer1_pwm_init(void)
 
     // Enable modules and leave others unchanged
     // PORT3: [1] = Peripheral clock is enabled
-    MRCC0->MRCC_GLB_CC1_SET = MRCC_MRCC_GLB_CC1_PORT3(1);
+    MRCC0->MRCC_GLB_CC0_SET = MRCC_MRCC_GLB_CC0_PORT1(1);
 
     // Release modules from reset and leave others unchanged
     // PORT3: [1] = Peripheral is released from reset
-    MRCC0->MRCC_GLB_RST1_SET = MRCC_MRCC_GLB_RST1_PORT3(1);
+    MRCC0->MRCC_GLB_RST0_SET = MRCC_MRCC_GLB_RST0_PORT1(1);
 
     // Configure P3_12
     // LK : [1] = Locks this PCR
@@ -147,7 +147,7 @@ void ctimer1_pwm_init(void)
     // SRE: [0] = Fast
     // PE:  [0] = Disables
     // PS:  [0] = n.a.
-    PORT3->PCR[14] = PORT_PCR_LK(1) | PORT_PCR_MUX(5);
+    PORT1->PCR[4] = PORT_PCR_LK(1) | PORT_PCR_MUX(4);
 
     // 6.
     //
