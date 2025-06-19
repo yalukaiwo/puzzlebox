@@ -51,6 +51,6 @@ extern volatile bool ctimer1_timeout_flag;
 // -----------------------------------------------------------------------------
 // Shared function prototypes
 // -----------------------------------------------------------------------------
-void ctimer1_pwm_init(void);
+void ctimer2_pwm_init(void);
 
 #endif // CTIMER1_H

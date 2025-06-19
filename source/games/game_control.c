@@ -12,8 +12,10 @@
 game_controller_t gameControl;
 
 game_controller_t * initGameControl() {
-	char currentGame[1];
-	SD_Read(GAMECONTROL_FILENAME, currentGame, 1); // Read current game from memory
+	char currentGame[2];
+	SD_Read(GAMECONTROL_FILENAME, currentGame, sizeof(currentGame) / sizeof(char)); // Read current game from memory
+
+	printf("current game read: %s", currentGame);
 
 	switch (currentGame[0]) { // Apply the saved game level
 	case '0':

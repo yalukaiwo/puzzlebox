@@ -12,6 +12,10 @@
 #include <time.h>
 #include "../utils/Millis.h"
 #include "game_control.h"
+#include "../utils/Buzzer.h"
+#include "../utils/Buttons.h"
+#include "../utils/Leds.h"
+#include <stdio.h>
 
 typedef enum RoundState {
 	DISPLAYING,

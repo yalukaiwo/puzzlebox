@@ -8,7 +8,7 @@
 
 #include "Millis.h"
 
-long ms = 0;
+static volatile long ms = 0;
 
 void Millis_init() {
 	SysTick_Config(48000);
@@ -22,4 +22,3 @@ void SysTick_Handler(void)
 {
     ms++;
 }
-

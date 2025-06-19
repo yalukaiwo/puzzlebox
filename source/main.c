@@ -42,21 +42,23 @@
 #include "lpuart0_interrupt.h"
 #include "lpuart2_interrupt.h"
 #include "lpi2c0_controller_polling.h"
+#include "ctimer2_pwm.h"
 #include "gpio_output.h"
 
 #include "utils/GPS.h"
 #include "utils/SD.h"
 #include "utils/Logger.h"
 #include "utils/Millis.h"
+#include "utils/Buzzer.h"
+#include "utils/Leds.h"
+#include "utils/Buttons.h"
 
 #include "games/game_control.h"
 #include "games/gps_location.game.h"
 #include "games/gps_proximity.game.h"
+#include "games/memory.game.h"
 
 #include <MCXA153.h>
-#include "ctimer1_pwm.h"
-
-#include "utils/button.h"
 
 
 // -----------------------------------------------------------------------------
@@ -86,22 +88,24 @@ static volatile long prevMillis = 0;
 // -----------------------------------------------------------------------------
 int main(void)
 {
+
 	Millis_init();
 	lpuart0_init(115200);
-    lpuart2_init(9600);
+	lpuart2_init(9600);
+	SD_Init();
     lpi2c0_controller_init();
     gpio_output_init();
-
-    // SD_Init();
+    ctimer2_pwm_init();
+    Buttons_init();
+    Leds_init();
 
     game_controller_t *gameControl = initGameControl();
 
-    initGPSLocationGame();
-    initGPSProximityGame();
+//    initGPSLocationGame();
+//    initGPSProximityGame();
+    initMemoryGame();
 
     directions_t *directions;
-
-    gameControl->gameSuccessFlag = TRUE;
 
     __enable_irq();
 
@@ -120,12 +124,13 @@ int main(void)
 
     	switch (gameControl->currentGame) {
     	case TUTORIAL:
+    		gameControl->gameSuccessFlag = TRUE;
     		break;
     	case LOCATION:
     		gameControl->gameSuccessFlag = TRUE;
     		break;
     	case MEMORY:
-    		gameControl->gameSuccessFlag = TRUE;
+    		memoryGame();
     		break;
     	case QUIZ:
     		gameControl->gameSuccessFlag = TRUE;
