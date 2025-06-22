@@ -8,15 +8,20 @@
 #ifndef GAME_CONTROL_H_
 #define GAME_CONTROL_H_
 
+#include "../utils/Buzzer.h"
+#include "../utils/Leds.h"
+
 typedef enum Games
 {
 	TUTORIAL,
 	LOCATION,
 	MEMORY,
+	SHOW_PIN,
 	QUIZ,
 	PROXIMITY,
 	PIN,
-	VICTORY
+	VICTORY,
+	FAIL
 } game_t;
 
 typedef enum Flag

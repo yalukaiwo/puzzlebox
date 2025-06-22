@@ -15,6 +15,7 @@
 #include "../utils/Buzzer.h"
 #include "../utils/Buttons.h"
 #include "../utils/Leds.h"
+#include "../utils/LCD.h"
 #include <stdio.h>
 
 typedef enum RoundState {

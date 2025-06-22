@@ -29,8 +29,8 @@ void initMemoryGame()
 {
 	// Fill the memory game
 
-	srand(time(NULL));
-	int r = rand() % 4;
+	srand(millis());
+	int r = rand() % 3;
 
 	sequences[0][0] = r;
 
@@ -54,6 +54,7 @@ void initMemoryGame()
 
 void memoryGame()
 {
+	LCD_print("Memory game     ", "                ");
 	long currentMillis = millis();
 	game_controller_t *gameControl = getGameControl();
 
@@ -90,7 +91,9 @@ void memoryGame()
 	}
 
 	if (roundState == M_TUTORIAL) {
-		roundState = DISPLAYING;
+
+		LCD_print("Memory game     ", "Press to next   ");
+		if (Buttons_isAnyPressed()) roundState = DISPLAYING;
 		return;
 	}
 
@@ -132,15 +135,16 @@ void memoryGame()
 			switchingRoundsCount = 0;
 			switchingRoundsMillis = currentMillis;
 			if (currentRound == 5) return;
+			srand(millis());
 			for (int i = 0; i < currentRound + 1; i++) {
-				int r = rand() % 4;
+				int r = rand() % 3;
 
 				sequences[currentRound][i] = r;
 			}
 			return;
 		}
 
-		if (Buttons_isAnyPressed() &&  currentMillis - prevReadMillis >= 1000) {
+		if (Buttons_isAnyPressed() &&  currentMillis - prevReadMillis >= 500) {
 			if (Buttons_isPressed(sequences[currentRound][currentReading])) {
 				currentReading++;
 			} else {

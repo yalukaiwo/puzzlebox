@@ -57,19 +57,24 @@ void checkGameStatus() {
 	{
 		// Display fail message
 
+
+		Buzzer_buzz(0);
+		Leds_allOff();
 		gameControl.gameFailFlag = FALSE; // Disable the flag
-	    gameControl.currentGame = TUTORIAL; // Reset the game
+	    gameControl.currentGame = FAIL; // Reset the game
 	    SD_Overwrite(GAMECONTROL_FILENAME, "0", 1); // Save to the sd card
 	}
 
 	if (gameControl.gameSuccessFlag) // If the game success flag is raised
 	{
-		// Display success message and open the box
+		Buzzer_buzz(0);
+		Leds_allOff();
 
 	    gameControl.gameSuccessFlag = FALSE; // Disable the flag
 
-	    if (gameControl.currentGame == VICTORY)
+	    if (gameControl.currentGame == VICTORY || gameControl.currentGame == FAIL)
 	    {
+	    	SD_Rmfile("0:/log.txt");
 	    	SD_Overwrite(GAMECONTROL_FILENAME, "0", 1); // Save to the sd card
 	    	gameControl.currentGame = TUTORIAL; // Reset the game
 	    }

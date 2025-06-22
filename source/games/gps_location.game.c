@@ -62,7 +62,6 @@ void initGPSLocationGame() {
 
 void gpsLocationGame() {
 	game_controller_t *gameControl = getGameControl();
-	// LCD_t *LCD = getLCD();
 
 	GPS_setDestination(locationGameProps.location.latitude, locationGameProps.location.latDirection, locationGameProps.location.longitude, locationGameProps.location.longDirection); // Should be gotten from game props
 
@@ -79,7 +78,14 @@ void gpsLocationGame() {
 		gameControl->gameSuccessFlag = TRUE;
 	}
 
-	// display the directions on the lcd display
-	// LCD.print(2, "blabla");
-	// LCD.print(3, "blabla");
+	char printLong[17];
+	char printLat[17];
+
+	printf("%.2lf, %.2lf\r\n", directions->lat_d, directions->long_d);
+	printf("%i\r\n", GPS_getConnectionQuality()->fixType);
+
+	sprintf(printLat, "Walk %.2lfm %c  ", directions->lat_d, directions->latDirection);
+	sprintf(printLong, "Walk %.2lfm %c  ", directions->long_d, directions->longDirection);
+
+	LCD_print(printLat, printLong);
 }

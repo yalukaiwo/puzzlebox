@@ -10,12 +10,15 @@
 
 #include "../utils/GPS.h"
 #include "../utils/SD.h"
+#include "../utils/LCD.h"
+#include "../utils/Buzzer.h"
+#include "../utils/Millis.h"
 #include "stdlib.h"
 #include "stdio.h"
 #include "game_control.h"
 #include "math.h"
 
-#define LOCATION_RADIUS_M 10
+#define LOCATION_RADIUS_M 20
 #define PROXIMITYGAME_FILENAME "gpsPD.txt"
 
 typedef struct {

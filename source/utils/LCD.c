@@ -7,6 +7,9 @@
 #define ENABLE 0x04
 #define BACKLIGHT 0x08
 
+char prevRowOne[17] = {'\0'};
+char prevRowTwo[17] = {'\0'};
+
 void delay_us(unsigned int us)
 {
     for (volatile unsigned int i = 0; i < us * 10; i++);
@@ -96,6 +99,20 @@ void LCD_set_cursor(uint8_t row, uint8_t col)
     if (col > 15) col = 15;
 
     LCD_send_cmd(0x80 | (col + row_offsets[row]));
+}
+
+void LCD_print(char *row1, char*row2) {
+	if (!!strcmp(row1, prevRowOne)) {
+		LCD_set_cursor(0,0);
+		LCD_send_string(row1);
+		strcpy(prevRowOne, row1);
+	}
+
+	if (!!strcmp(row2, prevRowTwo)) {
+		LCD_set_cursor(1,0);
+		LCD_send_string(row2);
+		strcpy(prevRowOne, row2);
+	}
 }
 
 

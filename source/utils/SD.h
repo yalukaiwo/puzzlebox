@@ -10,6 +10,7 @@
 
 #include <stdio.h>
 #include <MCXA153.h>
+#include "LCD.h"
 #include "../fatFs/ff.h"
 
 

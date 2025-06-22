@@ -35,6 +35,7 @@
 #define _LCD_H_
 
 #include <stdint.h>
+#include <string.h>
 
 #define LCD_I2C_ADDR 0x27
 
@@ -43,5 +44,6 @@ void LCD_send_string(const char *str);
 void LCD_clear(void);
 void LCD_set_cursor(uint8_t row, uint8_t col);
 void delay_us(unsigned int us);
+void LCD_print(char *row1, char *row2);
 
 #endif

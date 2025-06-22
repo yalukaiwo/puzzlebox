@@ -19,11 +19,10 @@ void SD_Rmfile(char *filename) {
 
 void SD_Init()
 {
-	__disable_irq();
 	fr = f_mount(&fatFs, "", 1);		// Give a work area to the default drive
-	__enable_irq();
 	if (fr != FR_OK) {
 		printf("Mount failed %d\r\n", fr);
+		LCD_print("SD EMPTY / CORR", "");
 		while (1);
 	}
 

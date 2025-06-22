@@ -51,13 +51,15 @@
 #include "utils/Buttons.h"
 #include "utils/Keypad.h"
 #include "utils/Lock.h"
-#include <utils/Buzzer.h>
 #include "utils/LCD.h"
+#include "utils/Buzzer.h"
 
 #include "games/game_control.h"
 #include "games/gps_location.game.h"
 #include "games/gps_proximity.game.h"
 #include "games/memory.game.h"
+#include "games/trivia.game.h"
+#include "games/pin.game.h"
 
 #include <MCXA153.h>
 
@@ -82,6 +84,8 @@
 // -----------------------------------------------------------------------------
 
 static volatile long prevMillis = 0;
+static volatile long prevButtonMillis = 0;
+int hasBeenOpen = 0;
 
 
 // -----------------------------------------------------------------------------
@@ -94,75 +98,116 @@ int main(void)
 	lpuart0_init(115200);
 	lpuart2_init(9600);
 	lpi2c0_controller_init();
+    LCD_init();
 	SD_Init();
     Buttons_init();
     Lock_init();
     Leds_init();
     Keypad_init();
     Buzzer_init();
-    LCD_init();
 
     game_controller_t *gameControl = initGameControl();
 
-//    initGPSLocationGame();
-//    initGPSProximityGame();
-//    initMemoryGame();
+    initGPSLocationGame();
+    initGPSProximityGame();
+    initMemoryGame();
+    initTriviaGame();
+    initPinGame();
 
     directions_t *directions;
 
     __enable_irq();
 
-    while (1) {
+    while(1)
+    {
+    	long currentMillis = millis();
     	GPS_updateData();
+    	directions = GPS_getCurrentDirections();
 
+    	if (GPS_getConnectionQuality()->fixType == 0) {
+    		LCD_print("NO GPS CONN      ", "NO GPS CONN      ");
+    		continue;
+    	}
 
-    	LCD_set_cursor(0,0);
-    	LCD_send_string("hello world");
+    	checkGameStatus();
 
+    	if (currentMillis - prevMillis >= 60000 && GPS_getConnectionQuality()->fixType != 0) {
+    		Logger_updateData();
+    		prevMillis = currentMillis;
+    	}
+
+    	switch (gameControl->currentGame) {
+    	case TUTORIAL:
+    		LCD_print("Welcome to game ", "Press to next    ");
+
+    		if (Buttons_isAnyPressed() && currentMillis - prevButtonMillis >= 500) {
+    			initGPSLocationGame();
+       		    initGPSProximityGame();
+        	    initMemoryGame();
+        	    initTriviaGame();
+        		initPinGame();
+    			hasBeenOpen = 0;
+        		prevButtonMillis = currentMillis;
+        		gameControl->gameSuccessFlag = TRUE;
+    		}
+    		break;
+    	case LOCATION:
+    		gpsLocationGame();
+    		break;
+    	case MEMORY:
+    		memoryGame();
+    		break;
+    	case SHOW_PIN:
+    		char buffer[17];
+    		sprintf(buffer, "%4s -- remember", getPin());
+    		LCD_print(buffer, "Press to next   ");
+    		if (Buttons_isAnyPressed() && currentMillis - prevButtonMillis >= 500) {
+    			gameControl->gameSuccessFlag = TRUE;
+    			prevButtonMillis = currentMillis;
+    		}
+    		break;
+    	case QUIZ:
+    		triviaGame();
+    		break;
+    	case PROXIMITY:
+    		gpsProximityGame();
+    		break;
+    	case PIN:
+    		pinGame();
+    		break;
+    	case  VICTORY:
+    		LCD_print("Congratulations!", "Press to restart");
+    		if (!hasBeenOpen) {
+    			Lock_open();
+    			delay_us(500*1000);
+    			Lock_close();
+    			hasBeenOpen = 1;
+    		}
+
+    		if (Buttons_isAnyPressed() && currentMillis - prevButtonMillis >= 500) {
+    			gameControl->gameSuccessFlag = TRUE;
+    			prevButtonMillis = currentMillis;
+    		}
+    		break;
+    	case FAIL:
+    		LCD_print("GAME FAILED!    ", "Press to restart");
+    		if (Buttons_isAnyPressed() && currentMillis - prevButtonMillis >= 500) {
+    			initGPSLocationGame();
+    			initGPSProximityGame();
+    			initMemoryGame();
+    			initTriviaGame();
+    			initPinGame();
+    			hasBeenOpen = 0;
+    			gameControl->gameSuccessFlag = TRUE;
+    			prevButtonMillis = currentMillis;
+    		}
+    		break;
+    	default:
+    		gameControl->gameFailFlag = TRUE;
+    		break;
+    	}
 
     }
-
-//    while(1)
-//    {
-//    	long currentMillis = millis();
-//    	GPS_updateData();
-//    	directions = GPS_getCurrentDirections();
-//
-//    	checkGameStatus();
-//
-//    	if (currentMillis - prevMillis >= 60000) {
-//    		Logger_updateData();
-//    		prevMillis = currentMillis;
-//    	}
-//
-//    	switch (gameControl->currentGame) {
-//    	case TUTORIAL:
-//    		gameControl->gameSuccessFlag = TRUE;
-//    		break;
-//    	case LOCATION:
-//    		gameControl->gameSuccessFlag = TRUE;
-//    		break;
-//    	case MEMORY:
-//    		memoryGame();
-//    		break;
-//    	case QUIZ:
-//    		gameControl->gameSuccessFlag = TRUE;
-//    		break;
-//    	case PROXIMITY:
-//    		gameControl->gameSuccessFlag = TRUE;
-//    		break;
-//    	case PIN:
-//    		gameControl->gameSuccessFlag = TRUE;
-//    		break;
-//    	case  VICTORY:
-//    		gameControl->gameSuccessFlag = TRUE;
-//    		break;
-//    	default:
-//    		gameControl->gameFailFlag = TRUE;
-//    		break;
-//    	}
-//
-//    }
 
 
 }

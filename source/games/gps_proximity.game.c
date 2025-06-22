@@ -9,6 +9,10 @@
 
 
 GPS_proximity_game_props_t proximityGameProps;
+int buzzDelay = 1000;
+long prevBuzzMillis = 0;
+long prevBuzzStartMillis = 0;
+int isBuzzing = 0;
 
 void initGPSProximityGame() {
 		char buffer[23] = {'\0'};
@@ -63,7 +67,8 @@ void initGPSProximityGame() {
 
 void gpsProximityGame() {
 	game_controller_t *gameControl = getGameControl();
-	// LCD_t *LCD = getLCD();
+	long currentMillis = millis();
+
 
 	GPS_setDestination(proximityGameProps.location.latitude, proximityGameProps.location.latDirection, proximityGameProps.location.longitude, proximityGameProps.location.longDirection); // Should be gotten from game props
 
@@ -91,6 +96,19 @@ void gpsProximityGame() {
 		gameControl->gameSuccessFlag = TRUE;
 	}
 
-	// buzz the buzzer and display on lcd (maybe)
-	// Buzzer.buzz(255 * proximityInPercent);
+	LCD_print("Proximity game  ", "                ");
+
+	buzzDelay = 1000 * (1-proximityInPercent);
+
+	if (!!isBuzzing && currentMillis - prevBuzzStartMillis >= 200) {
+		isBuzzing = 0;
+		prevBuzzMillis = currentMillis;
+		Buzzer_buzz(0);
+	};
+
+	if (!isBuzzing && currentMillis - prevBuzzMillis >= buzzDelay) {
+		isBuzzing = 1;
+		prevBuzzStartMillis = currentMillis;
+		Buzzer_buzz(600);
+	}
 }

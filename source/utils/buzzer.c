@@ -4,7 +4,7 @@
  *  Created on: 12 Jun 2025
  *      Author: adibh
  */
-#include "utils/Buzzer.h"
+#include <utils/Buzzer.h>
 
 void Buzzer_init() {
 	// MUX: [101] = CLK_1M

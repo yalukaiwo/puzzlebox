@@ -43,6 +43,7 @@ void GPS_updateData() {
 	    	if (strncmp(buffer, "$GNGGA", 6) == 0) // Determine whether the line is desired
 	        {
 	    		parseGNGGA(buffer, &currentLocation, &connectionQuality); // Parse the line
+	    		printf("\r\n%s\r\n", buffer);
 	        	GPSCalculateDirections(&directions, &currentLocation, &targetLocation); // Calculate directions based on new data
 	        	buffer[0] = '\0'; // Reset the buffer
 	        }
