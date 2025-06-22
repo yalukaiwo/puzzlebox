@@ -10,6 +10,7 @@
 
 #include <MCXA153.h>
 
+void Buzzer_init();
 void Buzzer_buzz(int intensity);
 
 #endif // BUZZER_H

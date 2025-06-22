@@ -41,17 +41,18 @@
 
 #include "lpuart0_interrupt.h"
 #include "lpuart2_interrupt.h"
-#include "lpi2c0_controller_polling.h"
-#include "ctimer2_pwm.h"
-#include "gpio_output.h"
+#include "lpi2c0_controller_interrupt.h"
 
 #include "utils/GPS.h"
 #include "utils/SD.h"
 #include "utils/Logger.h"
 #include "utils/Millis.h"
-#include "utils/Buzzer.h"
 #include "utils/Leds.h"
 #include "utils/Buttons.h"
+#include "utils/Keypad.h"
+#include "utils/Lock.h"
+#include <utils/Buzzer.h>
+#include "utils/LCD.h"
 
 #include "games/game_control.h"
 #include "games/gps_location.game.h"
@@ -92,64 +93,76 @@ int main(void)
 	Millis_init();
 	lpuart0_init(115200);
 	lpuart2_init(9600);
+	lpi2c0_controller_init();
 	SD_Init();
-    lpi2c0_controller_init();
-    gpio_output_init();
-    ctimer2_pwm_init();
     Buttons_init();
+    Lock_init();
     Leds_init();
+    Keypad_init();
+    Buzzer_init();
+    LCD_init();
 
     game_controller_t *gameControl = initGameControl();
 
 //    initGPSLocationGame();
 //    initGPSProximityGame();
-    initMemoryGame();
+//    initMemoryGame();
 
     directions_t *directions;
 
     __enable_irq();
 
-    while(1)
-    {
-    	long currentMillis = millis();
+    while (1) {
     	GPS_updateData();
-    	directions = GPS_getCurrentDirections();
 
-    	checkGameStatus();
 
-    	if (currentMillis - prevMillis >= 60000) {
-    		Logger_updateData();
-    		prevMillis = currentMillis;
-    	}
+    	LCD_set_cursor(0,0);
+    	LCD_send_string("hello world");
 
-    	switch (gameControl->currentGame) {
-    	case TUTORIAL:
-    		gameControl->gameSuccessFlag = TRUE;
-    		break;
-    	case LOCATION:
-    		gameControl->gameSuccessFlag = TRUE;
-    		break;
-    	case MEMORY:
-    		memoryGame();
-    		break;
-    	case QUIZ:
-    		gameControl->gameSuccessFlag = TRUE;
-    		break;
-    	case PROXIMITY:
-    		gameControl->gameSuccessFlag = TRUE;
-    		break;
-    	case PIN:
-    		gameControl->gameSuccessFlag = TRUE;
-    		break;
-    	case  VICTORY:
-    		gameControl->gameSuccessFlag = TRUE;
-    		break;
-    	default:
-    		gameControl->gameFailFlag = TRUE;
-    		break;
-    	}
 
     }
+
+//    while(1)
+//    {
+//    	long currentMillis = millis();
+//    	GPS_updateData();
+//    	directions = GPS_getCurrentDirections();
+//
+//    	checkGameStatus();
+//
+//    	if (currentMillis - prevMillis >= 60000) {
+//    		Logger_updateData();
+//    		prevMillis = currentMillis;
+//    	}
+//
+//    	switch (gameControl->currentGame) {
+//    	case TUTORIAL:
+//    		gameControl->gameSuccessFlag = TRUE;
+//    		break;
+//    	case LOCATION:
+//    		gameControl->gameSuccessFlag = TRUE;
+//    		break;
+//    	case MEMORY:
+//    		memoryGame();
+//    		break;
+//    	case QUIZ:
+//    		gameControl->gameSuccessFlag = TRUE;
+//    		break;
+//    	case PROXIMITY:
+//    		gameControl->gameSuccessFlag = TRUE;
+//    		break;
+//    	case PIN:
+//    		gameControl->gameSuccessFlag = TRUE;
+//    		break;
+//    	case  VICTORY:
+//    		gameControl->gameSuccessFlag = TRUE;
+//    		break;
+//    	default:
+//    		gameControl->gameFailFlag = TRUE;
+//    		break;
+//    	}
+//
+//    }
 
 
 }

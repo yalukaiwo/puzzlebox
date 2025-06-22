@@ -8,6 +8,10 @@
 #ifndef UTILS_KEYPAD_H_
 #define UTILS_KEYPAD_H_
 
+#include <MCXA153.h>
+#include "stdint.h"
 
+void Keypad_init(void);
+char Keypad_getKey(void);
 
 #endif /* UTILS_KEYPAD_H_ */

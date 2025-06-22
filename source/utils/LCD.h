@@ -1,13 +1,10 @@
 /*! ***************************************************************************
  *
- * \brief     Low level driver for the Standard Counter or Timer (CTIMER)
- * \file      ctimer1.h
+ * \brief     P3T1755 - I3C, I 2 C-bus interface, 0.5 �C accuracy, digital
+ *            temperature sensor
+ * \file      p3t1755_interrupt.h
  * \author    Hugo Arends
  * \date      February 2024
- *
- * \see       NXP. (2024). MCX A153, A152, A143, A142 Reference Manual. Rev. 4,
- *            01/2024. From:
- *            https://www.nxp.com/docs/en/reference-manual/MCXAP64M96FS3RM.pdf
  *
  * \copyright 2024 HAN University of Applied Sciences. All Rights Reserved.
  *            \n\n
@@ -32,25 +29,19 @@
  *            FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
  *            OTHER DEALINGS IN THE SOFTWARE.
  *
- ******************************************************************************/
-#ifndef CTIMER1_H
-#define CTIMER1_H
+ *****************************************************************************/
 
-#include <MCXA153.h>
-#include <stdbool.h>
+#ifndef _LCD_H_
+#define _LCD_H_
 
-// -----------------------------------------------------------------------------
-// Shared type definitions
-// -----------------------------------------------------------------------------
+#include <stdint.h>
 
-// -----------------------------------------------------------------------------
-// Shared variables
-// -----------------------------------------------------------------------------
-extern volatile bool ctimer1_timeout_flag;
+#define LCD_I2C_ADDR 0x27
 
-// -----------------------------------------------------------------------------
-// Shared function prototypes
-// -----------------------------------------------------------------------------
-void ctimer2_pwm_init(void);
+void LCD_init(void);
+void LCD_send_string(const char *str);
+void LCD_clear(void);
+void LCD_set_cursor(uint8_t row, uint8_t col);
+void delay_us(unsigned int us);
 
-#endif // CTIMER1_H
+#endif
